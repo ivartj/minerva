@@ -1,4 +1,4 @@
-@(registerForm: Form[controllers.Authentication.RegisterData])
+@(registerForm: Form[controllers.Registration.RegisterData])
 
 @import helper._
 
@@ -6,7 +6,7 @@
 
 	<h1>Registration</h1>
 
-	@helper.form(action = routes.Authentication.register) {
+	@helper.form(action = routes.Registration.register) {
 		@inputText(
 			registerForm("username"),
 			'_label -> "Username",
