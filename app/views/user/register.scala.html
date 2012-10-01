@@ -2,56 +2,45 @@
 
 @import helper._
 
-<h1>Registration</h1>
+@main("Registration") {
 
-@helper.form(action = routes.Authentication.register) {
-	@inputText(
-		registerForm("username"),
-		'_label -> "Username",
-		'_help -> "Please choose a valid username.",
-		'_error -> registerForm.error("username")
-	)
+	<h1>Registration</h1>
 
-	@inputPassword(
-		registerForm("password"),
-		'_label -> "Password",
-		'_help -> "A password must be at least 6 characters."
-	)
+	@helper.form(action = routes.Authentication.register) {
+		@inputText(
+			registerForm("username"),
+			'_label -> "Username",
+			'_help -> "Please choose a valid username.",
+			'_error -> registerForm.error("username")
+		)
 
-	@inputPassword(
-		registerForm("password_repeat"),
-		'_label -> "Password",
-		'_help -> "Please report your password again.",
-		'_error -> registerForm.error("password")
-	)
+		@inputPassword(
+			registerForm("password"),
+			'_label -> "Password",
+			'_help -> "A password must be at least 6 characters."
+		)
 
-	@inputText(
-		registerForm("fullname"),
-		'_label -> "Full name",
-		'_help -> "The name you go by offline.",
-		'_error -> registerForm.error("fullname")
-	)
+		@inputPassword(
+			registerForm("password_repeat"),
+			'_label -> "Password",
+			'_help -> "Please report your password again.",
+			'_error -> registerForm.error("password")
+		)
 
-	@inputText(
-		registerForm("email"),
-		'_label -> "Email",
-		'_help -> "A confirmation email will be sent.",
-		'_error -> registerForm.error("email")
-	)
+		@inputText(
+			registerForm("fullname"),
+			'_label -> "Full name",
+			'_help -> "The name you go by offline.",
+			'_error -> registerForm.error("fullname")
+		)
 
-	<input type="submit" value="Sign Up">
+		@inputText(
+			registerForm("email"),
+			'_label -> "Email",
+			'_help -> "A confirmation email will be sent.",
+			'_error -> registerForm.error("email")
+		)
+
+		<input type="submit" value="Sign Up">
+	}
 }
-<!--
-<form action="/register" method="post">
-	<p>
-		<input type="text" name="fullname" placeholder="Full name"><br>
-		<input type="text" name="email" placeholder="your@@email.com">
-	</p>
-	<p>
-		<input type="text" name="username" placeholder="Username"><br>
-		<input type="password" name="password" placeholder="Password"><br>
-		<input type="password" name="password_repeat" placeholder="Repeat password">
-	</p>
-	<input type="submit" value="Register">
-</form>
--->

@@ -10,9 +10,6 @@ JAR files in this directory:
 
    import org.mindrot.BCrypt;
 
-   See http://www.playframework.org/documentation/2.0.3/JavaDatabase
-   for how to use JDBC with Play.
-
  * sqlite.jar
    SQLite JDBC driver from:
 

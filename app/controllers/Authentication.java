@@ -1,6 +1,7 @@
 package controllers;
 
 import views.html.user.*;
+import views.html.error;
 import models.User;
 import play.mvc.*;
 
@@ -34,7 +35,7 @@ public class Authentication extends Controller {
 		public String fullname;
 	}
 
-	public static Result register() {
+	public static synchronized Result register() {
 		Form<RegisterData> filledForm = registerForm.bindFromRequest();
 		if(filledForm.hasErrors()) {
 			return ok(register.render(filledForm));
@@ -42,20 +43,23 @@ public class Authentication extends Controller {
 
 		RegisterData data = filledForm.get();
 
-		// Check if username is already taken
-		if(filledForm.error("username") == null) {
-			User samename;
-			try {
-				samename = User.getByUsername(data.username);
-			} catch (Exception e) {
-				return ok("Unable to check whether your username is taken.");
-			}
+		// Check if username is taken
+		User samename;
+		try {
+			samename = User.getByUsername(data.username);
 			if(samename != null)
 				filledForm.reject("username", "Username already taken.");
+		} catch (Exception e) {
+			e.printStackTrace(System.err);
+			// Presumably a database error, but as the
+			// database constraints will not allow any
+			// duplicate usernames anyway, we will just
+			// see what happens when we attempt to create
+			// the user.
 		}
 
 		// Check if the two passwords match
-		if(filledForm.error("password") == null && data.password != data.password_repeat)
+		if(!data.password.equals(data.password_repeat))
 			filledForm.reject("password_repeat", "Password does not match.");
 
 		if(filledForm.hasErrors()) {
@@ -66,7 +70,8 @@ public class Authentication extends Controller {
 			new User(data.username, data.password, data.email, data.fullname);
 			return ok("Registration succeded!");
 		} catch (Exception e) {
-			return ok("Database error");
+			e.printStackTrace(System.err);
+			return ok(error.render(e.toString()));
 		}
 	}
 
@@ -89,7 +94,7 @@ public class Authentication extends Controller {
 			else
 				return ok("Login failed");
 		} catch (Exception e) {
-			return ok("Database error");
+			return ok(error.render(e.toString()));
 		}
 	}
 
