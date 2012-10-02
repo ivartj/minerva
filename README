@@ -4,3 +4,38 @@ Minerva Class Project in Software Development
 This project is based on the Play Framework:
 
 http://www.playframework.org/
+
+The project is structured according to *Anatomy of a Play 2.0 application*.[1] 
+The ./lib directory includes a README describing the included libraries.
+
+app                      Application sources
+ └ assets                Compiled asset sources
+    └ stylesheets        Typically LESS CSS sources
+    └ javascripts        Typically CoffeeScript sources
+ └ controllers           Application controllers
+ └ models                Application business layer
+ └ views                 Templates
+conf                     Configurations files and other non-compiled resources (on classpath)
+ └ application.conf      Main configuration file
+ └ routes                Routes definition
+public                   Public assets
+ └ stylesheets           CSS files
+ └ javascripts           Javascript files
+ └ images                Image files
+project                  sbt configuration files
+ └ build.properties      Marker for sbt project
+ └ Build.scala           Application build script
+ └ plugins.sbt           sbt plugins
+lib                      Unmanaged libraries dependencies
+logs                     Standard logs folder
+ └ application.log       Default log file
+target                   Generated stuff
+ └ scala-2.9.1            
+    └ cache               
+    └ classes            Compiled class files
+    └ classes_managed    Managed class files (templates, ...)
+    └ resource_managed   Managed resources (less, ...)
+    └ src_managed        Generated sources (templates, ...)
+test                     source folder for unit or functional tests
+
+[1] http://www.playframework.org/documentation/2.0.3/Anatomy
