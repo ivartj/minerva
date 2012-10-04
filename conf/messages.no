@@ -1,0 +1,2 @@
+AskToChooseYourLanguage=Velg ditt språk
+TellYourCurrentLanguage=Spåket ditt er for øyeblikket norsk

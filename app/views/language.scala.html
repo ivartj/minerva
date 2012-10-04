@@ -1,0 +1,10 @@
+@import controllers.Language
+
+@main(Language.get("asktochooseyourlanguage")) {
+	<h1>@Language.get("AskToChooseYourLanguage")</h1>
+	<p>@Language.get("TellYourCurrentLanguage")</p>
+	<ul>
+		<li><a href="/language?lang=en">English</a></li>
+		<li><a href="/language?lang=no">Norsk</a></li>
+	</ul>
+}
