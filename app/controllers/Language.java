@@ -14,6 +14,7 @@ public class Language extends Controller {
 	}
 
 	// TODO: Add protection from Cross-Site Request Forgeries
+	// TODO: Perhaps set language in user profile if logged in
 	public static Result chooseLanguage() {
 		Lang lang = getLangFromQueryString();
 		if(lang != null)
