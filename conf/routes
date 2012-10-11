@@ -12,6 +12,8 @@ GET     /login                      controllers.Login.loginForm()
 POST    /login                      controllers.Login.login()
 
 GET     /language                   controllers.Language.chooseLanguage()
+GET     /sandbox                    controllers.Markup.sandbox()
+POST    /sandbox                    controllers.Markup.sandbox()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

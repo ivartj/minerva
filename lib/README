@@ -1,5 +1,18 @@
 JAR files in this directory:
 
+ * mouse.jar mouse-runtime.jar
+   The Mouse parser generator. Website and manual can be found at:
+   http://mousepeg.sourceforge.net/
+
+   The parser generator is used to generate the
+   app/controller/MarkupParser.java file. From the app/controller
+   directory, this can be done with the command:
+
+   java -cp ../../lib/mouse.jar mouse.Generate -G MarkupGrammar.peg -P MarkupParser -S MarkupSemantics -p controllers
+
+   If someone is able to include this in the sbt build process,
+   then that is a welcome adjustment.
+
  * bcrypt.jar
    The jBCrypt Java implementation of the BCrypt password hashing algorithm.
    Website and example can be found at:
