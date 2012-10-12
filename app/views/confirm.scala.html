@@ -1,0 +1,8 @@
+@(user: User)
+@main("Register") {
+	<h1>Confirm user data</h1>
+	<h3>@user.FullName</h3>
+	<h3>@user.Email</h3>
+	@User.create(user)
+	<a href="@{routes.Application.index()}">Go to frontpage</a>
+}
