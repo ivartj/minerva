@@ -92,9 +92,7 @@ class MarkupSemantics extends mouse.runtime.SemanticsBase
 		String url = "";
 		for(int i = 0; i < rhsSize(); i++)
 			url += rhs(i).text();
-		url = contract(url);
-		url = escape(url);
-		String out = "<a href=\"" + url + "\">" + url + "</a>";
+		String out = "<a href=\"" + escape(url) + "\">" + escape(contract(url)) + "</a>";
 		lhs().put(out);
 	}
 
