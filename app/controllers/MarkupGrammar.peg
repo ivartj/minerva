@@ -1,14 +1,10 @@
-Post = ( Paragraph / Delimiter )* ;
+Post = ( Paragraph / Delimiter )* {post} ;
 
-Paragraph = (!Delimiter ( Link / Multispace / Newline / LongWord / Any ))+ {paragraph} ;
+Paragraph = (!Delimiter ( Link / Multispace / Any ))+ {paragraph} ;
 
-LongWord = (!(Link / Multispace / Newline) ^[ ])+ {longword} ;
-
-Newline = "\r"? "\n" {newline} ;
 Any = _ {escape} ;
 Delimiter = "\r"? "\n" [\t\r ]* "\n" ;
 Multispace = " " " "+ {multispace} ;
-
 
 Link = Alpha Alnum* "://" ( LinkSymbols* OkEnd )* {link} ;
 

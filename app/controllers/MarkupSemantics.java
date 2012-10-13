@@ -4,95 +4,87 @@ class MarkupSemantics extends mouse.runtime.SemanticsBase
 {
 	final static int CUTLINE = 50;
 
-	private String parsed = "";
+	private StringBuilder parsed = new StringBuilder();
 
 	public String getParsed() {
-		return parsed;
+		return parsed.toString();
 	}
 
 	private static String escape(String input) {
-		String out = "";
+		StringBuilder out = new StringBuilder();
 		for(char c : input.toCharArray()) {
 			switch(c) {
 			case '<':
-				out += "&lt;";
+				out.append("&lt;");
 				break;
 			case '>':
-				out += "&gt;";
+				out.append("&gt;");
 				break;
 			case '&':
-				out += "&amp;";
+				out.append("&amp;");
+				break;
+			case '\n':
+				out.append("<br>\n");
+				break;
+			case '\t':
+				out.append("&nbsp; &nbsp; &nbsp; &nbsp; ");
 				break;
 			default:
-				out += c;
+				out.append(c);
 			}
 		}
-		return out;
+		return out.toString();
 	}
 
-	void newline() {
-		lhs().put("<br>");
+	void post() {
+		Object tmp;
+		for(int i = 0; i < rhsSize(); i++) {
+			tmp = (String)rhs(i).get();
+			if(tmp != null)
+				parsed.append((String)tmp);
+		}
 	}
 
 	void escape() {
-		String out = "";
+		StringBuilder sb = new StringBuilder();
 		for(int i = 0; i < rhsSize(); i++)
-			out += rhs(i).text();
-		out = escape(out);
+			sb.append(rhs(i).text());
+		String out = escape(sb.toString());
 		lhs().put(out);
 	}
 
 	void paragraph() {
-		String out = "<p>";
+		StringBuilder out = new StringBuilder("<p>");
 		for(int i = 0; i < rhsSize(); i++)
-			out += (String)rhs(i).get();
-		out += "</p>";
-		lhs().put(out);
-		parsed += out;
+			out.append((String)rhs(i).get());
+		out.append("</p>\n\n");
+		lhs().put(out.toString());
 	}
 
 	void multispace() {
 		boolean nonbreak = true;
-		String out = "";
+		StringBuilder out = new StringBuilder("");
 		for(int i = 0; i < rhsSize(); i++) {
-			out += nonbreak ? "&nbsp;" : " ";
+			out.append(nonbreak ? "&nbsp;" : " ");
 			nonbreak = nonbreak ? false : true;
 		}
-		lhs().put(out);
-	}
-
-	void longword() {
-		String out = "";
-
-		for(int i = 0; i < rhsSize() && i < CUTLINE; i++) {
-			out += escape(rhs(i).text());
-		}
-
-		for(int i = CUTLINE; i < rhsSize() - CUTLINE; i++) {
-			out += escape(rhs(i).text());
-			out += "&shy;";
-		}
-
-		for(int i = rhsSize() - CUTLINE; i > 0 && i < rhsSize(); i++) {
-			out += escape(rhs(i).text());
-		}
-		lhs().put(out);
+		lhs().put(out.toString());
 	}
 
 	private static String contract(String url) {
-		if(url.length() <= CUTLINE * 2)
+		if(url.length() <= CUTLINE)
 			return url;
-		String out = url.substring(0, CUTLINE / 2);
-		out += "...";
-		out += url.substring(url.length() - CUTLINE / 4, url.length());
-		return out;
+		StringBuilder out = new StringBuilder(url.substring(0, CUTLINE / 2));
+		out.append("...");
+		out.append(url.substring(url.length() - CUTLINE / 4, url.length()));
+		return out.toString();
 	}
 
 	void link() {
-		String url = "";
+		StringBuilder url = new StringBuilder("");
 		for(int i = 0; i < rhsSize(); i++)
-			url += rhs(i).text();
-		String out = "<a href=\"" + escape(url) + "\">" + escape(contract(url)) + "</a>";
+			url.append(rhs(i).text());
+		String out = "<a href=\"" + escape(url.toString()) + "\">" + escape(contract(url.toString())) + "</a>";
 		lhs().put(out);
 	}
 
