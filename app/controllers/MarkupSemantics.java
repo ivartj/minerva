@@ -71,6 +71,14 @@ class MarkupSemantics extends mouse.runtime.SemanticsBase
 		lhs().put(out.toString());
 	}
 
+	void startspace() {
+		lhs().put("&nbsp;");
+	}
+
+	void newlinespace() {
+		lhs().put("<br>\n&nbsp;");
+	}
+
 	private static String contract(String url) {
 		if(url.length() <= CUTLINE)
 			return url;
