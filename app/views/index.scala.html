@@ -1,24 +1,17 @@
-@(login: List[Login], taskForm: Form[Login])
+@()
 
 @import helper._
+@import controllers.Language
 
 @main("Minerva") {
 
 
 <h1> Startside - Minerva </h1>
 
-<ul>
-    @form(routes.Application.login()){
-            <input type="submit" value="Login" align="west">
-                }
-                </u1>
-                
-                <u2>
-                    @form(routes.Application.registrer()){
-            <input type="submit" value="Registrer">
-                }
-   
-                </u2>
+<p><a href="login" >@Language.get("LogIn")</a></p>
+
+<p><a href="register" >@Language.get("Reg")</a></p>
+
     
 }
 

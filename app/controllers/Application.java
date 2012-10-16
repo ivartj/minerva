@@ -10,10 +10,8 @@ import views.html.*;
 
 public class Application extends Controller {
   
-    static Form<Login> taskForm = form(Login.class);
   public static Result index() {
-      return ok(views.html.index.render(Login.all(), taskForm)
-      );
+      return ok(views.html.index.render());
   }
     
     public static Result login(){
