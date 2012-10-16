@@ -1,7 +1,7 @@
 @(markup: String, parsed: String)
 @import controllers.Language
 
-@main(Language.get("Sandbox")) {
+@main(Html(Language.get("Sandbox"))) {
 	<h1>@Language.get("Sandbox")</h1>
 	<p>@Language.get("SandboxDescription")</p>
 	<form method="POST" action="/sandbox">

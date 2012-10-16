@@ -1,0 +1,92 @@
+@(signupForm: Form[User])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@title = {
+    Endre profil
+}
+
+@main(title, nav = "signup") {
+    
+    @helper.form(action = routes.SignUp.submit) {
+        
+        <fieldset>
+            <legend>Persondetaljer: </legend>
+                  
+            @inputText(
+            	signupForm("firstName"), '_label -> "Fornavn",
+            	'_showConstraints -> false,
+            	 '_error -> signupForm("profile.country").error.map(_.withMessage("Vennligst velg en by eller fylke"))
+            )
+            
+            @inputText(
+            	signupForm("lastName"), '_label -> "Etternavn",
+            	'_showConstraints -> false
+            )
+
+			@inputText(
+                signupForm("age"), 
+                '_label -> "Alder", 'class -> "mini",
+                '_showConstraints -> false
+            )
+			
+        </fieldset>
+        
+        <fieldset>
+            
+            <legend>Kontaktinformasjon</legend>
+            
+             @inputText(
+                signupForm("email"), '_label -> "Alternativ epost",
+                '_help -> "Legg til en alternativ epostadresse."
+          
+            )
+            
+    		@inputText(
+    			signupForm("phone"), 
+    			'_label -> "Telefonnummer", 
+    			'class -> "small",
+    			'_showConstraints -> false
+    		)
+    		
+    		@textarea(
+                signupForm("address"), 
+                '_label -> "Adresse", 'cols -> 50
+            )
+            
+            @select( 
+            	signupForm("nearestCity"), 
+            	options = options(ByerINorge.list),
+            	'_default -> "--- Velg by/fylke ---", 
+            	'_label -> "N¾rmeste By/Fylke",
+            	'_showConstraints -> false,
+            	 '_error -> signupForm("profile.ByerINorge").error.map(_.withMessage("Vennligst velg en by eller fylke"))
+            )
+
+            @select(
+                signupForm("country"), 
+                options = options(Countries.list),
+                '_default -> "--- Velg land ---",
+                '_label -> "Land"
+               
+            )
+
+        </fieldset>
+        
+        <fieldset>
+            
+            @checkbox(
+                signupForm("accept"), 
+                '_label -> None, '_text -> "You aggree the Terms and conditions",
+                '_showConstraints -> false
+            )
+            
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" class="btn primary" value="Endre">
+            <a href="@routes.Application.index" class="btn">Avbryt</a>
+        </div>
+    }
+}

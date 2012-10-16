@@ -1,7 +1,12 @@
-@(message: String)
-
-@main("Welcome to Play 2.0") {
+@main(Html("Profil")) {
     
-    @play20.welcome(message, style = "Java")
+    <h2>Endre din profil</h2>
     
+    <p>
+        Demonstrate a classical sign up form.
+    </p>
+    
+    <p>
+        <a class="btn" href="@routes.SignUp.blank">Endre »</a>
+    </p>
 }

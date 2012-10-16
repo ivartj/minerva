@@ -5,15 +5,9 @@
 # Home page
 GET     /                           controllers.Application.index()
 
-# User
-GET     /register                   controllers.Registration.registerForm()
-POST    /register                   controllers.Registration.register()
-GET     /login                      controllers.Login.loginForm()
-POST    /login                      controllers.Login.login()
-
-GET     /language                   controllers.Language.chooseLanguage()
-GET     /sandbox                    controllers.Markup.sandbox()
-POST    /sandbox                    controllers.Markup.sandbox()
+# Signup
+GET     /signup                     controllers.SignUp.blank() 
+POST    /signup                     controllers.SignUp.submit()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

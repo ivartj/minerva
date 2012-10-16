@@ -1,6 +1,6 @@
 @import controllers.Language
 
-@main(Language.get("AskToChooseYourLanguage")) {
+@main(Html(Language.get("AskToChooseYourLanguage"))) {
 	<h1>@Language.get("AskToChooseYourLanguage")</h1>
 	<p>@Language.get("TellYourCurrentLanguage")</p>
 	<ul>
