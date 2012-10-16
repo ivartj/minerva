@@ -15,17 +15,22 @@
             <legend>Persondetaljer: </legend>
                   
             @inputText(
-            	signupForm("firstName"), '_label -> "Fornavn"
+            	signupForm("firstName"), '_label -> "Fornavn",
+            	'_showConstraints -> false,
+            	'_error -> signupForm("firstName").error.map(_.withMessage("Fornavnet mŒ v¾re kortere"))
             )
             
             @inputText(
-            	signupForm("lastName"), '_label -> "Etternavn"
+            	signupForm("lastName"), '_label -> "Etternavn",
+            	'_showConstraints -> false,
+            	'_error -> signupForm("lastName").error.map(_.withMessage("Etternavnet mŒ v¾re kortere"))
             )
 
 			@inputText(
                 signupForm("age"), 
                 '_label -> "Alder", 'class -> "mini",
-                '_showConstraints -> false
+                '_showConstraints -> false,
+                '_error -> signupForm("age").error.map(_.withMessage("Skriv inn rett alder"))
             )
 			
         </fieldset>
@@ -36,9 +41,10 @@
             
              @inputText(
                 signupForm("email"), '_label -> "Alternativ epost",
-                '_help -> "Legg til en alternativ epostadresse."
+                '_help -> "Legg til en alternativ epostadresse.",
+            	'_error -> signupForm("email").error.map(_.withMessage("Skriv inn en gyldig epost adresse"))
           
-            )
+            )	
             
     		@inputText(
     			signupForm("phone"), 
@@ -49,22 +55,25 @@
     		
     		@textarea(
                 signupForm("address"), 
-                '_label -> "Adresse", 'cols -> 50
+                '_label -> "Adresse", 'cols -> 50,
+                '_showConstraints -> false,
+                '_error -> signupForm("address").error.map(_.withMessage("Pr¿v Œ korte ned adressen"))
             )
             
             @select( 
             	signupForm("nearestCity"), 
             	options = options(ByerINorge.list),
             	'_default -> "--- Velg by/fylke ---", 
-            	'_label -> "N¾rmeste By/Fylke"
+            	'_label -> "N¾rmeste By/Fylke",
+            	'_help -> "PŒkrevd",
+            	'_error -> signupForm("nearestCity").error.map(_.withMessage("Vennligst velg en by eller fylke"))
             )
 
             @select(
                 signupForm("country"), 
                 options = options(Countries.list),
                 '_default -> "--- Velg land ---",
-                '_label -> "Land",
-                '_error -> signupForm("country").error.map(_.withMessage("Please select your country"))
+                '_label -> "Land"
             )
 
         </fieldset>
