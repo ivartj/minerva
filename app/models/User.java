@@ -1,8 +1,10 @@
 package models;
 
 import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
 import play.data.validation.Constraints.*;
 import play.db.ebean.Model;
 
@@ -14,15 +16,17 @@ public class User extends Model {
 	public Long id;
 
 	@Required
-	public String FullName;
+	public String fullName;
 	
-	@Required
 	@Email
-	public String Email;
+	@Required
+	public String email;
 	
-	public String City;
+	public String city;
 
-	public String GoogleId;
+	public String googleId;
+	
+	public String yahooId;
 	
 	public static Finder<Long,User> find = new Finder<Long,User>(Long.class, User.class);
 	
@@ -34,8 +38,7 @@ public class User extends Model {
 		return find.all();
 	}
 	
-	public static boolean isGoogleUser(String id){
-		return find.where().eq("GoogleId", id).findList().size() == 1;			
+	public static boolean isUser(String id){
+		return find.where().eq("googleId", id).findList().size() > 0 || find.where().eq("yahooId", id).findList().size() > 0;	
 	}
-	
 }

@@ -2,10 +2,12 @@ package controllers;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import models.User;
 
+import play.data.Form;
 import play.libs.F.Promise;
 import play.libs.OpenID;
 import play.libs.OpenID.UserInfo;
@@ -13,9 +15,10 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.login;
 import views.html.confirm;
-import views.html.index;
 
 public class Authenticator extends Controller{
+	
+	static Form<User> userForm = form(User.class);
 	
 	public static final Map<String, String> identifiers = createMap();	
 	
@@ -37,10 +40,12 @@ public class Authenticator extends Controller{
 	    String returnToUrl = "http://" + request().getHeader("Host") + "/verify";
 
 	    Map<String, String> attributes = new HashMap<String, String>();
-	    attributes.put("Email", "http://schema.openid.net/contact/email");
-	    attributes.put("FirstName", "http://schema.openid.net/namePerson/first");
-	    attributes.put("LastName", "http://schema.openid.net/namePerson/last");
-	    attributes.put("City", "http://openid.net/schema/contact/city/home");
+	    attributes.put("oiEmail", "http://schema.openid.net/contact/email");
+	    attributes.put("oiFirstName", "http://schema.openid.net/namePerson/first");
+	    attributes.put("oiLastName", "http://schema.openid.net/namePerson/last");
+	    attributes.put("oiCity", "http://openid.net/schema/contact/city/home");
+	    attributes.put("axEmail", "http://axschema.org/contact/email");
+	    attributes.put("axFullName", "http://axschema.org/namePerson");
 
 	    Promise<String> redirectUrl = null;
 		redirectUrl = OpenID.redirectURL(providerUrl, returnToUrl, attributes);
@@ -52,15 +57,33 @@ public class Authenticator extends Controller{
 	    Promise<UserInfo> userInfoPromise = OpenID.verifiedId();
 	    UserInfo userInfo = userInfoPromise.get();
 	    
-	    if (!User.isGoogleUser(userInfo.id)){
-		    User user = new User();
-	    	user.FullName = userInfo.attributes.get("FirstName") + " " + userInfo.attributes.get("LastName");
-		    user.Email =  userInfo.attributes.get("Email");
-		    user.GoogleId = userInfo.id;	    
-		    return ok(confirm.render(user));
+	    if (!User.isUser(userInfo.id)){
+		    
+	    	User user = new User();
+		    if (userInfo.id.startsWith(identifiers.get("google"))){
+
+		    	user.googleId = userInfo.id;
+		    	user.fullName = userInfo.attributes.get("oiFirstName") + " " + userInfo.attributes.get("oiLastName");
+		    	user.email =  userInfo.attributes.get("oiEmail");
+		    }
+		    else if (userInfo.id.startsWith(identifiers.get("yahoo"))){
+		 
+		    	user.fullName = userInfo.attributes.get("fullname");
+	    		user.email = userInfo.attributes.get("email");
+		    	user.yahooId = userInfo.id;
+		    }
+		    else
+		    	return unauthorized("Hmm");
+		    
+		    return ok(confirm.render(user, userForm));	    
 	    }
 	    else
-	    	return redirect(routes.Application.index());
-	    
+	    	return redirect(routes.Application.index());    
+	}
+	
+	public static Result confirmUser() {
+		Form<User> filledForm = userForm.bindFromRequest();
+		User.create(filledForm.get());
+		return redirect(routes.Application.index());
 	}
 }

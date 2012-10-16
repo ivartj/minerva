@@ -6,11 +6,14 @@
 GET     /                           controllers.Application.index()
 
 # User
-GET		/verify						controllers.Authenticator.verify()
-#POST	/verify						controllers.Authenticator.verify()
 GET		/login						controllers.Authenticator.chooseProvider()
 POST	/authenticate				controllers.Authenticator.auth()
+GET		/verify						controllers.Authenticator.verify()
+POST	/confirmUser				controllers.Authenticator.confirmUser()
+
+# Language
 GET     /language                   controllers.Language.chooseLanguage()
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
