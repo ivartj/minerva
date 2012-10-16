@@ -23,7 +23,7 @@
             )
 
 			@inputText(
-                signupForm("profile.age"), 
+                signupForm("age"), 
                 '_label -> "Alder", 'class -> "mini",
                 '_showConstraints -> false
             )
@@ -48,31 +48,23 @@
     		)
     		
     		@textarea(
-                signupForm("profile.address"), 
+                signupForm("address"), 
                 '_label -> "Adresse", 'cols -> 50
             )
             
             @select( 
-            	signupForm("profile.nearestCity"), 
+            	signupForm("nearestCity"), 
             	options = options(ByerINorge.list),
             	'_default -> "--- Velg by/fylke ---", 
             	'_label -> "N¾rmeste By/Fylke"
             )
-            
-            @select(
-            	signupForm("profile.county"), 
-            	options = options(Fylker.list), 
-            	'_default -> "--- Velg et fylke ---", 
-            	'_font -> "Times New Roman, 14",
-            	'_label -> "Fylke"
-            )
 
             @select(
-                signupForm("profile.country"), 
+                signupForm("country"), 
                 options = options(Countries.list),
                 '_default -> "--- Velg land ---",
                 '_label -> "Land",
-                '_error -> signupForm("profile.country").error.map(_.withMessage("Please select your country"))
+                '_error -> signupForm("country").error.map(_.withMessage("Please select your country"))
             )
 
         </fieldset>
