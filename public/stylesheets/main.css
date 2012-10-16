@@ -1,21 +1,23 @@
 body {
-	font-family: sans-serif;
-	margin: 1em;
-	background-color: #fff;
+	font-family: 'Droid Sans', sans-serif;
+	background-color: #fffffe;
+	margin: 0;
 }
 
 .wrap {
 	max-width: 60em;
-	margin: 1em auto;
-	border: 1px solid #dd8;
-	border-radius: 1em;
-	padding: 1em;
-	background-color: #fffadd;
+	margin: 2em auto;
+	padding: 0 5%;
+}
+
+h1, h2, h3, h4, h5, h6, h7, h8, h9 {
+	color: #f70;
 }
 
 .topbar {
-	border-bottom: 1px solid #dd8;
+	border-bottom: 1px solid #f80;
 	padding-bottom: 0.5em;
+	margin-bottom: 1em;
 }
 
 .topbar a:link, .topbar a:visited {
