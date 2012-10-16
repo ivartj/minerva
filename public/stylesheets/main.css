@@ -15,13 +15,17 @@ h1, h2, h3, h4, h5, h6, h7, h8, h9 {
 }
 
 .topbar {
-	border-bottom: 1px solid #f80;
-	padding-bottom: 0.5em;
+	border: 1px solid #f80;
+	border-radius: 1em 1em 0 0;
+	padding: 0.5em 0.5em 0.2em 0.5em;
 	margin-bottom: 1em;
+	background-color: #f70;
+	color: white;
 }
 
 .topbar a:link, .topbar a:visited {
 	text-decoration: none;
+	color: white;
 }
 
 .right {
