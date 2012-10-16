@@ -22,45 +22,35 @@ public class User {
 	@Valid
 	@Pattern(value = "[0-9.+]+", message = "Skriv et gyldig telefonnummer")
 	public String phone;
+	
+	public String county; 
+	
+	
+	public String country;
 
-	@Valid
-	public Profile profile;
+	public String address;
+	
+	@Required
+	public String nearestCity; 
+
+	@Min(18) @Max(100)
+	public Integer age;
+
 
 	public User() {}
 
-	public User(String firstName, String lastName, String email, String phone, Profile profile) throws SQLException {
+	public User(String firstName, String lastName, String email, String phone, String address, 
+			String nearestCity, String county, String country, Integer age) {
 		this.firstName = firstName; 
 		this.lastName = lastName; 
 		this.email = email;
 		this.phone = phone; 
-		this.profile = profile;
+		this.nearestCity = nearestCity; 
+		this.county = county;
+		this.country = country;
+		this.address = address;
+		this.age = age;
 	}
 
-	public static class Profile {
-
-		public String county; 
-		
-		
-		public String country;
-
-		public String address;
-		
-		@Required
-		public String nearestCity; 
-
-		@Min(18) @Max(100)
-		public Integer age;
-
-		public Profile() {}
-
-		public Profile(String address, String nearestCity, String county, String country, Integer age) {
-			this.nearestCity = nearestCity; 
-			this.county = county;
-			this.country = country;
-			this.address = address;
-			this.age = age;
-		}
-
-	}
 
 }
