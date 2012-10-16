@@ -1,7 +1,6 @@
 package controllers;
 
 import views.html.language;
-import models.User;
 import play.mvc.*;
 import play.i18n.Lang;
 import play.i18n.Messages;

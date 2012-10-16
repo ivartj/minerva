@@ -1,0 +1,19 @@
+/*!
+ * Minerva customizations for Bootstrap v2.1.1
+ *
+ */
+
+body {
+	padding-top: 60px;
+	padding-bottom: 40px;
+}
+
+.icon-google {
+	background-image: url("../images/google_16.png");
+    background-position: center center;
+}
+
+.icon-yahoo {
+	background-image: url("../images/yahoo_16.png");
+    background-position: center center;
+}

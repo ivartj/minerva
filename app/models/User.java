@@ -1,60 +1,44 @@
 package models;
 
-import play.db.*;
-import java.sql.*;
-import org.mindrot.BCrypt;
+import java.util.List;
 
-public class User {
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-	private String username;
-	private String email;
-	private String fullname;
+import play.data.validation.Constraints.*;
+import play.db.ebean.Model;
 
-	private User() {}
+@SuppressWarnings("serial")
+@Entity
+public class User extends Model {
 
-	public User(String username, String password, String email, String fullname) throws Exception {
-		this.username = username;
-		String passhash = BCrypt.hashpw(password, BCrypt.gensalt(12));
-		this.email = email;
-		this.fullname = fullname;
+	@Id
+	public Long id;
 
-		Connection conn = DB.getConnection();
+	@Required
+	public String fullName;
+	
+	@Email
+	@Required
+	public String email;
+	
+	public String city;
 
-		PreparedStatement stmt = conn.prepareStatement("insert into user (username, passhash, email, fullname) values (?, ?, ?, ?)");
-		stmt.setString(1, username);
-		stmt.setString(2, passhash);
-		stmt.setString(3, email);
-		stmt.setString(4, fullname);
-		stmt.execute();
+	public String googleId;
+	
+	public String yahooId;
+	
+	public static Finder<Long,User> find = new Finder<Long,User>(Long.class, User.class);
+	
+	public static void create(User user) {
+		user.save();
 	}
-
-	public static boolean authenticate(String username, String password) throws Exception {
-		Connection conn = DB.getConnection();
-		PreparedStatement stmt = conn.prepareStatement("select passhash from user where username = ?");
-		stmt.setString(1, username);
-
-		ResultSet result = stmt.executeQuery();
-
-		if(!result.next())
-			return false;
-
-		String passhash = result.getString(1);
-
-		return BCrypt.checkpw(password, passhash);
+	
+	public static List<User> all() {
+		return find.all();
 	}
-
-	// Returns null when there is no user by the username
-	public static User getByUsername(String username) throws Exception {
-		Connection conn = DB.getConnection();
-		PreparedStatement stmt = conn.prepareStatement("select email, fullname from user where username = ?"); 
-		stmt.setString(1, username);
-		ResultSet result = stmt.executeQuery();
-		if(result.next() == false)
-			return null;
-		User retval = new User();
-		retval.username = username;
-		retval.email = result.getString(1);
-		retval.fullname = result.getString(2);
-		return retval;
+	
+	public static boolean isUser(String id){
+		return find.where().eq("googleId", id).findList().size() > 0 || find.where().eq("yahooId", id).findList().size() > 0;	
 	}
 }
