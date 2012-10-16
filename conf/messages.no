@@ -1,0 +1,7 @@
+AskToChooseYourLanguage=Velg ditt språk
+TellYourCurrentLanguage=Spåket ditt er for øyeblikket norsk.
+Sandbox=Sandkassa
+SandboxDescription=Sandkassa gir deg muligheten til å prøve ut formateringen som blir brukt på nettsiden. Text som blir sendt inn i feltet nedenfor vil vises på undersiden.
+TrySandbox=Send
+LogIn=Logg inn
+Reg=Registrere deg

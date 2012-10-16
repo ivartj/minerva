@@ -1,0 +1,23 @@
+Post = ( Paragraph / Delimiter )* {post} ;
+
+Paragraph = (!Delimiter StartSpace)? (!Delimiter ( Link / NewlineSpace / Multispace / Any ))+ {paragraph} ;
+
+Any = _ {escape} ;
+Delimiter = "\r"? "\n" [\t\r ]* "\n" ;
+Multispace = " " " "+ {multispace} ;
+StartSpace = " " {startspace} ;
+NewlineSpace = "\n " {newlinespace} ;
+
+Link = Alpha Alnum* "://" ( LinkSymbols* OkEnd )* {link} ;
+
+LinkSymbols = "-" / "." / "_" / "~" / ":"
+		  / "?" / "#" / "[" / "]"
+		  / "@" / "!" / "$" / "&" / "'"
+		  / "(" / ")" / "*" / "+" / ","
+		  / ";" / "=" / "%" ;
+
+OkEnd = "/" / Alnum ;
+
+Alpha = [a-z] / [A-Z] ;
+Digit = [0-9] ;
+Alnum = Alpha / Digit ;

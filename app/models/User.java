@@ -1,30 +1,38 @@
 package models;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.util.List;
 
-import javax.validation.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 import play.data.validation.Constraints.*;
-import play.db.DB;
+import play.db.ebean.Model;
 
-public class User {
+@SuppressWarnings("serial")
+@Entity
+public class User extends Model {
 
+	@Id
+	public Long id;
+
+	@Required
+	public String fullName;
+	
 	@MaxLength(50)
 	public String firstName; 
 
 	@MaxLength(50)
 	public String lastName; 
 
-	@Required
 	@Email
+	@Required
 	public String email;
 
-	@Valid
 	@Pattern(value = "[0-9.+]+", message = "Skriv et gyldig telefonnummer")
 	public String phone;
 	
+	public String city;
+
 	public String country;
 
 	@MaxLength(100)
@@ -36,6 +44,24 @@ public class User {
 	@Min(18) @Max(150)
 	public Integer age;
 
+	public String googleId;
+	
+	public String yahooId;
+
+	
+	public static Finder<Long,User> find = new Finder<Long,User>(Long.class, User.class);
+	
+	public static void create(User user) {
+		user.save();
+	}
+	
+	public static List<User> all() {
+		return find.all();
+	}
+	
+	public static boolean isUser(String id){
+		return find.where().eq("googleId", id).findList().size() > 0 || find.where().eq("yahooId", id).findList().size() > 0;	
+	}
 
 	public User() {}
 
@@ -50,6 +76,4 @@ public class User {
 		this.address = address;
 		this.age = age;
 	}
-
-
 }
