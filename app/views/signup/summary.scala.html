@@ -19,10 +19,10 @@
     <h6>Alder</h6>
     
     <p>
-        @if(user.age == null) {
+        @if(user.profile.age == null) {
             <em>Not specified</em>
         } else {
-            @user.age
+            @user.profile.age
         }
     </p>
     
@@ -36,19 +36,28 @@
     
     <h2>Additional informations:</h2>
     
+    <h6>Fylke</h6>
+    
+    <p>
+        @user.profile.county
+    </p>
+    
     <h6>Land</h6>
     
     <p>
-        @user.country
+        @user.profile.country
     </p>
     
     <h6>Adresse</h6>
     
     <p>
-        @if(user.address == null || user.address == "") {
+        @if(user.profile.address == null || user.profile.address == "") {
             <em>Not specified</em>
         } else {
-            @user.address
+            @user.profile.address
         }
     </p>
+    
+   
+    
 }
