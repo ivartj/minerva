@@ -1,0 +1,27 @@
+body {
+	font-family: sans-serif;
+	margin: 1em;
+	background-color: #fff;
+}
+
+.wrap {
+	max-width: 60em;
+	margin: 1em auto;
+	border: 1px solid #dd8;
+	border-radius: 1em;
+	padding: 1em;
+	background-color: #fffadd;
+}
+
+.topbar {
+	border-bottom: 1px solid #dd8;
+	padding-bottom: 0.5em;
+}
+
+.topbar a:link, .topbar a:visited {
+	text-decoration: none;
+}
+
+.right {
+	float: right;
+}

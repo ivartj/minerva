@@ -5,3 +5,4 @@ SandboxDescription=Sandkassa gir deg muligheten til å prøve ut formateringen s
 TrySandbox=Send
 LogIn=Logg inn
 Reg=Registrere deg
+Language=Språk
