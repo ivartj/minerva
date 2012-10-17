@@ -16,8 +16,12 @@ public class Language extends Controller {
 	// TODO: Perhaps set language in user profile if logged in
 	public static Result chooseLanguage() {
 		Lang lang = getLangFromQueryString();
-		if(lang != null)
+		if(lang != null) {
 			changeLang(lang);
+			String referer = request().getHeader("Referer");
+			if(referer != null)
+				return redirect(referer);
+		}
 		return ok(language.render());
 	}
 
