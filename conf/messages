@@ -6,3 +6,7 @@ TrySandbox=Submit
 LogIn=Log on
 Reg=Register
 Language=Language
+IndexTitle=Learn and Teach!
+IndexDescriptionTitle=About
+IndexDescriptionHTML=<p>Minerva is a website where you can find people who help you learn new things and meet others with your interests.</p><p>Choose a topic of interest or find a mentor.</p>
+IndexTopicsTitle=Learn

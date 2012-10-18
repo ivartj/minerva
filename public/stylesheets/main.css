@@ -1,33 +1,85 @@
 body {
 	font-family: 'Droid Sans', sans-serif;
-	background-color: #fffffe;
 	margin: 0;
 }
 
 .wrap {
-	max-width: 60em;
-	margin: 2em auto;
-	padding: 0 5%;
+	max-width: 62em;
+	margin: 0 auto;
+	border-radius: 1em;
 }
 
-h1, h2, h3, h4, h5, h6, h7, h8, h9 {
-	color: #f70;
+h1, h2, h3, h4, h5, h6 {
+	color: #ff5600;
 }
 
-.topbar {
-	border: 1px solid #f80;
-	border-radius: 1em 1em 0 0;
-	padding: 0.5em 0.5em 0.2em 0.5em;
-	margin-bottom: 1em;
-	background-color: #f70;
+.dark {
+	background-color: #da5;
+}
+
+.bar {
+	background-color: #bb4422;
+	padding: 0.3em 0.5em 0.2em 0.5em;
 	color: white;
 }
 
-.topbar a:link, .topbar a:visited {
+.bar a:link, .bar a:visited {
 	text-decoration: none;
 	color: white;
+	vertical-align: middle;
+}
+
+.footer {
+	padding: 0 0.5em;
+}
+
+.language {
+	float: right;
+	border-top: 1px solid #bb4422;
+	border-radius: 0.4em;
+	background-color: #eee;
+	padding: 0.3em 0.5em 0.2em 0.5em;
 }
 
 .right {
 	float: right;
+}
+
+.center {
+	text-align: center;
+}
+
+.content {
+	 padding: 0.5em;
+}
+
+img {
+	max-width: 100%;
+}
+
+/* Front page */
+
+.box {
+	vertical-align: top;
+	text-align: justify;
+	width: 49%;
+	min-width: 15em;
+	max-width: 20em;
+	display: inline-block;
+}
+
+.box a {
+	white-space: nowrap;
+}
+
+.subbox {
+	margin: 0.5em;
+	padding: 0.5em;
+}
+
+.lightbordered {
+	border-width: 1px 1px 0 1px;
+	border-style: solid;
+	border-color: #ffcc99;
+	border-radius: 0.5em 0.5em 0 0;
 }

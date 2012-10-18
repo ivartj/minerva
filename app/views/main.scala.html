@@ -13,15 +13,26 @@
 		<link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
 	</head>
 	<body>
-		<div class="wrap">
-			<div class="topbar">
-				<a href="/">Minerva</a>
-				<div class="right">
-					<a href="/login">@Language.get("LogIn")</a> &nbsp;
-					<a href="/language">@Language.get("Language")</a>
+		<div class="dark">
+			<div class="wrap">
+				<div class="bar">
+					<a href="/">Minerva</a>
+					<div class="right">
+						<a href="/login">@Language.get("LogIn")</a>
+					</div>
 				</div>
 			</div>
-			@content
+		</div>
+		<div class="wrap">
+			<div class="content">
+				@content
+			</div>
+			<div class="footer">
+			<div class="language">
+				<a href="/language?lang=en&amp;redirect_back=true">English</a> -
+				<a href="/language?lang=no&amp;redirect_back=true">Norsk</a>
+			</div>
+			</div>
 		</div>
 	</body>
 </html>
