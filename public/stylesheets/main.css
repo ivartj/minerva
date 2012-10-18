@@ -62,9 +62,7 @@ img {
 .box {
 	vertical-align: top;
 	text-align: justify;
-	width: 49%;
-	min-width: 15em;
-	max-width: 20em;
+	width: 50%;
 	display: inline-block;
 }
 
@@ -73,13 +71,35 @@ img {
 }
 
 .subbox {
-	margin: 0.5em;
-	padding: 0.5em;
-}
-
-.lightbordered {
-	border-width: 1px 1px 0 1px;
+	padding: 1em;
+	border-width: 0;
 	border-style: solid;
 	border-color: #ffcc99;
-	border-radius: 0.5em 0.5em 0 0;
+}
+
+@media all and (max-width: 40em) {
+	.box {
+		width: 100% ! important;
+		max-width: 30em ! important;
+	}
+}
+
+@media all and (min-width: 40em) {
+	.box:first-child .subbox {
+		border-width: 0 1px 0 0;
+		margin-right: -1px;
+	}
+
+	.box:first-child + .box .subbox {
+		border-width: 0 0 0 1px;
+	}
+
+	.box:first-child + .box + .box .subbox {
+		border-width: 1px 1px 0 0;
+		margin-right: -1px;
+	}
+
+	.box:first-child + .box + .box + .box .subbox {
+		border-width: 1px 0 0 1px;
+	}
 }
