@@ -10,25 +10,25 @@ import views.html.signup.*;
 
 import models.*;
 
-public class SignUp extends Controller {
+public class EditProfile extends Controller {
     
     /**
      * Defines a form wrapping the User class.
      */ 
-    final static Form<User> signupForm = form(User.class);
+    final static Form<User> editForm = form(User.class);
   
     /**
      * Display a blank form.
      */ 
     public static Result blank() {
-        return ok(form.render(signupForm));
+        return ok(form.render(editForm));
     }
   
     /**
      * Handle the form submission.
      */
     public static Result submit() {
-        Form<User> filledForm = signupForm.bindFromRequest();
+        Form<User> filledForm = editForm.bindFromRequest();
         
         // Check accept conditions
         if(!"true".equals(filledForm.field("accept").value())) {

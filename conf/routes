@@ -11,9 +11,9 @@ POST	/authenticate				controllers.Authenticator.auth()
 GET		/verify						controllers.Authenticator.verify()
 POST	/confirmUser				controllers.Authenticator.confirmUser()
 
-# Signup
-GET     /signup                     controllers.SignUp.blank() 
-POST    /signup                     controllers.SignUp.submit()
+# Edit profile
+GET     /editprofile                     controllers.EditProfile.blank() 
+POST    /editprofile                     controllers.EditProfile.submit()
 
 # Language
 GET     /language                   controllers.Language.chooseLanguage()
