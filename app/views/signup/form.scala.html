@@ -3,12 +3,12 @@
 @import helper._
 @import helper.twitterBootstrap._
 
-@main("Endre profil") {
+@main("Endre profil", nav = "editProfile") {
 <div class="container">
 	<div class="row">
 		<div class="span6 offset3">
     
-    @helper.form(action = routes.EditProfile.submit) {
+    @helper.form(action = routes.EditProfile.submit()) {
         
         <fieldset>
             <legend>Persondetaljer</legend>
@@ -76,17 +76,7 @@
             )
 
         </fieldset>
-        
-        <fieldset>
-            
-            @checkbox(
-                editForm("accept"), 
-                '_label -> None, '_text -> "You aggree the Terms and conditions",
-                '_showConstraints -> false
-            )
-            
-        </fieldset>
-        
+       
         <div class="actions">
             <input type="submit" class="btn primary" value="Endre">
             <a href="@routes.Application.index" class="btn">Avbryt</a>
