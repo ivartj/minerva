@@ -1,7 +1,5 @@
 package controllers;
 
-import java.sql.SQLException;
-
 import play.*;
 import play.mvc.*;
 import play.data.*;
