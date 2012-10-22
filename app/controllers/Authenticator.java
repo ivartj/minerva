@@ -83,7 +83,9 @@ public class Authenticator extends Controller{
 	
 	public static Result confirmUser() {
 		Form<User> filledForm = userForm.bindFromRequest();
+		
 		User.create(filledForm.get());
 		return redirect(routes.Application.index());
+
 	}
 }

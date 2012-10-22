@@ -60,12 +60,12 @@
             )
             
             @select( 
-            	editForm("nearestCity"), 
+            	editForm("city"), 
             	options = options(ByerINorge.list),
             	'_default -> "--- Velg by/fylke ---", 
             	'_label -> "N¾rmeste By/Fylke",
             	'_help -> "PŒkrevd",
-            	'_error -> editForm("nearestCity").error.map(_.withMessage("Vennligst velg en by eller fylke"))
+            	'_error -> editForm("city").error.map(_.withMessage("Vennligst velg en by eller fylke"))
             )
 
             @select(

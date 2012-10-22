@@ -30,8 +30,6 @@ public class User extends Model {
 
 	@Pattern(value = "[0-9.+]+", message = "Skriv et gyldig telefonnummer")
 	public String phone;
-	
-	public String city;
 
 	public String country;
 
@@ -39,7 +37,7 @@ public class User extends Model {
 	public String address;
 
 	@Required
-	public String nearestCity; 
+	public String city; 
 
 	@Min(18) @Max(150)
 	public Integer age;
@@ -65,13 +63,14 @@ public class User extends Model {
 
 	public User() {}
 
-	public User(String firstName, String lastName, String email, String phone, String address, 
+	public User(String fullName, String firstName, String lastName, String email, String phone, String address, 
 			String nearestCity, String country, Integer age) {
+		this.fullName = fullName; 
 		this.firstName = firstName; 
 		this.lastName = lastName; 
 		this.email = email;
 		this.phone = phone; 
-		this.nearestCity = nearestCity; 
+		this.city = nearestCity; 
 		this.country = country;
 		this.address = address;
 		this.age = age;
