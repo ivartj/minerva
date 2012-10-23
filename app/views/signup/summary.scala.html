@@ -1,58 +1,73 @@
 @(user: User)
+@import helper._
+@import helper.twitterBootstrap._
 
-@main("Account created!") {
+@main("Profil") {
+ 
+ <div class="container">
+	<div class="row">
+		<div class="span6 offset3">
+    	
+    	<h2>@user.firstName</h2>
     
-    <h2>Your account:</h2>
-    
-    <h6>Fornavn</h6>
-    
-    <p>
-    	@user.firstName
-    </p>
-    
-    <h6>Etternavn</h6>
-    
-    <p>
-    	@user.lastName
-    </p>
-   
-    <h6>Alder</h6>
-    
-    <p>
-        @if(user.age == null) {
-            <em>Not specified</em>
-        } else {
-            @user.age
-        }
-    </p>
-    
-    <h2>Kontaktdetaljer:</h2>
-    
-     <h6>Email</h6>
-    
-    <p>
-        @user.email
-    </p>
-    
-    <h6>By/Fylke</h6>
-    
-    <p> 
-    	@user.city
-    </p>
-    
-    <h6>Land</h6>
-    
-    <p>
-        @user.country
-    </p>
-    
-    <h6>Adresse</h6>
-    
-    <p>
-        @if(user.address == null || user.address == "") {
-            <em>Not specified</em>
-        } else {
-            @user.address
-        }
-    </p>
+    		<fieldset>
+            <legend>Profildetaljer</legend>
+   			<table cellpadding="1">
+		   		<tr>
+		    	<td> <b> Fornavn:</td>
+		    	<td> @user.firstName </td>
+		    	</tr>
+		    
+		    	<tr>
+		    	<td> <b> Etternavn:</td>
+		    	<td> @user.lastName </td>
+		    	</tr>
+		    
+		    	<tr>
+		    	<td> <b> Alder: </td>
+		    	<td> @if(user.age == null) {
+		            	<em>Ikke spesifisert</em>
+		        	 } else {
+		            	@user.age
+		        	 } 
+		        </td>
+		    	</tr>
+		    </table>
+			 </fieldset>	
+			<br>
+			<fieldset>
+				<legend>Kontaktdetaljer</legend>
+				<table cellpadding="1">
+				<tr>
+		   	 	<td> <b> Email:</td>
+		    	<td> @user.email </td>
+		    	</tr>
+		    
+		    	<tr>
+			    <td> <b> Adresse:</td>
+			    <td> @if(user.address == null || user.address == "") {
+			            <em>Ikke spesifisert</em>
+			        } else {
+			            @user.address
+			        } </td>
+			    </tr>
+			    
+			    <tr>
+			    <td> <b> By:</td>
+			    <td> @user.city</td>
+			    </tr>
+			    
+			    <tr>
+			    <td> <b> Land: </td>
+			    <td> @user.country </td>
+			    </tr>
+			</table>
+	    
+			</fieldset>
+	 
+	
+	</div>
+	</div>
+	</div>
+	
 }
