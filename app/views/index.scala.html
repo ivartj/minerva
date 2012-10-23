@@ -12,14 +12,22 @@
 				<h2>@Language.get("IndexDescriptionTitle")</h2>
 				@Html(Language.get("IndexDescriptionHTML"))
 			</div>
-		</div><div class="box">
-			<div class="subbox">
-				<h2>@Language.get("LogIn")</h2>
-				<p><a href="#">Google</a></p>
-				<p><a href="#">Facebook</a></p>
-				<p><a href="#">Yahoo</a></p>
-			</div>
-		</div><div class="box">
+			</div><div class="box">
+				<div class="subbox">
+					<form action="/authenticate" method="post">
+						<h2>@Language.get("LogIn")</h2>
+						<legend>Choose your login provider:</legend>
+						<img src="@routes.Assets.at("images/google_32.png")">
+						<input type="submit" class="btn" name="provider" value="google">
+						<br><br>
+						<img src="@routes.Assets.at("images/facebook_32.png")">
+						<input type="submit" disabled="disabled" class="btn" name="provider" value="facebook">
+						<br><br>
+						<img src="@routes.Assets.at("images/yahoo_32.png")">
+						<input type="submit" class="btn" name="provider" value="yahoo">
+					</form>
+				</div>
+			</div><div class="box">
 			<div class="subbox">
 				<h2>@Language.get("IndexTopicsTitle")</h2>
 				<a href="#">Java</a>
