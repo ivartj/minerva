@@ -15,7 +15,7 @@ public class User extends Model {
 	@Id
 	public Long id;
 
-	@Required
+	//@Required
 	public String fullName;
 	
 	@MaxLength(50)
@@ -36,7 +36,7 @@ public class User extends Model {
 	@MaxLength(100)
 	public String address;
 
-	@Required
+//	@Required
 	public String city; 
 
 	@Min(18) @Max(150)
