@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ByerINorge {
@@ -10,7 +11,7 @@ public class ByerINorge {
 		List<String> norskeByer = new ArrayList<String>();
 
 		//Finnmark
-		norskeByer.add("--- Finnmark ---");
+//		norskeByer.add("--- Finnmark ---");
 		norskeByer.add("Alta"); 
 		norskeByer.add("Hammerfest"); 
 		norskeByer.add("Honningsvåg");
@@ -20,14 +21,14 @@ public class ByerINorge {
 
 		//Troms
 
-		norskeByer.add("--- Troms ---");
+//		norskeByer.add("--- Troms ---");
 		norskeByer.add("Finnsnes");
 		norskeByer.add("Harstad");
 		norskeByer.add("Tromsø");
 
 		//Nordland
 
-		norskeByer.add("--- Nordland ---");
+//		norskeByer.add("--- Nordland ---");
 		norskeByer.add("Bodø");
 		norskeByer.add("Brønnøysund");
 		norskeByer.add("Fauske");
@@ -42,7 +43,7 @@ public class ByerINorge {
 
 		//Nord-Trøndelag
 
-		norskeByer.add("--- Nord-Trøndelag ---");
+//		norskeByer.add("--- Nord-Trøndelag ---");
 		norskeByer.add("Levanger");
 		norskeByer.add("Namsos");
 		norskeByer.add("Nærøy (tettsted: Kolvereid)");
@@ -52,13 +53,13 @@ public class ByerINorge {
 
 		//Sør-Trøndelag
 
-		norskeByer.add("--- Sør-Trøndelag ---");
+//		norskeByer.add("--- Sør-Trøndelag ---");
 		norskeByer.add("Trondheim");
 		norskeByer.add("Brekstad");
 
 		//Møre og Romsdal
 
-		norskeByer.add("--- Møre ogRomsdal ---");
+//		norskeByer.add("--- Møre ogRomsdal ---");
 		norskeByer.add("Fosnavåg");
 		norskeByer.add("Kristiansund");
 		norskeByer.add("Molde");
@@ -68,21 +69,21 @@ public class ByerINorge {
 
 		//Sogn og Fjordane
 
-		norskeByer.add("--- Sogn og Fjordane ---");
+//		norskeByer.add("--- Sogn og Fjordane ---");
 		norskeByer.add("Flora");
 		norskeByer.add("Førde");
 		norskeByer.add("Måløy");
 
 		//Hordaland
 
-		norskeByer.add("--- Hordaland ---");
+//		norskeByer.add("--- Hordaland ---");
 		norskeByer.add("Bergen");
 		norskeByer.add("Stord");
 		norskeByer.add("Odda");
 
 		//Rogaland
 
-		norskeByer.add("--- Rogaland ---");
+//		norskeByer.add("--- Rogaland ---");
 		norskeByer.add("Bryne");
 		norskeByer.add("Eigersund");
 		norskeByer.add("Haugesund");
@@ -96,7 +97,7 @@ public class ByerINorge {
 
 		//Vest-Agder
 
-		norskeByer.add("--- Vest-Agder ---");
+//		norskeByer.add("--- Vest-Agder ---");
 		norskeByer.add("Flekkefjord");
 		norskeByer.add("Kristiansand");
 		norskeByer.add("Farsund");
@@ -105,7 +106,7 @@ public class ByerINorge {
 
 		//Aust-Agder
 
-		norskeByer.add("--- Aust-Agder ---");
+//		norskeByer.add("--- Aust-Agder ---");
 		norskeByer.add("Arendal");
 		norskeByer.add("Grimstad");
 		norskeByer.add("Lillesand");
@@ -114,7 +115,7 @@ public class ByerINorge {
 
 		//Telemark
 
-		norskeByer.add("--- Telemark ---");
+//		norskeByer.add("--- Telemark ---");
 		norskeByer.add("Brevik");
 		norskeByer.add("Kragerø");
 		norskeByer.add("Langesund");
@@ -126,7 +127,7 @@ public class ByerINorge {
 
 		//Buskerud
 
-		norskeByer.add("--- Buskerud ---");
+//		norskeByer.add("--- Buskerud ---");
 		norskeByer.add("Drammen");
 		norskeByer.add("Hokksund");
 		norskeByer.add("Hønefoss/Ringerike");
@@ -134,7 +135,7 @@ public class ByerINorge {
 
 		//Oppland
 
-		norskeByer.add("--- Oppland ---");
+//		norskeByer.add("--- Oppland ---");
 		norskeByer.add("Fagernes");
 		norskeByer.add("Gjøvik");
 		norskeByer.add("Lillehammer");
@@ -142,7 +143,7 @@ public class ByerINorge {
 
 		//Hedmark
 
-		norskeByer.add("--- Hedmark ---");
+//		norskeByer.add("--- Hedmark ---");
 		norskeByer.add("Elverum");
 		norskeByer.add("Hamar");
 		norskeByer.add("Kongsvinger");
@@ -151,11 +152,11 @@ public class ByerINorge {
 
 		//Oslo
 
-		norskeByer.add("--- Oslo ---");
+		norskeByer.add("Oslo");
 
 		//Akershus
 
-		norskeByer.add("--- Akershus ---");
+//		norskeByer.add("--- Akershus ---");
 		norskeByer.add("Drøbak");
 		norskeByer.add("Lillestrøm");
 		norskeByer.add("Sandvika");
@@ -164,7 +165,7 @@ public class ByerINorge {
 
 		//Østfold
 
-		norskeByer.add("--- Østfold ---");
+//		norskeByer.add("--- Østfold ---");
 		norskeByer.add("Askim");
 		norskeByer.add("Fredrikstad");
 		norskeByer.add("Halden");
@@ -172,6 +173,7 @@ public class ByerINorge {
 		norskeByer.add("Mysen");
 		norskeByer.add("Sarpsborg");
 		
+		Collections.sort(norskeByer); 
 		return norskeByer;
 	}
 }

@@ -8,7 +8,7 @@
 	<div class="row">
 		<div class="span6 offset3">
     
-    @helper.form(action = routes.EditProfile.submit()) {
+    @helper.form(action = routes.EditProfile.submit) {
         
         <fieldset>
             <legend>Persondetaljer</legend>
@@ -40,7 +40,7 @@
             
              @inputText(
                 editForm("email"), '_label -> "Alternativ epost",
-                '_help -> "Legg til en alternativ epostadresse.",
+                '_showConstraints -> false,
             	'_error -> editForm("email").error.map(_.withMessage("Skriv inn en gyldig epost adresse"))
           
             )	
@@ -63,9 +63,9 @@
             	editForm("city"), 
             	options = options(ByerINorge.list),
             	'_default -> "--- Velg by/fylke ---", 
-            	'_label -> "N¾rmeste By/Fylke",
-            	'_help -> "PŒkrevd",
-            	'_error -> editForm("city").error.map(_.withMessage("Vennligst velg en by eller fylke"))
+            	'_label -> "By",
+            	 '_showConstraints -> false,
+            	'_error -> editForm("city").error.map(_.withMessage("Vennligst velg en by"))
             )
 
             @select(
