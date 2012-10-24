@@ -6,68 +6,71 @@
  
  <div class="container">
 	<div class="row">
-		<div class="span6 offset3">
+		
     	
-    	<h2>@user.firstName</h2>
-    
-    		<fieldset>
-            <legend>Profildetaljer</legend>
-   			<table cellpadding="1">
-		   		<tr>
-		    	<td> <b> Fornavn:</td>
-		    	<td> @user.firstName </td>
-		    	</tr>
-		    
-		    	<tr>
-		    	<td> <b> Etternavn:</td>
-		    	<td> @user.lastName </td>
-		    	</tr>
-		    
-		    	<tr>
-		    	<td> <b> Alder: </td>
-		    	<td> @if(user.age == null) {
-		            	<em>Ikke spesifisert</em>
-		        	 } else {
-		            	@user.age
-		        	 } 
-		        </td>
-		    	</tr>
-		    </table>
-			 </fieldset>	
-			<br>
-			<fieldset>
-				<legend>Kontaktdetaljer</legend>
-				<table cellpadding="1">
-				<tr>
-		   	 	<td> <b> Email:</td>
-		    	<td> @user.email </td>
-		    	</tr>
-		    
-		    	<tr>
-			    <td> <b> Adresse:</td>
-			    <td> @if(user.address == null || user.address == "") {
-			            <em>Ikke spesifisert</em>
-			        } else {
-			            @user.address
-			        } </td>
-			    </tr>
-			    
-			    <tr>
-			    <td> <b> By:</td>
-			    <td> @user.city</td>
-			    </tr>
-			    
-			    <tr>
-			    <td> <b> Land: </td>
-			    <td> @user.country </td>
-			    </tr>
-			</table>
+	    	<h2>@user.firstName @user.lastName</h2>
 	    
-			</fieldset>
-	 
+    		<fieldset>
+	        <legend>Profildetaljer</legend>
+   				<table cellpadding="1">
+			   		<tr>
+			    	<td width = "200"> <b> Fornavn:</td>
+			    	<td> @user.firstName </td>
+			    	</tr>
+			    
+			    	<tr>
+			    	<td width = "200"> <b> Etternavn:</td>
+			    	<td> @user.lastName </td>
+			    	</tr>
+			    
+			    	<tr>
+			    	<td width = "200"> <b> Alder: </td>
+			    	<td> @if(user.age == null) {
+			            	<em>Ikke spesifisert</em>
+			        	 } else {
+			            	@user.age
+			        	 } 
+			        </td>
+			    	</tr>
+			    </table>
+			 </fieldset>	
+				<br>
+			<fieldset>
+			<legend>Kontaktdetaljer</legend>
+					<table cellpadding="1">
+						<tr>
+				   	 	<td width = "200"> <b> Email:</td>
+				    	<td> @user.email </td>
+				    	</tr>
+				    
+				    	<tr>
+				   	 	<td width = "200"> <b> Alternativ email:</td>
+				    	<td> @user.alternativeEmail </td>
+				    	</tr>
+				    	
+				    	<tr>
+					    <td width = "200"> <b> Adresse:</td>
+					    <td> @if(user.address == null || user.address == "") {
+					            <em>Ikke spesifisert</em>
+					        } else {
+					            @user.address
+					        } </td>
+					    </tr>
+					    
+					    <tr>
+					    <td width = "200"> <b> By:</td>
+					    <td> @user.city</td>
+					    </tr>
+					    
+					    <tr>
+					    <td width = "200"> <b> Land: </td>
+					    <td> @user.country </td>
+					    </tr>
+					</table>
+		   	
+			</fieldset>			
 	
 	</div>
-	</div>
-	</div>
-	
+</div>
+		
 }

@@ -27,6 +27,9 @@ public class User extends Model {
 	@Email
 	@Required
 	public String email;
+	
+	@Email
+	public String alternativeEmail; 
 
 	@Pattern(value = "[0-9.+]+", message = "Skriv et gyldig telefonnummer")
 	public String phone;
@@ -63,12 +66,13 @@ public class User extends Model {
 
 	public User() {}
 
-	public User(String fullName, String firstName, String lastName, String email, String phone, String address, 
+	public User(String fullName, String firstName, String lastName, String email, String alternativeEmail, String phone, String address, 
 			String nearestCity, String country, Integer age) {
 		this.fullName = fullName; 
 		this.firstName = firstName; 
 		this.lastName = lastName; 
 		this.email = email;
+		this.alternativeEmail = alternativeEmail; 
 		this.phone = phone; 
 		this.city = nearestCity; 
 		this.country = country;

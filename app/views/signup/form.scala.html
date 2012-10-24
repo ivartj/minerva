@@ -7,6 +7,7 @@
 <div class="container">
 	<div class="row">
 		<div class="span6 offset3">
+		<h2>Endre profil</h2>
     
     @helper.form(action = routes.EditProfile.submit) {
         
@@ -34,15 +35,22 @@
 			
         </fieldset>
         
+	  
+        
         <fieldset>
             
             <legend>Kontaktinformasjon</legend>
             
              @inputText(
-                editForm("email"), '_label -> "Alternativ epost",
+                editForm("email"), '_label -> "Epost",
                 '_showConstraints -> false,
-            	'_error -> editForm("email").error.map(_.withMessage("Skriv inn en gyldig epost adresse"))
-          
+            	'_error -> editForm("email").error.map(_.withMessage("Skriv inn en gyldig epost adresse"))         
+            )	
+            
+            @inputText(
+                editForm("alternativeEmail"), '_label -> "Alternativ epost",
+                '_showConstraints -> false,
+            	'_error -> editForm("alternativeEmail").error.map(_.withMessage("Skriv inn en gyldig epost adresse"))         
             )	
             
     		@inputText(
@@ -62,7 +70,7 @@
             @select( 
             	editForm("city"), 
             	options = options(ByerINorge.list),
-            	'_default -> "--- Velg by/fylke ---", 
+            	'_default -> "--- Velg by ---", 
             	'_label -> "By",
             	 '_showConstraints -> false,
             	'_error -> editForm("city").error.map(_.withMessage("Vennligst velg en by"))
@@ -77,16 +85,17 @@
             )
 
         </fieldset>
-       
+		
         <div class="actions">
             <input type="submit" class="btn primary" value="Endre">
             <a href="@routes.Application.index" class="btn">Avbryt</a>
         </div>
         
     }
-    
-    		
+		
 		</div>
 	</div>
 </div>	
+
+		
 }
