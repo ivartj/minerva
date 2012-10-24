@@ -1,0 +1,58 @@
+@(user: User)
+
+@main("Account created!") {
+    
+    <h2>Your account:</h2>
+    
+    <h6>Fornavn</h6>
+    
+    <p>
+    	@user.firstName
+    </p>
+    
+    <h6>Etternavn</h6>
+    
+    <p>
+    	@user.lastName
+    </p>
+   
+    <h6>Alder</h6>
+    
+    <p>
+        @if(user.age == null) {
+            <em>Not specified</em>
+        } else {
+            @user.age
+        }
+    </p>
+    
+    <h2>Kontaktdetaljer:</h2>
+    
+     <h6>Email</h6>
+    
+    <p>
+        @user.email
+    </p>
+    
+    <h6>By/Fylke</h6>
+    
+    <p> 
+    	@user.city
+    </p>
+    
+    <h6>Land</h6>
+    
+    <p>
+        @user.country
+    </p>
+    
+    <h6>Adresse</h6>
+    
+    <p>
+        @if(user.address == null || user.address == "") {
+            <em>Not specified</em>
+        } else {
+            @user.address
+        }
+    </p>
+}

@@ -1,0 +1,91 @@
+@(editForm: Form[User])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@main("Endre profil") {
+<div class="container">
+	<div class="row">
+		<div class="span6 offset3">
+    
+    @helper.form(action = routes.EditProfile.submit) {
+        
+        <fieldset>
+            <legend>Persondetaljer</legend>
+                  
+            @inputText(
+            	editForm("firstName"), '_label -> "Fornavn",
+            	'_showConstraints -> false,
+            	'_error -> editForm("firstName").error.map(_.withMessage("Fornavnet mŒ v¾re kortere"))
+            )
+            
+            @inputText(
+            	editForm("lastName"), '_label -> "Etternavn",
+            	'_showConstraints -> false,
+            	'_error -> editForm("lastName").error.map(_.withMessage("Etternavnet mŒ v¾re kortere"))
+            )
+
+			@inputText(
+                editForm("age"), 
+                '_label -> "Alder", 'class -> "mini",
+                '_showConstraints -> false,
+                '_error -> editForm("age").error.map(_.withMessage("Skriv inn rett alder"))
+            )
+			
+        </fieldset>
+        
+        <fieldset>
+            
+            <legend>Kontaktinformasjon</legend>
+            
+             @inputText(
+                editForm("email"), '_label -> "Alternativ epost",
+                '_showConstraints -> false,
+            	'_error -> editForm("email").error.map(_.withMessage("Skriv inn en gyldig epost adresse"))
+          
+            )	
+            
+    		@inputText(
+    			editForm("phone"), 
+    			'_label -> "Telefonnummer", 
+    			'class -> "small",
+    			'_showConstraints -> false
+    		)
+    		
+    		@textarea(
+                editForm("address"), 
+                '_label -> "Adresse", 'cols -> 50,
+                '_showConstraints -> false,
+                '_error -> editForm("address").error.map(_.withMessage("Pr¿v Œ korte ned adressen"))
+            )
+            
+            @select( 
+            	editForm("city"), 
+            	options = options(ByerINorge.list),
+            	'_default -> "--- Velg by/fylke ---", 
+            	'_label -> "By",
+            	 '_showConstraints -> false,
+            	'_error -> editForm("city").error.map(_.withMessage("Vennligst velg en by"))
+            )
+
+            @select(
+                editForm("country"), 
+                options = options(Countries.list),
+                '_default -> "--- Velg land ---",
+                '_label -> "Land"
+            )
+
+        </fieldset>
+       
+        <div class="actions">
+            <input type="submit" class="btn primary" value="Endre">
+            <a href="@routes.Application.index" class="btn">Avbryt</a>
+        </div>
+        
+    }
+    
+    		
+		</div>
+	</div>
+</div>	
+}
