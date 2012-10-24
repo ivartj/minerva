@@ -27,7 +27,7 @@ public class EditProfile extends Controller {
 	 */
 	public synchronized static Result submit() {
 		Form<User> filledForm = editForm.bindFromRequest();
-
+		
 		if(filledForm.hasErrors()) {
 			return badRequest(form.render(filledForm));
 		} else {
