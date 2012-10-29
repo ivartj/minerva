@@ -1,0 +1,9 @@
+@(topicName: java.lang.String)
+@import controllers.Language
+
+@main(topicName) {
+	<h1>@Language.get("Topic"): @topicName</h1>
+	<form action="/topic/@topicName" method="post">
+		<input type="submit" value="Apply">
+	</form>
+}

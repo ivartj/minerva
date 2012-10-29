@@ -11,3 +11,4 @@ IndexDescriptionTitle=Om
 IndexDescriptionHTML=<p>Minerva er en nettside hvor du kan møte folk som hjelper deg med å lære nye ting og møte andre med samme interesser.</p><p>Velg et emne du er interessert i eller søk etter en mentor.</p>
 IndexTopicsTitle=Lær
 IndexTopicsTitle=Lær
+Topic=Emne
