@@ -12,13 +12,18 @@ GET		/verify						controllers.Authenticator.verify()
 POST	/confirmUser				controllers.Authenticator.confirmUser()
 
 # Edit profile
-GET     /editProfile                     controllers.EditProfile.blank() 
-POST    /editProfile                     controllers.EditProfile.submit()
+GET     /editProfile                controllers.EditProfile.blank() 
+POST    /editProfile                controllers.EditProfile.submit()
 
 # Language
 GET     /language                   controllers.Language.chooseLanguage()
 GET     /sandbox                    controllers.Markup.sandbox()
 POST    /sandbox                    controllers.Markup.sandbox()
+
+#Subjects
+GET		/subjects					controllers.Subject.send()
+POST	/subjectsPage				controllers.Subject.post()
+
 
 
 # Map static resources from the /public folder to the /assets URL path

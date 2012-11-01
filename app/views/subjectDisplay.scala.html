@@ -1,0 +1,28 @@
+@(emnerVil : ArrayList[String], emnerKan : ArrayList[String])
+
+
+@import helper._
+
+@main("SubjectsDisplay") {
+
+<h1>Antall emner jeg vil lære: @emnerVil.size().</h1>
+<ul>
+@for(emner <- emnerVil){
+<li>
+<p>@emner</p>
+</li>
+}
+</ul>
+
+<h1>Antall emner jeg kan lære: @emnerKan.size().</h1>
+<ul>
+@for(emner <- emnerKan){
+<li>
+<p>@emner</p>
+
+}
+</li>
+</ul>
+
+}
+

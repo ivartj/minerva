@@ -1,0 +1,116 @@
+
+
+
+@import helper._
+
+@main("Subjects") {
+
+	<h1>Emne registrering</h1>
+
+	<script>
+		function swapElement(fromList, toList) {
+			var selectOptions = document.getElementById(fromList);
+			for ( var i = 0; i < selectOptions.length; i++) {
+				var opt = selectOptions[i];
+				if (opt.selected) {
+					document.getElementById(fromList).removeChild(opt);
+					document.getElementById(toList).appendChild(opt);
+					i--;
+				}
+			}
+		}
+	</script>
+	<form action="@routes.Subject.post()" method="POST" />
+
+	<div style="float: left;">
+		<strong>Emner</strong><br /> <select id="available" size="24"
+			multiple="multiple" style="width: 140px;">
+			<option value="Java">Java</option>
+			<option value="C">C</option>
+			<option value="Scala">Scala</option>
+			<option value="Play Framework">Play Framework</option>
+			<option value="Banana">Bananas</option>
+			<option value="Muring">Muring</option>
+			<option value="Bavian vasking">Bavian vasking</option>
+			<option value="Delegering">Delegering</option>
+			<option value="Rectoskopi">Rectoskopi</option>
+			<option value="Traktor">Traktor</option>
+			<option value="Rokk">Rokk</option>
+		</select>
+	</div>
+	
+	<div style="float: left; height: 50px; padding-top: 30px;">
+	<br />
+	<br />
+	<br />
+	
+	
+		<input type="button" class="testButton" value="   &gt; Legg til   "
+			onclick="swapElement('available','selectedWant')" /> <br /> <input
+			type="button" class="testButton" value="&lt; Fjern"
+			onclick="swapElement('selectedWant','available')" /><br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			
+			
+			<input type="button" class="testButton" value="   &gt; Legg til   "
+			onclick="swapElement('available','selectedCan')" /> <br /> <input
+			type="button" class="testButton" value="&lt; Fjern"
+			onclick="swapElement('selectedCan','available')" /><br />
+	</div>
+
+	<div style="float: left;">
+	<p>Emner jeg vil lære:</p>
+				<strong></strong><br /> <select id="selectedWant" size="8"
+			multiple="multiple" name="selectedWant[]" style="width: 140px;">
+		</select>
+		
+		<p>Emner jeg kan:</p>
+		
+		<strong></strong><br /> <select id="selectedCan" size="8"
+			multiple="multiple" name="selectedCan[]" style="width: 140px;">
+		</select>
+
+	</div>
+
+	<div style="float: left;">
+	</div>
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	
+	
+
+	<input type="submit" name="Submit" class="formbutton" id="Submit"
+		value="Legg til" />
+	<br />
+	</p>
+
+	</form>
+
+}
