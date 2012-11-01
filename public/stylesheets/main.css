@@ -19,14 +19,15 @@ h1, h2, h3, h4, h5, h6 {
 
 .bar {
 	background-color: #bb4422;
-	padding: 0.3em 0.5em 0.2em 0.5em;
+	padding: 0.3em 0 0.2em 0;
 	color: white;
 }
 
-.bar a:link, .bar a:visited {
+.bar a:link, .bar a:visited, .bar span {
 	text-decoration: none;
 	color: white;
 	vertical-align: middle;
+	margin: 0 0.5em;
 }
 
 .footer {
@@ -43,12 +44,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .right {
 	float: right;
-}
-
-.right p {
-	float: left;
-	font-size: 10px;
-	vertical-align: middle;
 }
 
 .center {
