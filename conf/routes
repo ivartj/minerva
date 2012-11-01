@@ -6,7 +6,7 @@
 GET     /                           controllers.Application.index()
 
 # User
-GET		/login						controllers.Authenticator.chooseProvider()
+GET		/login						controllers.Authenticator.login()
 POST	/authenticate				controllers.Authenticator.auth()
 GET		/verify						controllers.Authenticator.verify()
 POST	/confirmUser				controllers.Authenticator.confirmUser()

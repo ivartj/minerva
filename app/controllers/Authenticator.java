@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.UUID;
+import java.util.regex.*;
 
 import models.User;
 
@@ -12,6 +14,7 @@ import play.libs.F.Promise;
 import play.libs.OpenID;
 import play.libs.OpenID.UserInfo;
 import play.mvc.Controller;
+import play.mvc.Http.Cookie;
 import play.mvc.Result;
 import views.html.login;
 import views.html.confirm;
@@ -77,13 +80,46 @@ public class Authenticator extends Controller{
 		    
 		    return ok(confirm.render(user, userForm));	    
 	    }
-	    else
-	    	return redirect(routes.Application.index());    
+	    else{
+	    	remember(User.find.where().eq("googleId", userInfo.id).findList().get(0));
+	    	return redirect(routes.Application.index());
+	    }
 	}
-	
+
 	public static Result confirmUser() {
 		Form<User> filledForm = userForm.bindFromRequest();
-		User.create(filledForm.get());
+		User.create(filledForm.get());		
 		return redirect(routes.Application.index());
+	}
+	
+	public static Result login() {		
+		Cookie cookie = request().cookies().get("rememberMe");
+		if (cookie != null && !cookie.value().isEmpty()){
+			int uid = Integer.parseInt(cookie.value().split("[ ]")[0]);
+			String uuid = cookie.value().split("[ ]")[1];
+			if (User.find.where().eq("id", uid).findUnique().cookieIdentifier.equals(uuid)){
+				session("connected", Integer.toString(uid));
+				return redirect(routes.Application.index());
+			}
+		}
+		return chooseProvider();
+	}
+	
+	public static Result logout() {
+		User user = User.find.where().eq("id", Integer.parseInt(session("connected"))).findUnique();
+		user.cookieIdentifier = "";
+		session().remove("connected");
+		return redirect(routes.Application.index());
+	}
+	
+	private static void remember(User user) {
+		String uuid = UUID.randomUUID().toString();
+		user.cookieIdentifier = uuid;
+		response().setCookie("rememberMe", user.id + " " + uuid, 604800);
+	}
+	
+	public static User getCurrentUser(){
+		User user = User.find.where().eq("id", Integer.parseInt(session("connected"))).findUnique();
+		return user;
 	}
 }
