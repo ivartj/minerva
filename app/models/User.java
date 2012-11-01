@@ -1,12 +1,19 @@
 package models;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import play.data.validation.Constraints.*;
+import play.db.DB;
 import play.db.ebean.Model;
+import play.api.db.*;
 
 @SuppressWarnings("serial")
 @Entity
@@ -65,17 +72,40 @@ public class User extends Model {
 
 	public User() {}
 
-	public User(String fullName, String firstName, String lastName, String email, String alternativeEmail, String phone, String address, 
-			String nearestCity, String country, Integer age) {
+	public User(String fullName, String firstName, String lastName, Integer age, String email, String alternativeEmail, String phone, String address,  
+			String nearestCity, String country) {
 		this.fullName = fullName; 
 		this.firstName = firstName; 
 		this.lastName = lastName; 
+		this.age = age;
 		this.email = email;
-		this.alternativeEmail = alternativeEmail; 
+		this.alternativeEmail = alternativeEmail;
 		this.phone = phone; 
+		this.address = address;
 		this.city = nearestCity; 
 		this.country = country;
-		this.address = address;
-		this.age = age;
+	}
+	
+	public void getInfo() {
+		try {		
+			Connection conn = DB.getConnection();
+			Statement setning = conn.createStatement();
+			String sporring = "select full_name, first_name, last_name, age, email, alternative_Email, phone, address, "+
+								"city, country from user where id=1";
+			ResultSet resultat = setning.executeQuery(sporring);
+			fullName = resultat.getString(1);
+			firstName = resultat.getString(2); 
+			lastName = resultat.getString(3); 
+			age = resultat.getInt(4); 
+			email = resultat.getString(5); 
+			alternativeEmail = resultat.getString(6); 
+			phone = resultat.getString(7);
+			address = resultat.getString(8); 
+			city = resultat.getString(9); 
+			country = resultat.getString(10); 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

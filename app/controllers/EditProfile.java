@@ -18,8 +18,22 @@ public class EditProfile extends Controller {
 	/**
 	 * Display a blank form.
 	 */ 
-	public static Result blank() {
-		return ok(form.render(editForm));
+	public static Result edit() {
+		User existingUser = new User();
+		existingUser.getInfo();
+		
+		String firstName = existingUser.firstName;
+		String lastName = existingUser.lastName;
+		Integer age = existingUser.age; 
+		String email = existingUser.email; 
+		String alternativeEmail = existingUser.alternativeEmail; 
+		String phone = existingUser.phone; 
+		String address = existingUser.address; 
+		String city = existingUser.city; 
+		String country = existingUser.country; 
+		
+		existingUser = new User("",firstName,lastName,age,email,alternativeEmail,phone,address,city,country);
+		return ok(form.render(editForm.fill(existingUser)));
 	}
 
 	/**
@@ -27,7 +41,7 @@ public class EditProfile extends Controller {
 	 */
 	public synchronized static Result submit() {
 		Form<User> filledForm = editForm.bindFromRequest();
-		
+
 		if(filledForm.hasErrors()) {
 			return badRequest(form.render(filledForm));
 		} else {
