@@ -20,11 +20,18 @@
 			}
 		}
 	</script>
-	<form action="@routes.Subject.post()" method="POST" />
 
-	<div style="float: left;">
-		<strong>Emner</strong><br /> <select id="available" size="24"
-			multiple="multiple" style="width: 140px;">
+	<style>
+		select {
+			width: 100%;
+		}
+	</style>
+
+<form action="@routes.Subject.post()" method="POST">
+
+	<div style="float: left; width: 33%;">
+		<h3>Emner</h3>
+		<select id="available" size="24" multiple="multiple">
 			<option value="Java">Java</option>
 			<option value="C">C</option>
 			<option value="Scala">Scala</option>
@@ -38,79 +45,21 @@
 			<option value="Rokk">Rokk</option>
 		</select>
 	</div>
-	
-	<div style="float: left; height: 50px; padding-top: 30px;">
-	<br />
-	<br />
-	<br />
-	
-	
-		<input type="button" class="testButton" value="   &gt; Legg til   "
-			onclick="swapElement('available','selectedWant')" /> <br /> <input
-			type="button" class="testButton" value="&lt; Fjern"
-			onclick="swapElement('selectedWant','available')" /><br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			
-			
-			<input type="button" class="testButton" value="   &gt; Legg til   "
-			onclick="swapElement('available','selectedCan')" /> <br /> <input
-			type="button" class="testButton" value="&lt; Fjern"
-			onclick="swapElement('selectedCan','available')" /><br />
+	<div style="float: left; width: 33%;">
+		<h3>Emner jeg vil lære</h3>
+		<input type="button" value="Legg til &gt;" onclick="swapElement('available','selectedWant')"><br>
+		<select id="selectedWant" size="21" multiple="multiple" name="selectedWant[]"></select>
+		<input type="button" value="&lt; Fjern" onclick="swapElement('selectedWant','available')"><br>
 	</div>
-
-	<div style="float: left;">
-	<p>Emner jeg vil lære:</p>
-				<strong></strong><br /> <select id="selectedWant" size="8"
-			multiple="multiple" name="selectedWant[]" style="width: 140px;">
-		</select>
-		
-		<p>Emner jeg kan:</p>
-		
-		<strong></strong><br /> <select id="selectedCan" size="8"
-			multiple="multiple" name="selectedCan[]" style="width: 140px;">
-		</select>
-
+	<div style="float: left; width: 33%;">
+		<h3>Emner jeg kan</h3>
+		<input type="button" value="Legg til &gt;" onclick="swapElement('available','selectedCan')"><br>
+		<select id="selectedCan" size="21" multiple="multiple" name="selectedCan[]"></select>
+		<input type="button" value="&lt; Fjern" onclick="swapElement('selectedCan','available')">
 	</div>
+	<div style="clear: both;"></div>
 
-	<div style="float: left;">
-	</div>
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	
-	
-
-	<input type="submit" name="Submit" class="formbutton" id="Submit"
-		value="Legg til" />
-	<br />
-	</p>
-
-	</form>
+	<input type="submit" value="Legg til">
+</form>
 
 }
