@@ -77,7 +77,6 @@ public class Authenticator extends Controller{
 		    }
 		    else
 		    	return unauthorized("Hmm");
-		    
 		    return ok(confirm.render(user, userForm));	    
 	    }
 	    else{
@@ -88,7 +87,8 @@ public class Authenticator extends Controller{
 
 	public static Result confirmUser() {
 		Form<User> filledForm = userForm.bindFromRequest();
-		User.create(filledForm.get());		
+		User.create(filledForm.get());
+		remember(filledForm.get());
 		return redirect(routes.Application.index());
 	}
 	
@@ -109,6 +109,7 @@ public class Authenticator extends Controller{
 		User user = User.find.where().eq("id", Integer.parseInt(session("connected"))).findUnique();
 		user.cookieIdentifier = "";
 		session().remove("connected");
+		response().discardCookies("rememberMe");
 		return redirect(routes.Application.index());
 	}
 	
@@ -116,9 +117,12 @@ public class Authenticator extends Controller{
 		String uuid = UUID.randomUUID().toString();
 		user.cookieIdentifier = uuid;
 		response().setCookie("rememberMe", user.id + " " + uuid, 604800);
+		session("connected", Long.toString(user.id));
 	}
 	
 	public static User getCurrentUser(){
+		if (session("connected") == null)
+			return null;
 		User user = User.find.where().eq("id", Integer.parseInt(session("connected"))).findUnique();
 		return user;
 	}

@@ -18,7 +18,16 @@
 				<div class="bar">
 					<a href="/">Minerva</a>
 					<div class="right">
-						<a href="/login">@Language.get("LogIn")</a>
+						@{
+              				if (Authenticator.getCurrentUser() == null){
+              					<a href="/login">{Language.get("LogIn")}</a>
+              				}
+              				else {
+              					<p>{Authenticator.getCurrentUser().email}</p>
+              					<a href="/logout">{Language.get("LogOut")}</a>
+              				} 		
+	              		} 
+						
 					</div>
 				</div>
 			</div>
