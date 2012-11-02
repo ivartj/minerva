@@ -71,6 +71,10 @@ textarea {
 	clear: both;
 }
 
+fieldset {
+	border: 1px solid #ba7;
+}
+
 /* Front page */
 
 .box {
