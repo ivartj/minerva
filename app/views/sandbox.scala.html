@@ -5,8 +5,8 @@
 	<h1>@Language.get("Sandbox")</h1>
 	<p>@Language.get("SandboxDescription")</p>
 	<form method="POST" action="/sandbox">
-		<textarea cols="40" rows="6" name="markup">@markup</textarea><br>
-		<input type="submit" value="@Language.get("TrySandbox")">
+		<textarea rows="6" name="markup">@markup</textarea><br>
+		<input type="submit" value="@Language.get("Submit")">
 	</form>
 	@Html(parsed)
 }

@@ -58,6 +58,15 @@ img {
 	max-width: 100%;
 }
 
+textarea {
+	width: 100%;
+	max-width: 40em;
+}
+
+.clearboth {
+	clear: both;
+}
+
 /* Front page */
 
 .box {

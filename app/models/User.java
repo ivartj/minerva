@@ -60,6 +60,14 @@ public class User extends Model {
 	public static List<User> all() {
 		return find.all();
 	}
+
+	public static User getByUserId(int uid) {
+		List<User> list = find.where().eq("id", uid).findList();
+		if(list.size() == 0)
+			return null;
+		else
+			return list.get(0);
+	}
 	
 	public static boolean isUser(String id){
 		return find.where().eq("googleId", id).findList().size() == 1 || find.where().eq("yahooId", id).findList().size() == 1;	

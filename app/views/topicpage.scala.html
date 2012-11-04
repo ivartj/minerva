@@ -1,9 +1,23 @@
 @(topicName: java.lang.String)
 @import controllers.Language
+@import controllers.Markup
+@import models.Topic
 
 @main(topicName) {
 	<h1>@Language.get("Topic"): @topicName</h1>
+	<ul>
+	@for(interest <- new Topic(topicName).getInterests()) {
+		<li class="interest">
+			<h3>@interest.user.fullName</h3>
+			@Html(Markup.parse(interest.description))
+		</li>
+	}
+	</ul>
+	<h2>@Language.get("ApplyForTopic")</h2>
 	<form action="/topic/@topicName" method="post">
-		<input type="submit" value="Apply">
+		<textarea rows="6" name="description"></textarea>
+		<p><label><input type="checkbox" name="as_mentor"> @Language.get("AsMentorQuestion")</label></p>
+		<p><label><input type="checkbox" name="as_student"> @Language.get("AsStudentQuestion")</label></p>
+		<input type="submit" value="@Language.get("Submit")">
 	</form>
 }
