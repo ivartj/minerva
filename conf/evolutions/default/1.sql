@@ -1,10 +1,9 @@
 
 # --- !Ups
 
-PRAGMA synchronous = OFF;
-
 create table user (
-  id                        integer primary key AUTOINCREMENT,
+  id                        integer primary key auto_increment,
+  cookie_identifier			varchar(255),
   full_name                 varchar(255),
   first_name				varchar(50),
   last_name					varchar(50),
@@ -21,9 +20,5 @@ create table user (
 
 # --- !Downs
 
-PRAGMA foreign_keys = OFF;
-
 drop table user;
-
-PRAGMA foreign_keys = ON;
 
