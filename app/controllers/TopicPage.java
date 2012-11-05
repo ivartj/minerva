@@ -12,7 +12,8 @@ public class TopicPage extends Controller {
 
 
 	public static Result page(String topicName) {
-		return ok(topicpage.render(topicName));
+		User user = Authenticator.getCurrentUser();
+		return ok(topicpage.render(topicName, user));
 	}
 
 	// TODO: Protect against cross-site request forgeries
@@ -20,18 +21,30 @@ public class TopicPage extends Controller {
 		User user = null;
 		Topic topic;
 		String description;
-		boolean asMentor, asStudent;
+		boolean asMentor, asStudent, remove;
 		String tmp[];
 		Map<String, String[]> formData;
 
 		topic = new Topic(topicName);
 
 		formData = request().body().asFormUrlEncoded();
+
+		remove = getFormString(formData, "remove") != "";
 		description = getFormString(formData, "description");
 		asMentor = getFormString(formData, "as_mentor") != "";
 		asStudent = getFormString(formData, "as_student") != "";
 
 		user = Authenticator.getCurrentUser();
+
+		if(remove) {
+			try {
+				topic.removeUser(user);
+				return ok(topicpage.render(topicName, user));
+			} catch (Exception e) {
+				e.printStackTrace();
+				return ok(error.render(e.toString()));
+			}
+		}
 
 		if(user == null)
 			return ok(error.render("You can't apply to a topic without being logged in!"));
@@ -39,17 +52,11 @@ public class TopicPage extends Controller {
 		try {
 			topic.addUser(user, description, asMentor, asStudent);
 		} catch (Exception e) {
-			try {
-				if(topic.hasUser(user))
-					return ok(error.render(Language.get("AlreadyApplied")));
-			} catch(Exception ee) {
-				return ok(error.render(ee.toString()));
-			}
 			e.printStackTrace();
 			return ok(error.render(e.toString()));
 		}
 
-		return ok(topicpage.render(topicName));
+		return ok(topicpage.render(topicName, user));
 	}
 
 	private static String getFormString(Map<String, String[]> formData, String key) {

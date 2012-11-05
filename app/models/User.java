@@ -61,7 +61,7 @@ public class User extends Model {
 		return find.all();
 	}
 
-	public static User getByUserId(int uid) {
+	public static User getByUserId(Long uid) {
 		List<User> list = find.where().eq("id", uid).findList();
 		if(list.size() == 0)
 			return null;

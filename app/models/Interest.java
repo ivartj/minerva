@@ -2,17 +2,21 @@ package models;
 
 public class Interest {
 	
-	public User user;
+	public Long userId;
 	public Topic topic;
 	public String description;
 	public boolean asMentor;
 	public boolean asStudent;
 
-	public Interest(User user, Topic topic, String description, boolean asMentor, boolean asStudent) {
-		this.user = user;
+	public Interest(Long userId, Topic topic, String description, boolean asMentor, boolean asStudent) {
+		this.userId = userId;
 		this.topic = topic;
 		this.description = description;
 		this.asMentor = asMentor;
 		this.asStudent = asStudent;
+	}
+
+	public User getUser() {
+		return User.getByUserId(userId);
 	}
 }

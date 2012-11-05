@@ -38,19 +38,29 @@ public class Topic {
 			description = result.getString(2);
 			list.add(new Topic(name, description));
 		}
+		conn.close();
 		return list;
 	}
 
 	public void addUser(User user, String description, boolean asMentor, boolean asStudent) throws SQLException {
 		
 		Connection conn = DB.getConnection();
-		PreparedStatement stmt = conn.prepareStatement("insert into interest (user, topic, description, as_mentor, as_student) values (?, ?, ?, ?, ?)");
+		PreparedStatement stmt = conn.prepareStatement("replace into interest (user, topic, description, as_mentor, as_student) values (?, ?, ?, ?, ?)");
 		stmt.setLong(1, user.id);
 		stmt.setString(2, name);
 		stmt.setString(3, description);
 		stmt.setBoolean(4, asMentor);
 		stmt.setBoolean(5, asStudent);
 		stmt.executeUpdate();
+		conn.close();
+	}
+
+	public void removeUser(User user) throws SQLException {
+		Connection conn = DB.getConnection();
+		PreparedStatement stmt = conn.prepareStatement("delete from interest where user = ?");
+		stmt.setLong(1, user.id);
+		stmt.executeUpdate();
+		conn.close();
 	}
 
 	public boolean hasUser(User user) throws SQLException {
@@ -63,6 +73,7 @@ public class Topic {
 		result = stmt.executeQuery();
 		while(result.next())
 			rownum++;
+		conn.close();
 		return rownum != 0;
 	}
 
@@ -79,13 +90,16 @@ public class Topic {
 		stmt.setLong(1, user.id);
 		stmt.setString(2, name);
 		result = stmt.executeQuery();
-		if(result.next() == false)
+		if(result.next() == false) {
+			conn.close();
 			return null;
+		}
 		description = result.getString(1);
 		asMentor = result.getBoolean(2);
 		asStudent = result.getBoolean(3);
+		conn.close();
 
-		return new Interest(user, this, description, asMentor, asStudent);
+		return new Interest(user.id, this, description, asMentor, asStudent);
 	}
 
 	public List<Interest> getInterests() throws SQLException {
@@ -104,12 +118,13 @@ public class Topic {
 		result = stmt.executeQuery();
 		list = new ArrayList<Interest>();
 		while(result.next()) {
-			user = User.getByUserId(result.getInt(1));
+			user = User.getByUserId(result.getLong(1));
 			description = result.getString(2);
 			asMentor = result.getBoolean(3);
 			asStudent = result.getBoolean(4);
-			list.add(new Interest(user, this, description, asMentor, asStudent));
+			list.add(new Interest(user.id, this, description, asMentor, asStudent));
 		}
+		conn.close();
 
 		return list;
 	}
