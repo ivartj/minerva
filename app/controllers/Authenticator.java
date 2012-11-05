@@ -120,7 +120,7 @@ public class Authenticator extends Controller{
 	private static void remember(User user) {
 		String uuid = UUID.randomUUID().toString();
 		user.cookieIdentifier = uuid;
-		response().setCookie("rememberMe", user.id + " " + uuid, 604800);
+		response().setCookie("rememberMe", user.id + " " + uuid);
 		session("connected", Long.toString(user.id));
 	}
 

@@ -1,0 +1,79 @@
+@(user: User)
+    @import helper._
+    @import helper.twitterBootstrap._
+    
+    @main("Profil") {
+    
+    <div class="container">
+        <div class="row">
+            
+            
+	    	<h2>@user.firstName @user.lastName</h2>
+            
+    		<fieldset>
+                
+               
+                <legend><a href="@routes.EditProfile.blank()">Profildetaljer</a></legend>
+   				<table cellpadding="1">
+			   		<tr> <img src="/Users/Roya/Downloads/minerva/public/images/rokk.jpg" height="150" width= "200" >
+                        <td width = "200"> <b> Fornavn:</td>
+                        <td> @user.firstName </td>
+			    	</tr>
+                    
+			    	<tr>
+                        <td width = "200"> <b> Etternavn:</td>
+                        <td> @user.lastName </td>
+			    	</tr>
+                    
+			    	<tr>
+                        <td width = "200"> <b> Alder: </td>
+                        <td> @if(user.age == 0) {
+			            	<em>Ikke spesifisert</em>
+                            } else {
+			            	@user.age
+                            }
+                        </td>
+			    	</tr>
+			    </table>
+            </fieldset>
+            <br>
+			<fieldset>
+              <legend>  <a href="@routes.EditProfile.blank()">Kontaktinformasjon</a>
+</legend>
+                <table cellpadding="1">
+                    <tr>
+				   	 	<td width = "200"> <b> Email:</td>
+				    	<td> @user.email </td>
+                    </tr>
+				    
+                    <tr>
+				   	 	<td width = "200"> <b> Alternativ email:</td>
+				    	<td> @user.alternativeEmail </td>
+                    </tr>
+                    
+                    <tr>
+					    <td width = "200"> <b> Adresse:</td>
+					    <td> @if(user.address == null || user.address == "") {
+                            <em>Ikke spesifisert</em>
+					        } else {
+                            @user.address
+					        } </td>
+                    </tr>
+                    
+                    <tr>
+					    <td width = "200"> <b> By:</td>
+					    <td> @user.city</td>
+                    </tr>
+                    
+                    <tr>
+					    <td width = "200"> <b> Land: </td>
+					    <td> @user.country </td>
+                    </tr>
+                </table>
+                
+			</fieldset>
+                 </div>
+    </div>
+
+
+}
