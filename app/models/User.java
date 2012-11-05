@@ -4,16 +4,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import controllers.Authenticator;
+
 import play.data.validation.Constraints.*;
 import play.db.DB;
 import play.db.ebean.Model;
-import play.api.db.*;
 
 @SuppressWarnings("serial")
 @Entity
@@ -74,9 +74,10 @@ public class User extends Model {
 
 	public User() {}
 
-	public User(String fullName, String firstName, String lastName, Integer age, String email, String alternativeEmail, String phone, String address,  
+	public User(String fullName, String cookieIdentifier, String firstName, String lastName, Integer age, String email, String alternativeEmail, String phone, String address,  
 			String nearestCity, String country) {
 		this.fullName = fullName; 
+		this.cookieIdentifier = cookieIdentifier; 
 		this.firstName = firstName; 
 		this.lastName = lastName; 
 		this.age = age;
@@ -88,26 +89,21 @@ public class User extends Model {
 		this.country = country;
 	}
 	
-	public void getInfo() {
-		try {		
-			Connection conn = DB.getConnection();
-			Statement setning = conn.createStatement();
-			String sporring = "select full_name, first_name, last_name, age, email, alternative_Email, phone, address, "+
-								"city, country from user where id=1";
-			ResultSet resultat = setning.executeQuery(sporring);
-			fullName = resultat.getString(1);
-			firstName = resultat.getString(2); 
-			lastName = resultat.getString(3); 
-			age = resultat.getInt(4); 
-			email = resultat.getString(5); 
-			alternativeEmail = resultat.getString(6); 
-			phone = resultat.getString(7);
-			address = resultat.getString(8); 
-			city = resultat.getString(9); 
-			country = resultat.getString(10); 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void getInfo() {	
+		User currentUser = Authenticator.getCurrentUser(); 
+		id = currentUser.id; 
+		email = currentUser.email; 
+		fullName = currentUser.fullName;
+		String[] names = fullName.split(" "); 
+		firstName = names[0]; 
+		lastName = names[1];
+		age = currentUser.age; 
+		alternativeEmail = currentUser.alternativeEmail; 
+		phone = currentUser.phone; 
+		address = currentUser.address; 
+		city = currentUser.city; 
+		country = currentUser.country;
 	}
+
+	
 }

@@ -17,21 +17,21 @@
    				<table cellpadding="1">
 			   		<tr>
 			    	<td width = "200"> <b> Fornavn:</td>
-			    	<td> @user.firstName </td>
+			    	<td>@user.firstName</td>
 			    	</tr>
 			    
 			    	<tr>
 			    	<td width = "200"> <b> Etternavn:</td>
-			    	<td> @user.lastName </td>
+			    	<td>@user.lastName</td>
 			    	</tr>
 			    
 			    	<tr>
 			    	<td width = "200"> <b> Alder: </td>
-			    	<td> @if(user.age == null) {
+			    	<td>@if(user.age == null) {
 			            	<em>Ikke spesifisert</em>
-			        	 } else {
+			        	} else {
 			            	@user.age
-			        	 } 
+			        	} 
 			        </td>
 			    	</tr>
 			    </table>
@@ -42,12 +42,17 @@
 					<table cellpadding="1">
 						<tr>
 				   	 	<td width = "200"> <b> Email:</td>
-				    	<td> @user.email </td>
+				    	<td> @user.email</td>
 				    	</tr>
 				    
 				    	<tr>
 				   	 	<td width = "200"> <b> Alternativ email:</td>
-				    	<td> @user.alternativeEmail </td>
+				    	<td> @user.alternativeEmail</td>
+				    	</tr>
+				    	
+				    	<tr>
+				   	 	<td width = "200"> <b> Telefon:</td>
+				    	<td> @user.phone </td>
 				    	</tr>
 				    	
 				    	<tr>
@@ -66,7 +71,7 @@
 					    
 					    <tr>
 					    <td width = "200"> <b> Land: </td>
-					    <td> @user.country </td>
+					    <td> @user.country</td>
 					    </tr>
 					</table>
 		   	
