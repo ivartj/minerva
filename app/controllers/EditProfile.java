@@ -14,26 +14,25 @@ public class EditProfile extends Controller {
 	 * Defines a form wrapping the User class.
 	 */ 
 	final static Form<User> editForm = form(User.class);
-
+	
 	/**
 	 * Display a blank form.
 	 */ 
 	public static Result edit() {
-		User existingUser = new User();
-		existingUser.getInfo();
+		User currentUser= new User();
+		currentUser.getInfo();
 		
-		String firstName = existingUser.firstName;
-		String lastName = existingUser.lastName;
-		Integer age = existingUser.age; 
-		String email = existingUser.email; 
-		String alternativeEmail = existingUser.alternativeEmail; 
-		String phone = existingUser.phone; 
-		String address = existingUser.address; 
-		String city = existingUser.city; 
-		String country = existingUser.country; 
-		
-		existingUser = new User("",firstName,lastName,age,email,alternativeEmail,phone,address,city,country);
-		return ok(form.render(editForm.fill(existingUser)));
+		String firstName = currentUser.firstName;
+		String lastName = currentUser.lastName;
+		Integer age = currentUser.age; 
+		String email = currentUser.email; 
+		String alternativeEmail = currentUser.alternativeEmail; 
+		String phone = currentUser.phone; 
+		String address = currentUser.address; 
+		String city = currentUser.city; 
+		String country = currentUser.country;
+		currentUser = new User("",firstName,lastName,age,email,alternativeEmail,phone,address,city,country);
+		return ok(form.render(editForm.fill(currentUser)));
 	}
 
 	/**
