@@ -17,9 +17,16 @@
 			<div class="wrap">
 				<div class="bar">
 					<div class="right">
-						<a href="/login">@Language.get("LogIn")</a>
-						<a href="@routes.EditProfile.edit()"> @Language.get("EditProfile")</a>
-						<a href="/profile">@Language.get("Profile")</a>
+						@{
+              				if (Authenticator.getCurrentUser() == null){
+              					<a href="/login">{Language.get("LogIn")}</a>
+              				}
+              				else {
+              					<a href="/profile">{Authenticator.getCurrentUser().email}</a>
+              					<a href="@routes.EditProfile.edit()"> @Language.get("EditProfile")</a>
+              					<a href="/logout">{Language.get("LogOut")}</a>
+              				} 		
+	              		} 
 						
 					</div>
 					<a href="/">Minerva</a>		

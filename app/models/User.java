@@ -21,6 +21,8 @@ public class User extends Model {
 
 	@Id
 	public Long id;
+	
+	public String cookieIdentifier;
 
 	//@Required
 	public String fullName;
@@ -67,7 +69,7 @@ public class User extends Model {
 	}
 	
 	public static boolean isUser(String id){
-		return find.where().eq("googleId", id).findList().size() > 0 || find.where().eq("yahooId", id).findList().size() > 0;	
+		return find.where().eq("googleId", id).findList().size() == 1 || find.where().eq("yahooId", id).findList().size() == 1;	
 	}
 
 	public User() {}
