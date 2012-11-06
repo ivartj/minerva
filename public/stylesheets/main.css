@@ -116,19 +116,23 @@ textarea {
 
 /* Topic page */
 
+.interest-info {
+	background-color: #bb4422;
+	color: white;
+}
+
 ul.interests {
 	padding: 0;
 }
 
-.interestbox {
-	display: inline-block;
-	border: 1px solid #da5;
-	background-color: #ffffee;
-	padding: 0.5em 0.5em 0 0.5em;
-	border-radius: 0.2em;
+li.interest {
+	border-width: 1px;
+	border-style: solid;
+	border-color: #da5;
+	list-style: none;
+	margin-bottom: 1em;
 }
 
-li.interest {
-	list-style: none;
-	margin: 0.5em 0;
+.interestcontent {
+	padding: 0 0.5em;
 }

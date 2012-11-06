@@ -99,7 +99,7 @@ public class Topic {
 		asStudent = result.getBoolean(3);
 		conn.close();
 
-		return new Interest(user.id, this, description, asMentor, asStudent);
+		return new Interest(user.id, this.name, description, asMentor, asStudent);
 	}
 
 	public List<Interest> getInterests() throws SQLException {
@@ -122,7 +122,7 @@ public class Topic {
 			description = result.getString(2);
 			asMentor = result.getBoolean(3);
 			asStudent = result.getBoolean(4);
-			list.add(new Interest(user.id, this, description, asMentor, asStudent));
+			list.add(new Interest(user.id, this.name, description, asMentor, asStudent));
 		}
 		conn.close();
 

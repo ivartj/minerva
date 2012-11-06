@@ -44,8 +44,7 @@
 	@for(interest <- new Topic(topicName).getInterests()) {
 	@defining(interest.getUser()) { user =>
 	<li class="interest">
-		<div class="interestbox">
-		<div class="interest-info">
+		<div class="bar">
 			<a href="/user/@user.id">@user.fullName</a>
 			@if(interest.asMentor) {
 				&#150; @Language.get("SeeksStudent")
@@ -54,6 +53,7 @@
 				&#150; @Language.get("SeeksMentor")
 			}
 		</div>
+		<div class="interestcontent">
 		@Html(Markup.parse(interest.description))
 		</div>
 	</li>
