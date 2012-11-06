@@ -113,3 +113,22 @@ textarea {
 		border-width: 1px 0 0 1px;
 	}
 }
+
+/* Topic page */
+
+ul.interests {
+	padding: 0;
+}
+
+.interestbox {
+	display: inline-block;
+	border: 1px solid #da5;
+	background-color: #ffffee;
+	padding: 0.5em 0.5em 0 0.5em;
+	border-radius: 0.2em;
+}
+
+li.interest {
+	list-style: none;
+	margin: 0.5em 0;
+}

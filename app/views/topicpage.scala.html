@@ -5,21 +5,6 @@
 
 @main(topicName) {
 	<h1>@Language.get("Topic"): @topicName</h1>
-	<ul>
-	@for(interest <- new Topic(topicName).getInterests()) {
-	@defining(interest.getUser()) { user =>
-		<li class="interest">
-		<a href="/user/@user.id">@user.fullName</a>
-		@if(interest.asMentor) {
-			&#150; @Language.get("SeeksStudent")
-		}
-		@if(interest.asStudent) {
-			&#150; @Language.get("SeeksMentor")
-		}
-			@Html(Markup.parse(interest.description))
-		</li>
-	}}
-	</ul>
 	@if(user != null) {
 	<form action="/topic/@topicName" method="post">
 
@@ -28,8 +13,10 @@
 		@if(interest == null) {
 
 		<h2>@Language.get("ApplyForTopic")</h2>
-
-		<textarea rows="6" name="description"></textarea>
+		<label>
+			<p>@Language.get("WriteAboutYourInterest")</p>
+			<textarea rows="6" name="description"></textarea>
+		</label>
 		<p><label><input type="checkbox" name="as_mentor"> @Language.get("AsMentorQuestion")</label></p>
 		<p><label><input type="checkbox" name="as_student"> @Language.get("AsStudentQuestion")</label></p>
 		<input type="submit" value="@Language.get("Submit")">
@@ -40,7 +27,10 @@
 
 		<h2>@Language.get("EditInterest")</h2>
 		<input type="submit" name="remove" value="@Language.get("RemoveInterest")"><br>
-		<textarea rows="6" name="description">@interest.description</textarea>
+		<label>
+			<p>@Language.get("WriteAboutYourInterest")</p>
+			<textarea rows="6" name="description">@interest.description</textarea>
+		</label>
 		<p><label><input type="checkbox" name="as_mentor" @if(interest.asMentor) { checked }> @Language.get("AsMentorQuestion")</label></p>
 		<p><label><input type="checkbox" name="as_student" @if(interest.asStudent) { checked }> @Language.get("AsStudentQuestion")</label></p>
 		<input type="submit" value="@Language.get("Submit")">
@@ -50,4 +40,23 @@
 
 	</form>
 	}
+	<ul class="interests">
+	@for(interest <- new Topic(topicName).getInterests()) {
+	@defining(interest.getUser()) { user =>
+	<li class="interest">
+		<div class="interestbox">
+		<div class="interest-info">
+			<a href="/user/@user.id">@user.fullName</a>
+			@if(interest.asMentor) {
+				&#150; @Language.get("SeeksStudent")
+			}
+			@if(interest.asStudent) {
+				&#150; @Language.get("SeeksMentor")
+			}
+		</div>
+		@Html(Markup.parse(interest.description))
+		</div>
+	</li>
+	}}
+	</ul>
 }
