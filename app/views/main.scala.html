@@ -22,8 +22,7 @@
               					<a href="/login">{Language.get("LogIn")}</a>
               				}
               				else {
-              					<a href="/profile">{Authenticator.getCurrentUser().email}</a>
-              					<a href="/editProfile">{Language.get("EditProfile")}</a>
+              					<a href="/profile">{Authenticator.getCurrentUser().fullName}</a>
               					<a href="/logout">{Language.get("LogOut")}</a>
               				} 		
 	              		} 
