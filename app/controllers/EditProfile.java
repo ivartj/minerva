@@ -47,4 +47,9 @@ public class EditProfile extends Controller {
 			return ok(summary.render(created));
 		}
 	}
+	
+	public static Result profile(){
+        User user = Authenticator.getCurrentUser();
+        return ok(summary.render(user));      
+    }
 }
