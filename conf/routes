@@ -14,7 +14,7 @@ POST	/confirmUser				controllers.Authenticator.confirmUser()
 GET     /profile                    controllers.Profile.profile()
 
 # Edit profile
-GET     /editProfile                controllers.Profile.edit()
+GET     /editProfile                controllers.Profile.edit()            
 POST	/editProfile                controllers.Profile.submit()
 
 
