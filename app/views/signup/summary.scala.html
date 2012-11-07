@@ -28,12 +28,7 @@
                     
 			    	<tr>
                         <td width = "200"> <b> @Language.get("Age"):</td>
-                        <td> @if(user.age == 0) {
-			            	<em>Ikke spesifisert</em>
-                            } else {
-			            	@user.age
-                            }
-                        </td>
+                        <td> @user.age </td>
 			    	</tr>
 			    </table>
             </fieldset>
@@ -58,11 +53,7 @@
                     
                     <tr>
 					    <td width = "200"> <b> @Language.get("Address"):</td>
-					    <td> @if(user.address == null || user.address == "") {
-                            <em>Ikke spesifisert</em>
-					        } else {
-                            @user.address
-					        } </td>
+					    <td> @user.address</td>
                     </tr>
                     
                     <tr>
@@ -80,6 +71,8 @@
 			
 			<div class="actions"> <br>
 			<a href="@routes.Profile.edit()">@Language.get("EditProfile")</a>
+			<h3>Se andre sin profil</h3>
+			<a href="@routes.Profile.profileOthers(49)">Se profilen til stine</a>
         	</div>
         </div>
          </div>

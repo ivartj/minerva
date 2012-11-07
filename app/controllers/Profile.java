@@ -1,9 +1,5 @@
 package controllers;
 
-import java.sql.SQLException;
-
-
-
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.SqlUpdate;
 
@@ -23,20 +19,11 @@ public class Profile extends Controller {
 
 	/**
 	 * Display a blank form.
-	 * @throws SQLException 
 	 */ 
 	public static Result edit() {
 		User currentUser = Authenticator.getCurrentUser();  
 		currentUser.getInfo();
 		return ok(form.render(editForm.fill(currentUser)));
-		
-//		User currentUser = Authenticator.getCurrentUser();  
-//		currentUser.getInfo();
-//		
-//		User created = new User(currentUser.fullName, currentUser.cookieIdentifier, currentUser.firstName, currentUser.lastName, currentUser.age, 
-//    			currentUser.email, currentUser.alternativeEmail, currentUser.phone, currentUser.address, currentUser.city, currentUser.country);  
-//		
-//		return ok(form.render(editForm.fill(created)));
 	}
 
 	/**
