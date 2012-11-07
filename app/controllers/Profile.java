@@ -11,6 +11,7 @@ import play.mvc.*;
 import play.data.*;
 
 import views.html.signup.*;
+import views.html.*;
 
 import models.*;
 
@@ -84,5 +85,14 @@ public class Profile extends Controller {
 	public static Result profile(){
         User user = Authenticator.getCurrentUser();
         return ok(summary.render(user));      
+    }
+    
+    public static Result getUser(Long userID){
+        User user = User.getByUserId(userID);
+        if(user == null){
+            return ok(error.render("No such user!"));
+        }else{
+            return ok(profile.render(user));
+        }
     }
 }
