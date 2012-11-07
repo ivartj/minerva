@@ -23,7 +23,7 @@
 @main(""+title) {
 		<h2>@Language.get("EditProfile")</h2>
     
-    @helper.form(action = routes.EditProfile.profile) {
+    @helper.form(action = routes.Profile.submit) {
 
         <fieldset>
             <legend>@Language.get("AboutMe")</legend>
@@ -98,7 +98,7 @@
         
         <div class="actions"> <br>
             <input type="submit" class="btn" value=@Language.get("Save")>
-            <a href="@routes.Application.index">@Language.get("Cancel")</a>
+            <a href="@routes.Profile.profile">@Language.get("Cancel")</a>
         </div>
 
      	
