@@ -17,7 +17,7 @@
 			@if(interest.asStudent) {
 				&#150; @Language.get("SeeksMentor")
 			}
-			@if(listuser.id == user.id) {
+			@if(user != null && listuser.id == user.id) {
 				&#150; <input type="submit" name="remove" value="@Language.get("RemoveInterest")"></form>
 			}
 		</form>

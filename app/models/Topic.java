@@ -57,8 +57,9 @@ public class Topic {
 
 	public void removeUser(User user) throws SQLException {
 		Connection conn = DB.getConnection();
-		PreparedStatement stmt = conn.prepareStatement("delete from interest where user = ?");
+		PreparedStatement stmt = conn.prepareStatement("delete from interest where user = ? and topic = ?");
 		stmt.setLong(1, user.id);
+		stmt.setString(2, name);
 		stmt.executeUpdate();
 		conn.close();
 	}
