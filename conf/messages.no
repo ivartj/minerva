@@ -41,4 +41,3 @@ EditInterest=Endre opplistingen
 LogOut=Logg ut
 RemoveInterest=Fjern
 WriteAboutYourInterest=Skriv litt om interessen din for emnet:
->>>>>>> master
