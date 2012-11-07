@@ -26,5 +26,10 @@ POST    /sandbox                    controllers.Markup.sandbox()
 GET     /topic/:topicName           controllers.TopicPage.page(topicName: String)
 POST    /topic/:topicName           controllers.TopicPage.apply(topicName: String)
 
+# User list
+GET     /users                  controllers.Userlist.list(p:Int ?= 0, s ?= "fullName", o ?= "asc", f ?= "")
+
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
+

@@ -20,3 +20,4 @@ EditInterest=Edit listing
 LogOut=Log out
 RemoveInterest=Remove
 WriteAboutYourInterest=Write a little about your interest in this topic:
+users.list.title={0,choice,0#Ingen brukere|1#En bruker|1<{0,number,integer} brukere} funnet

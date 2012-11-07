@@ -67,6 +67,7 @@ textarea {
 	clear: both;
 }
 
+
 /* Front page */
 
 .box {
@@ -135,4 +136,12 @@ li.interest {
 
 .interestcontent {
 	padding: 0 0.5em;
+}
+
+
+/* User list */
+
+td {
+	border: 1px solid #da5;
+	padding: 0.1em 2em;
 }

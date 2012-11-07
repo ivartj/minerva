@@ -9,7 +9,9 @@ import java.util.ArrayList;
 
 public class Topic {
 
+	
 	public String name;
+	
 	public String description;
 	
 	public Topic(String name) {

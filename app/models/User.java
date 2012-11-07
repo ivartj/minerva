@@ -2,11 +2,12 @@ package models;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import play.data.validation.Constraints.*;
-import play.db.ebean.Model;
+import play.db.ebean.*;
+
+import com.avaje.ebean.*;
 
 @SuppressWarnings("serial")
 @Entity
@@ -72,6 +73,15 @@ public class User extends Model {
 	public static boolean isUser(String id){
 		return find.where().eq("googleId", id).findList().size() == 1 || find.where().eq("yahooId", id).findList().size() == 1;	
 	}
+	
+	 public static Page<User> page(int page, int pageSize, String sortBy, String order, String filter) {
+	        return 
+	            find.where()
+	                .ilike("fullName", "%" + filter + "%")
+	                .orderBy(sortBy + " " + order)
+	                .findPagingList(pageSize)
+	                .getPage(page);
+	    }
 
 	public User() {}
 
