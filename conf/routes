@@ -11,10 +11,11 @@ GET		/logout						controllers.Authenticator.logout()
 POST	/authenticate				controllers.Authenticator.auth()
 GET		/verify						controllers.Authenticator.verify()
 POST	/confirmUser				controllers.Authenticator.confirmUser()
+GET     /profile                    controllers.Profile.profile()
 
 # Edit profile
-GET     /editProfile                controllers.EditProfile.edit()
-GET     /profile                     controllers.EditProfile.profile()
+GET     /editProfile                controllers.Profile.edit()
+POST	/editProfile                controllers.Profile.submit()
 
 
 # Language
