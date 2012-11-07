@@ -1,17 +1,14 @@
 package controllers;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+
+
 
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.SqlUpdate;
 
-import play.*;
 import play.mvc.*;
 import play.data.*;
-import play.db.DB;
 
 import views.html.signup.*;
 

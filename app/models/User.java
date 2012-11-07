@@ -1,9 +1,5 @@
 package models;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -12,7 +8,6 @@ import javax.persistence.Id;
 import controllers.Authenticator;
 
 import play.data.validation.Constraints.*;
-import play.db.DB;
 import play.db.ebean.Model;
 
 @SuppressWarnings("serial")
