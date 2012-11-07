@@ -20,15 +20,15 @@ import views.html.login;
 import views.html.confirm;
 
 public class Authenticator extends Controller{
-	
+
 	static Form<User> userForm = form(User.class);
-	
+
 	public static final Map<String, String> identifiers = createMap();	
-	
+
 	public static Result chooseProvider() {
 		return ok(login.render());
 	}
-		
+
 	private static Map<String, String> createMap() {
 		Map<String, String> result = new HashMap<String, String>();
 		result.put("google", "https://www.google.com/accounts/o8/id");
@@ -37,52 +37,56 @@ public class Authenticator extends Controller{
 	}
 
 	public static Result auth() {
-	
+
 		String providerId = request().body().asFormUrlEncoded().get("provider")[0];
 		String providerUrl = identifiers.get(providerId);
-	    String returnToUrl = "http://" + request().getHeader("Host") + "/verify";
+		String returnToUrl = "http://" + request().getHeader("Host") + "/verify";
 
-	    Map<String, String> attributes = new HashMap<String, String>();
-	    attributes.put("oiEmail", "http://schema.openid.net/contact/email");
-	    attributes.put("oiFirstName", "http://schema.openid.net/namePerson/first");
-	    attributes.put("oiLastName", "http://schema.openid.net/namePerson/last");
-	    attributes.put("oiCity", "http://openid.net/schema/contact/city/home");
-	    attributes.put("axEmail", "http://axschema.org/contact/email");
-	    attributes.put("axFullName", "http://axschema.org/namePerson");
+		Map<String, String> attributes = new HashMap<String, String>();
+		attributes.put("oiEmail", "http://schema.openid.net/contact/email");
+		attributes.put("oiFirstName", "http://schema.openid.net/namePerson/first");
+		attributes.put("oiLastName", "http://schema.openid.net/namePerson/last");
+		attributes.put("oiCity", "http://openid.net/schema/contact/city/home");
+		attributes.put("axEmail", "http://axschema.org/contact/email");
+		attributes.put("axFullName", "http://axschema.org/namePerson");
 
-	    Promise<String> redirectUrl = null;
+		Promise<String> redirectUrl = null;
 		redirectUrl = OpenID.redirectURL(providerUrl, returnToUrl, attributes);
-		
-	    return redirect(redirectUrl.get());
+
+		return redirect(redirectUrl.get());
 	}
 
 	public static Result verify() {
-	    Promise<UserInfo> userInfoPromise = OpenID.verifiedId();
-	    UserInfo userInfo = userInfoPromise.get();
-	    
-	    if (!User.isUser(userInfo.id)){
-		    
-	    	User user = new User();
-		    if (userInfo.id.startsWith(identifiers.get("google"))){
+		Promise<UserInfo> userInfoPromise = OpenID.verifiedId();
+		UserInfo userInfo = userInfoPromise.get();
 
-		    	user.googleId = userInfo.id;
-		    	user.fullName = userInfo.attributes.get("oiFirstName") + " " + userInfo.attributes.get("oiLastName");
-		    	user.email =  userInfo.attributes.get("oiEmail");
-		    }
-		    else if (userInfo.id.startsWith(identifiers.get("yahoo"))){
-		 
-		    	user.fullName = userInfo.attributes.get("fullname");
-	    		user.email = userInfo.attributes.get("email");
-		    	user.yahooId = userInfo.id;
-		    }
-		    else
-		    	return unauthorized("Hmm");
-		    return ok(confirm.render(user, userForm));	    
-	    }
-	    else{
-	    	remember(User.find.where().eq("googleId", userInfo.id).findList().get(0));
-	    	return redirect(routes.Application.index());
-	    }
+		if (!User.isUser(userInfo.id)){
+
+			User user = new User();
+			if (userInfo.id.startsWith(identifiers.get("google"))){
+
+				user.googleId = userInfo.id;
+				user.fullName = userInfo.attributes.get("oiFirstName") + " " + userInfo.attributes.get("oiLastName");
+				user.firstName = userInfo.attributes.get("oiFirstName");
+				user.lastName = userInfo.attributes.get("oiLastName");
+				user.email = userInfo.attributes.get("oiEmail");
+			}
+			else if (userInfo.id.startsWith(identifiers.get("yahoo"))){
+
+				user.fullName = userInfo.attributes.get("fullname");
+				user.firstName = userInfo.attributes.get("firstName"); 
+				user.lastName = userInfo.attributes.get("lastName");
+				user.email = userInfo.attributes.get("email");
+				user.yahooId = userInfo.id;
+			}
+			else
+				return unauthorized("Hmm");
+			return ok(confirm.render(user, userForm));	    
+		}
+		else{
+			remember(User.find.where().eq("googleId", userInfo.id).findList().get(0));
+			return redirect(routes.Application.index());
+		}
 	}
 
 	public static Result confirmUser() {
@@ -91,7 +95,7 @@ public class Authenticator extends Controller{
 		remember(filledForm.get());
 		return redirect(routes.Application.index());
 	}
-	
+
 	public static Result login() {		
 		Cookie cookie = request().cookies().get("rememberMe");
 		if (cookie != null && !cookie.value().isEmpty()){
@@ -104,7 +108,7 @@ public class Authenticator extends Controller{
 		}
 		return chooseProvider();
 	}
-	
+
 	public static Result logout() {
 		User user = User.find.where().eq("id", Integer.parseInt(session("connected"))).findUnique();
 		user.cookieIdentifier = "";
@@ -112,14 +116,14 @@ public class Authenticator extends Controller{
 		response().discardCookies("rememberMe");
 		return redirect(routes.Application.index());
 	}
-	
+
 	private static void remember(User user) {
 		String uuid = UUID.randomUUID().toString();
 		user.cookieIdentifier = uuid;
 		response().setCookie("rememberMe", user.id + " " + uuid);
 		session("connected", Long.toString(user.id));
 	}
-	
+
 	public static User getCurrentUser(){
 		if (session("connected") == null)
 			return null;

@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import controllers.Authenticator;
+
 import play.data.validation.Constraints.*;
 import play.db.ebean.Model;
 
@@ -75,17 +77,36 @@ public class User extends Model {
 
 	public User() {}
 
-	public User(String fullName, String firstName, String lastName, String email, String alternativeEmail, String phone, String address, 
-			String nearestCity, String country, Integer age) {
+	public User(String fullName, String cookieIdentifier, String firstName, String lastName, Integer age, String email, String alternativeEmail, String phone, String address,  
+			String nearestCity, String country) {
 		this.fullName = fullName; 
+		this.cookieIdentifier = cookieIdentifier; 
 		this.firstName = firstName; 
 		this.lastName = lastName; 
+		this.age = age;
 		this.email = email;
-		this.alternativeEmail = alternativeEmail; 
+		this.alternativeEmail = alternativeEmail;
 		this.phone = phone; 
+		this.address = address;
 		this.city = nearestCity; 
 		this.country = country;
-		this.address = address;
-		this.age = age;
 	}
+	
+	public void getInfo() {	
+		User currentUser = Authenticator.getCurrentUser(); 
+		id = currentUser.id; 
+		email = currentUser.email; 
+		fullName = currentUser.fullName;
+		String[] names = fullName.split(" "); 
+		firstName = names[0]; 
+		lastName = names[1];
+		age = currentUser.age; 
+		alternativeEmail = currentUser.alternativeEmail; 
+		phone = currentUser.phone; 
+		address = currentUser.address; 
+		city = currentUser.city; 
+		country = currentUser.country;
+	}
+
+	
 }
