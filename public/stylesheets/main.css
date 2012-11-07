@@ -58,6 +58,15 @@ img {
 	max-width: 100%;
 }
 
+textarea {
+	width: 100%;
+	max-width: 40em;
+}
+
+.clearboth {
+	clear: both;
+}
+
 /* Front page */
 
 .box {
@@ -103,4 +112,27 @@ img {
 	.box:first-child + .box + .box + .box .subbox {
 		border-width: 1px 0 0 1px;
 	}
+}
+
+/* Topic page */
+
+.interest-info {
+	background-color: #bb4422;
+	color: white;
+}
+
+ul.interests {
+	padding: 0;
+}
+
+li.interest {
+	border-width: 1px;
+	border-style: solid;
+	border-color: #da5;
+	list-style: none;
+	margin-bottom: 1em;
+}
+
+.interestcontent {
+	padding: 0 0.5em;
 }

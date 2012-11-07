@@ -1,0 +1,62 @@
+@(topicName: java.lang.String, user: models.User)
+@import controllers.Language
+@import controllers.Markup
+@import models.Topic
+
+@main(topicName) {
+	<h1>@Language.get("Topic"): @topicName</h1>
+	@if(user != null) {
+	<form action="/topic/@topicName" method="post">
+
+	@defining(new Topic(topicName).getInterestOf(user)) { interest =>
+
+		@if(interest == null) {
+
+		<h2>@Language.get("ApplyForTopic")</h2>
+		<label>
+			<p>@Language.get("WriteAboutYourInterest")</p>
+			<textarea rows="6" name="description"></textarea>
+		</label>
+		<p><label><input type="checkbox" name="as_mentor"> @Language.get("AsMentorQuestion")</label></p>
+		<p><label><input type="checkbox" name="as_student"> @Language.get("AsStudentQuestion")</label></p>
+		<input type="submit" value="@Language.get("Submit")">
+
+		}
+
+		@if(interest != null) {
+
+		<h2>@Language.get("EditInterest")</h2>
+		<input type="submit" name="remove" value="@Language.get("RemoveInterest")"><br>
+		<label>
+			<p>@Language.get("WriteAboutYourInterest")</p>
+			<textarea rows="6" name="description">@interest.description</textarea>
+		</label>
+		<p><label><input type="checkbox" name="as_mentor" @if(interest.asMentor) { checked }> @Language.get("AsMentorQuestion")</label></p>
+		<p><label><input type="checkbox" name="as_student" @if(interest.asStudent) { checked }> @Language.get("AsStudentQuestion")</label></p>
+		<input type="submit" value="@Language.get("Submit")">
+
+		}
+	}
+
+	</form>
+	}
+	<ul class="interests">
+	@for(interest <- new Topic(topicName).getInterests()) {
+	@defining(interest.getUser()) { user =>
+	<li class="interest">
+		<div class="bar">
+			<a href="/user/@user.id">@user.fullName</a>
+			@if(interest.asMentor) {
+				&#150; @Language.get("SeeksStudent")
+			}
+			@if(interest.asStudent) {
+				&#150; @Language.get("SeeksMentor")
+			}
+		</div>
+		<div class="interestcontent">
+		@Html(Markup.parse(interest.description))
+		</div>
+	</li>
+	}}
+	</ul>
+}

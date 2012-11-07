@@ -1,6 +1,7 @@
 @()
 
 @import controllers.Language
+@import models.Topic
 
 @main("Minerva") {
 
@@ -30,25 +31,9 @@
 			</div><div class="box">
 			<div class="subbox">
 				<h2>@Language.get("IndexTopicsTitle")</h2>
-				<a href="#">Java</a>
-				<a href="#">C</a>
-				<a href="#">Play&#x2005;Framework</a>
-				<a href="#">Nachos</a>
-				<a href="#">Operativsystemer</a>
-				<a href="#">Baking</a>
-				<a href="#">Matlaging</a>
-				<a href="#">Ekstraterrestielle&#x2005;skapninger</a>
-				<a href="#">Meningen&#x2005;med&#x2005;livet</a>
-				<a href="#">Obladi</a>
-				<a href="#">NTNU</a>
-				<a href="#">Informasjonsvitenskap</a>
-				<a href="#">Linux</a>
-				<a href="#">Yacc&#x2005;&amp;&#x2005;Lex</a>
-				<a href="#">Avansert&#x2005;baking</a>
-				<a href="#">Simple&#x2005;Build&#x2005;Tool</a>
-				<a href="#">Piano</a>
-				<a href="#">Puter</a>
-				<a href="#">Madrasser</a>
+				@for(topic <- Topic.getAll()) {
+					<a href="/topic/@topic.name">@topic.name</a>
+				}
 			</div>
 		</div><div class="box">
 			<div class="subbox center">
