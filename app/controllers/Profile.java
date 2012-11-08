@@ -46,8 +46,8 @@ public class Profile extends Controller {
         	String address = currentUser.address; 
         	String city = currentUser.city;
         	String country = currentUser.country; 
-        	
-        	String s = "UPDATE user SET first_name = :first_name, last_name = :last_name, age = :age, email = :email, alternative_Email = :alternativeEmail, " +
+
+        	String s = "UPDATE user SET first_name = :first_name, last_name = :last_name, age = :age, email = :email, " +
         			"phone = :phone, address = :address, city = :city, country = :country where id = :id";
 			SqlUpdate update = Ebean.createSqlUpdate(s);
 			update.setParameter("id", id);
@@ -64,7 +64,6 @@ public class Profile extends Controller {
 			Ebean.execute(update);
 			
 			return ok(summary.render(currentUser));
-        	
         }
     }
 	
