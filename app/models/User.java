@@ -96,10 +96,8 @@ public class User extends Model {
 		User currentUser = Authenticator.getCurrentUser(); 
 		id = currentUser.id; 
 		email = currentUser.email; 
-		fullName = currentUser.fullName;
-		String[] names = fullName.split(" "); 
-		firstName = names[0]; 
-		lastName = names[1];
+		firstName = currentUser.firstName; 
+		lastName = currentUser.lastName; 
 		age = currentUser.age; 
 		alternativeEmail = currentUser.alternativeEmail; 
 		phone = currentUser.phone; 
@@ -107,6 +105,5 @@ public class User extends Model {
 		city = currentUser.city; 
 		country = currentUser.country;
 	}
-
 	
 }
