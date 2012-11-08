@@ -12,10 +12,9 @@
 	    	<h2>@user.firstName @user.lastName</h2>
             
     		<fieldset>
-                
                
                 <legend>@Language.get("AboutMe")</legend>
-   				<table cellpadding="1">
+   				<table>
 			   		<tr> <img src="@routes.Assets.at("images/logo/medium.png")">
                         <td width = "200"> <b> @Language.get("FirstName"):</td>
                         <td> @user.firstName </td>
@@ -66,13 +65,14 @@
 					    <td> @user.country </td>
                     </tr>
                 </table>
-                
+         
 			</fieldset>
 			
 			<div class="actions"> <br>
 			<a href="@routes.Profile.edit()">@Language.get("EditProfile")</a>
         	</div>
+        	
         </div>
-         </div>
-    </div>
+	</div>
+  
 }
