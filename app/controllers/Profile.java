@@ -90,7 +90,7 @@ public class Profile extends Controller {
     public static Result getUser(Long userID){
         User user = User.getByUserId(userID);
         if(user == null){
-            return ok(error.render("No such user!"));
+            return ok(noUser.render(userID));
         }else{
             return ok(profile.render(user));
         }
