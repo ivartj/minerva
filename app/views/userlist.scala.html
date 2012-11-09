@@ -67,8 +67,8 @@
         <table class="bordered-table">
             <thead>
                 <tr>
-                    @header("full_Name", Language.get("Name"))
-                    @header("City", Language.get("City"))
+                    @header("full_name", Language.get("Name"))
+                    @header("city", Language.get("City"))
                 </tr>
             </thead>
             <tbody>
@@ -116,10 +116,7 @@
                         <a>&larr; Previous</a>
                     </li>
                 }
-                <li class="current">
-		    @(page + 1) / @(currentPage.size() / pageSize + 1)
-                </li>
-                @if(page != currentPage.size() / pageSize) {
+                @if(currentPage.size() == pageSize) {
                     <li class="next">
                         <a href="@link(page + 1, null)">Next &rarr;</a>
                     </li>

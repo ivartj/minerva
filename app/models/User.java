@@ -93,23 +93,30 @@ public class User extends Model {
 
 		 list = new ArrayList<UserTableInfo>();
 
-		 stmtStr = "select id, first_name, last_name, city from user where concat(first_name, ' ', last_name) like concat('%', ?, '%') limit ? offset ?";
-		 if(sortBy.equals("first_name") || sortBy.equals("last_name") || sortBy.equals("city")) {
-			 stmtStr += "order by " + sortBy;
+		 stmtStr = "select id, first_name, last_name, city from user where concat(first_name, ' ', last_name) like concat('%', ?, '%')";
+
+		 // We will not accept anything that we do not expect, lest we get susceptible to SQL injections.
+		 if(sortBy.equals("full_name")) {
+			stmtStr += " order by concat(first_name, ' ', last_name)";
+			 if(order.equals("asc") || order.equals("desc"))
+				 stmtStr += " " + order;
+		 } else if(sortBy.equals("first_name") || sortBy.equals("last_name") || sortBy.equals("city")) {
+			 stmtStr += " order by " + sortBy;
 			 if(order.equals("asc") || order.equals("desc"))
 				 stmtStr += " " + order;
 		 }
 
+		stmtStr += " limit ? offset ?";
+
 		 try {
 			 conn = DB.getConnection();
-			 System.out.println(stmtStr);
 			 stmt = conn.prepareStatement(stmtStr);
 			 stmt.setString(1, filter);
 			 stmt.setInt(2, pageSize);
 			 stmt.setInt(3, pageSize * page);
 			 res = stmt.executeQuery();
 			 while(res.next()) {
-				 UserTableInfo info = new UserTableInfo();;
+				 UserTableInfo info = new UserTableInfo();
 				 info.id = res.getLong(1);
 				 info.firstName = res.getString(2);
 				 info.lastName = res.getString(3);
