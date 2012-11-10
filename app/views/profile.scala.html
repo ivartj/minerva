@@ -1,78 +1,76 @@
 @(user: User)
-    @import helper._
-    @import helper.twitterBootstrap._
-    
-    @title = {@Language.get("Profile")}
-    
-    @main(""+title) {
-    
-    <div class="container">
-        <div class="row">
+@import helper._	  	
+@import helper.twitterBootstrap._
 
-	    	<h2>@user.firstName @user.lastName</h2> 
-            
-    		<fieldset>
+@main("Profil") {
+
+<div class="container">
+	<div class="row">
+ 
+ 
+ 		<h2>@user.firstName @user.lastName</h2>
+ 
+ 		<fieldset>
+ 
+ 
+ 			<legend>Profildetaljer</legend>
+ 			<table cellpadding="1">	
+ 				<tr> <img src="@routes.Assets.at("images/logo/medium.png")">
+ 					<td width = "200"> <b> Fornavn:</td>	
+  					<td> @user.firstName </td>
+  				</tr>
+   				
+   				<tr>
+    				<td width = "200"> <b> Etternavn:</td>
+   	 				<td> @user.lastName </td>
+				</tr>
+  	
+                <tr>
+	  				<td width = "200"> <b> Alder: </td>
+	  				<td> @if(user.age == 0) {
+	  	            	<em>Ikke spesifisert</em>
+	  	                } else {
+  						@user.age
+  						}
+                   </td>
+              </tr>
+           </table>
+       </fieldset>
+       <br> 	
+       <fieldset>
+           <legend>Kontaktinformasjon</legend>
+           <table cellpadding="1">
+                <tr>	  	
+                   <td width = "200"> <b> Email:</td>
+                   <td> @user.email </td>
+                </tr>
+
+                <tr>
+                    <td width = "200"> <b> Alternativ email:</td>
+                 	<td> @user.alternativeEmail </td>
+                </tr>
+	  	
+                <tr>
+                    <td width = "200"> <b> Adresse:</td>
+                    <td> @if(user.address == null || user.address == "") {
+                        <em>Ikke spesifisert</em>
+                       } else {
+                     @user.address
+                        } </td>
+                </tr>
+                
+          		<tr>
+                  <td width = "200"> <b> By:</td>
+                  <td> @user.city</td>
+                </tr>  	
                
-                <legend>@Language.get("AboutMe")</legend>
-   				<table>
-			   		<tr> <img src="@routes.Assets.at("images/logo/medium.png")">
-                        <td width = "200"> <b> @Language.get("FirstName"):</td>
-                        <td> @user.firstName </td>
-			    	</tr>
-                    
-			    	<tr>
-                        <td width = "200"> <b>@Language.get("LastName"):</td>
-                        <td> @user.lastName </td>
-			    	</tr>
-                    
-			    	<tr>
-                        <td width = "200"> <b> @Language.get("Age"):</td>
-                        <td> @user.age </td>
-			    	</tr>
-			    </table>
-            </fieldset>
-            <br>
-			<fieldset>
-              <legend>@Language.get("ContactInfo")</legend> 
-                <table cellpadding="1">
-                    <tr>
-				   	 	<td width = "200"> <b> @Language.get("Email"):</td>
-				    	<td> @user.email </td>
-                    </tr>
-				    
-                    <tr>
-				   	 	<td width = "200"> <b> @Language.get("AlternativeEmail")</td>
-				    	<td> @user.alternativeEmail </td>
-                    </tr>
-                    
-                     <tr>
-				   	 	<td width = "200"> <b> @Language.get("Phone"):</td>
-				    	<td> @user.phone </td>
-                    </tr>
-                    
-                    <tr>
-					    <td width = "200"> <b> @Language.get("Address"):</td>
-					    <td> @user.address</td>
-                    </tr>
-                    
-                    <tr>
-					    <td width = "200"> <b> @Language.get("City"):</td>
-					    <td> @user.city</td>
-                    </tr>
-                    
-                    <tr>
-					    <td width = "200"> <b> @Language.get("Country"): </td>
-					    <td> @user.country </td>
-                    </tr>
-                </table>
-         
-			</fieldset>
-			
-			<div class="actions"> <br>
-			<a href="@routes.Profile.edit()">@Language.get("EditProfile")</a>
-        	</div>
-        	
-        </div>
-	</div> 
+               <tr>
+                  <td width = "200"> <b> Land: </td>
+                  <td> @user.country </td>
+                </tr>
+	  	
+            </table>
+        </fieldset>	
+    </div> 	
+</div>
 }
-
