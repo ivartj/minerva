@@ -41,3 +41,7 @@ EditInterest=Endre opplistingen
 LogOut=Logg ut
 RemoveInterest=Fjern
 WriteAboutYourInterest=Skriv litt om interessen din for emnet:
+SomeOtherTopicQuestion=Et annet emne?
+GetTopic=Skaff emne
+TopicName=Emnenavn
+EmptyTopicName=Tumt emnenavn!

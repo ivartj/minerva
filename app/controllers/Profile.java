@@ -6,7 +6,7 @@ import com.avaje.ebean.SqlUpdate;
 import play.mvc.*;
 import play.data.*;
 
-import views.html.signup.*;
+import views.html.*;
 
 import models.*;
 
@@ -23,7 +23,7 @@ public class Profile extends Controller {
 	public static Result edit() {
 		User currentUser = Authenticator.getCurrentUser();  
 		currentUser.getInfo();
-		return ok(form.render(editForm.fill(currentUser)));
+		return ok(editProfile.render(editForm.fill(currentUser)));
 	}
 
 	/**
@@ -32,7 +32,7 @@ public class Profile extends Controller {
 	public static Result submit() {
         Form<User> filledForm = editForm.bindFromRequest();
         if(filledForm.hasErrors()) {
-            return badRequest(form.render(filledForm));
+            return badRequest(editProfile.render(filledForm));
         } else {
         	User currUs = Authenticator.getCurrentUser(); 
         	User currentUser = filledForm.get(); 
@@ -63,12 +63,21 @@ public class Profile extends Controller {
 			
 			Ebean.execute(update);
 			
-			return ok(summary.render(currentUser));
+			return ok(profile.render(currentUser));
         }
     }
 	
 	public static Result profile(){
         User user = Authenticator.getCurrentUser();
-        return ok(summary.render(user));      
+        return ok(profile.render(user));      
+    }
+    
+    public static Result getUser(Long userID){
+        User user = User.getByUserId(userID);
+        if(user == null){
+            return ok(noUser.render(userID));
+        }else{
+            return ok(profile.render(user));
+        }
     }
 }

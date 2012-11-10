@@ -8,10 +8,12 @@ GET     /                           controllers.Application.index()
 # User
 GET     /login                      controllers.Authenticator.login()
 GET     /logout                     controllers.Authenticator.logout()
-POST	/authenticate               controllers.Authenticator.auth()
+POST    /authenticate               controllers.Authenticator.auth()
 GET     /verify                     controllers.Authenticator.verify()
 POST    /confirmUser                controllers.Authenticator.confirmUser()
 GET     /profile                    controllers.Profile.profile()
+GET     /profile/:userID            controllers.Profile.getUser(userID: Long)
+
 
 # Edit profile
 GET     /editProfile                controllers.Profile.edit() 
@@ -25,6 +27,7 @@ POST    /sandbox                    controllers.Markup.sandbox()
 # Topic
 GET     /topic/:topicName           controllers.TopicPage.page(topicName: String)
 POST    /topic/:topicName           controllers.TopicPage.apply(topicName: String)
+GET     /gettopic                   controllers.TopicPage.getTopic()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

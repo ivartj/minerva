@@ -34,6 +34,12 @@
 				@for(topic <- Topic.getAll()) {
 					<a href="/topic/@topic.name">@topic.name</a>
 				}
+				<form action="/gettopic" method="get">
+					<p>@Language.get("SomeOtherTopicQuestion")</p>
+					<input type="hidden" name="submit" value="true">
+					<input type="text" name="topic" placeholder="@Language.get("TopicName")">
+					<input type="submit" value="@Language.get("GetTopic")">
+				</form>
 			</div>
 		</div><div class="box">
 			<div class="subbox center">

@@ -41,3 +41,7 @@ EditInterest=Edit listing
 LogOut=Log out
 RemoveInterest=Remove
 WriteAboutYourInterest=Write a little about your interest in this topic:
+SomeOtherTopicQuestion=Some other topic?
+TopicName=Topic name
+GetTopic=Get topic
+EmptyTopicName=Empty topic name!
