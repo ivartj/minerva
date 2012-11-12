@@ -2,6 +2,7 @@
 
 @import controllers.Language
 @import models.Topic
+@import java.net.URLEncoder
 
 @main("Minerva") {
 
@@ -17,7 +18,7 @@
 			<div class="subbox">
 				<h2>@Language.get("IndexTopicsTitle")</h2>
 				@for(topic <- Topic.getAll()) {
-					<a href="/topic/@topic.name">@topic.name</a>
+					<a href="/topic/@URLEncoder.encode(topic.name, "UTF-8")">@topic.name</a>
 				}
 				<form action="/topic/" method="get">
 					<p>@Language.get("SomeOtherTopicQuestion")</p>
@@ -28,7 +29,7 @@
 			</div>
 		</div><div class="box">
 			<div class="subbox center">
-				<p><img src="@routes.Assets.at("images/logo/medium.png")"></p>
+				<p><img alt="logo" src="@routes.Assets.at("images/logo/medium.png")"></p>
 			</div>
 		</div>
 	</div>
