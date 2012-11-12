@@ -91,19 +91,4 @@ public class User extends Model {
 		this.city = nearestCity; 
 		this.country = country;
 	}
-	
-	public void getInfo() {	
-		User currentUser = Authenticator.getCurrentUser(); 
-		id = currentUser.id; 
-		email = currentUser.email; 
-		firstName = currentUser.firstName; 
-		lastName = currentUser.lastName; 
-		age = currentUser.age; 
-		alternativeEmail = currentUser.alternativeEmail; 
-		phone = currentUser.phone; 
-		address = currentUser.address; 
-		city = currentUser.city; 
-		country = currentUser.country;
-	}
-	
 }

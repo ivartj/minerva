@@ -22,8 +22,7 @@ public class Profile extends Controller {
 	 * Display a blank form.
 	 */ 
 	public static Result edit() {
-		User currentUser = Authenticator.getCurrentUser();  
-		currentUser.getInfo();
+		User currentUser = Authenticator.getCurrentUser();
 		return ok(form.render(editForm.fill(currentUser)));
 	}
 
@@ -67,7 +66,7 @@ public class Profile extends Controller {
 			return ok(summary.render(currentUser));
         }
     }
-	
+	 
 	public static Result profile(){
         User user = Authenticator.getCurrentUser();
         return ok(summary.render(user));      
