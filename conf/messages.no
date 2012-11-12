@@ -45,3 +45,4 @@ SomeOtherTopicQuestion=Et annet emne?
 GetTopic=Skaff emne
 TopicName=Emnenavn
 EmptyTopicName=Tumt emnenavn!
+LogInToApplyToTopicHTML=<p><a href="/login">Logg inn</a> for å melde deg på emnet.</p>

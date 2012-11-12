@@ -61,4 +61,7 @@
 
 	</form>
 	}
+	@if(user == null) {
+		@Html(Language.get("LogInToApplyToTopicHTML"))
+	}
 }

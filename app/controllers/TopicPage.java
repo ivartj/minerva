@@ -8,6 +8,8 @@ import models.User;
 import models.Topic;
 import controllers.Language;
 import java.util.Map;
+import java.net.URLEncoder;
+import java.io.UnsupportedEncodingException;
 
 public class TopicPage extends Controller {
 
@@ -19,18 +21,23 @@ public class TopicPage extends Controller {
 
 	public static Result getTopic() {
 		Map<String, String[]> formData;
-		String topicName;
+		String topicName, url;
 		String errMsg;
 		boolean submit;
 
 		formData = request().queryString();
-		topicName = getFormString(formData, "topic");	
+		topicName = getFormString(formData, "topic");
 		submit = getFormString(formData, "submit") != "";
 		if(topicName == "") {
 			errMsg = submit ? Language.get("EmptyTopicName") : "";
 			return ok(gettopic.render(errMsg));
 		}
-		return redirect("/topic/" + topicName);
+		try {
+			url = "/topic/" + URLEncoder.encode(topicName, "UTF-8");
+		} catch(UnsupportedEncodingException e) {
+			url = "/topic/" + topicName;
+		}
+		return redirect(url);
 	}
 
 	// TODO: Protect against cross-site request forgeries
