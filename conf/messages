@@ -45,3 +45,4 @@ SomeOtherTopicQuestion=Some other topic?
 TopicName=Topic name
 GetTopic=Get topic
 EmptyTopicName=Empty topic name!
+LogInToApplyToTopicHTML=<p><a href="/login">Log in</a> to apply to topic.</p>
