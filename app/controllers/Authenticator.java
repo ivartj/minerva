@@ -119,7 +119,7 @@ public class Authenticator extends Controller{
 		String uuid = user.id + UUID.randomUUID().toString();
 		user.cookieIdentifier = uuid;
 		user.save();
-		response().setCookie("rememberMe", uuid, 10800);
+		response().setCookie("rememberMe", uuid);
 	}
 
 	public static User getCurrentUser(){
