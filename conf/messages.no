@@ -41,8 +41,10 @@ EditInterest=Endre opplistingen
 LogOut=Logg ut
 RemoveInterest=Fjern
 WriteAboutYourInterest=Skriv litt om interessen din for emnet:
+users.list.title={0,choice,0#Ingen brukere|1#Èn bruker|1<{0,number,integer} brukere} funnet
 SomeOtherTopicQuestion=Et annet emne?
 GetTopic=Skaff emne
 TopicName=Emnenavn
 EmptyTopicName=Tumt emnenavn!
 ProfileImage=Profilbilde
+LogInToApplyToTopicHTML=<p><a href="/login">Logg inn</a> for å melde deg på emnet.</p>

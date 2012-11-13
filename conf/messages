@@ -41,12 +41,10 @@ EditInterest=Edit listing
 LogOut=Log out
 RemoveInterest=Remove
 WriteAboutYourInterest=Write a little about your interest in this topic:
-
-users.list.title={0,choice,0#Ingen brukere|1#En bruker|1<{0,number,integer} brukere} funnet
-
+users.list.title={0,choice,0#No users|1#One user|1<{0,number,integer} users} found
 SomeOtherTopicQuestion=Some other topic?
 TopicName=Topic name
 GetTopic=Get topic
 EmptyTopicName=Empty topic name!
 ProfileImage=Profile image
-
+LogInToApplyToTopicHTML=<p><a href="/login">Log in</a> to apply to topic.</p>
