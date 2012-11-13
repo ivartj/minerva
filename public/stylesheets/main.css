@@ -54,6 +54,18 @@ fieldset {
 	border: 1px solid #ba7;
 }
 
+.bordered-table {
+	border: 1px solid #ba7;
+	text-align: left ! important;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.bordered-table td {
+	border-left: 1px solid #ba7;
+	padding: 0.3em 0.5em 0.2em 0.5em;
+}
+
 /* Main */
 
 .wrap {
@@ -66,24 +78,44 @@ fieldset {
 	background-color: #da5;
 }
 
-.bar {
+.bar, .bordered-table th {
 	background-color: #bb4422;
 	padding: 0.3em 0 0.2em 0;
 	color: white;
 }
 
-.bar a:focus, .bar a:focus, .bar a:focus, .bar a:hover {
+.bar a:focus, .bar a:focus, .bar a:focus, .bar a:hover,
+.bordered-table th a:focus, .bordered-table th a:focus, .bordered-table th a:focus, .bordered-table th a:hover {
 	background-color: white;
 	color: #bb4422 ! important;
 	outline: none;
 }
 
-.bar a:link, .bar a:visited, .bar span {
+.bar a:link, .bar a:visited, .bar span,
+.bordered-table th a:link, .bordered-table th a:visited, .bordered-table th span
+{
 	text-decoration: none;
 	color: white;
 	vertical-align: middle;
 	padding: 0.3em 0.5em 0.2em 0.5em;
 }
+
+.pagination li {
+	float: left;
+	list-style: none;
+	padding: 0.3em 0.5em 0.2em 0.5em;
+}
+
+.pagination ul {
+	padding: 0;
+	margin: 0;
+}
+
+/*
+.pagination .disabled {
+	display: none;
+}
+*/
 
 .content {
 	 padding: 0.5em;
@@ -169,9 +201,3 @@ li.interest {
 }
 
 
-/* User list */
-
-td {
-	border: 1px solid #da5;
-	padding: 0.1em 2em;
-}
