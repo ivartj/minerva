@@ -3,5 +3,5 @@
 # --- !Ups
 alter table user add image_url varchar(255);
  
-# --- !downs
+# --- !Downs
 alter table user drop image_url;
