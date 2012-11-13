@@ -14,7 +14,6 @@ create table user (
   address           		varchar(255),
   city              		varchar(255),
   country           		varchar(255),
-  image_url					varchar(255),
   google_id					varchar(255),
   yahoo_id					varchar(255))
 ;
