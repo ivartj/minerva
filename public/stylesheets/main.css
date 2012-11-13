@@ -138,12 +138,8 @@ fieldset {
 	}
 
 	.box:first-child + .box + .box .subbox {
-		border-width: 1px 1px 0 0;
+		border-width: 1px 0 0 0;
 		margin-right: -1px;
-	}
-
-	.box:first-child + .box + .box + .box .subbox {
-		border-width: 1px 0 0 1px;
 	}
 }
 

@@ -27,9 +27,9 @@ GET     /sandbox                    controllers.Markup.sandbox()
 POST    /sandbox                    controllers.Markup.sandbox()
 
 # Topic
-GET     /topic/:topicName           controllers.TopicPage.page(topicName: String)
-POST    /topic/:topicName           controllers.TopicPage.apply(topicName: String)
-GET     /gettopic                   controllers.TopicPage.getTopic()
+GET     /topic/*topicName           controllers.TopicPage.page(topicName: String)
+POST    /topic/*topicName           controllers.TopicPage.apply(topicName: String)
+GET     /topic/                     controllers.TopicPage.getTopic()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

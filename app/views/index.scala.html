@@ -2,6 +2,7 @@
 
 @import controllers.Language
 @import models.Topic
+@import java.net.URLEncoder
 
 @main("Minerva") {
 
@@ -14,27 +15,12 @@
 				@Html(Language.get("IndexDescriptionHTML"))
 			</div>
 			</div><div class="box">
-				<div class="subbox">
-					<form action="/authenticate" method="post">
-						<h2>@Language.get("LogIn")</h2>
-						<legend>Choose your login provider:</legend>
-						<img src="@routes.Assets.at("images/google_32.png")">
-						<input type="submit" class="btn" name="provider" value="google">
-						<br><br>
-						<img src="@routes.Assets.at("images/facebook_32.png")">
-						<input type="submit" disabled="disabled" class="btn" name="provider" value="facebook">
-						<br><br>
-						<img src="@routes.Assets.at("images/yahoo_32.png")">
-						<input type="submit" class="btn" name="provider" value="yahoo">
-					</form>
-				</div>
-			</div><div class="box">
 			<div class="subbox">
 				<h2>@Language.get("IndexTopicsTitle")</h2>
 				@for(topic <- Topic.getAll()) {
-					<a href="/topic/@topic.name">@topic.name</a>
+					<a href="/topic/@URLEncoder.encode(topic.name, "UTF-8")">@topic.name</a>
 				}
-				<form action="/gettopic" method="get">
+				<form action="/topic/" method="get">
 					<p>@Language.get("SomeOtherTopicQuestion")</p>
 					<input type="hidden" name="submit" value="true">
 					<input type="text" name="topic" placeholder="@Language.get("TopicName")">
@@ -43,7 +29,7 @@
 			</div>
 		</div><div class="box">
 			<div class="subbox center">
-				<p><img src="@routes.Assets.at("images/logo/medium.png")"></p>
+				<p><img alt="logo" src="@routes.Assets.at("images/logo/medium.png")"></p>
 			</div>
 		</div>
 	</div>
