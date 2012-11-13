@@ -1,0 +1,14 @@
+@(errMsg: String)
+
+@main(Language.get("GetTopic")) {
+
+<form action="/topic/">
+	@if(errMsg != "") {
+		<p>@errMsg</p>
+	}
+	<input type="hidden" name="submit" value="true">
+	<input type="text" name="topic" placeholder="@Language.get("TopicName")">
+	<input type="submit" value="@Language.get("GetTopic")">
+</form>
+
+}

@@ -1,12 +1,15 @@
 package controllers;
 
 import views.html.topicpage;
+import views.html.gettopic;
 import views.html.error;
 import play.mvc.*;
 import models.User;
 import models.Topic;
 import controllers.Language;
 import java.util.Map;
+import java.net.URLEncoder;
+import java.io.UnsupportedEncodingException;
 
 public class TopicPage extends Controller {
 
@@ -14,6 +17,27 @@ public class TopicPage extends Controller {
 	public static Result page(String topicName) {
 		User user = Authenticator.getCurrentUser();
 		return ok(topicpage.render(topicName, user));
+	}
+
+	public static Result getTopic() {
+		Map<String, String[]> formData;
+		String topicName, url;
+		String errMsg;
+		boolean submit;
+
+		formData = request().queryString();
+		topicName = getFormString(formData, "topic");
+		submit = getFormString(formData, "submit") != "";
+		if(topicName == "") {
+			errMsg = submit ? Language.get("EmptyTopicName") : "";
+			return ok(gettopic.render(errMsg));
+		}
+		try {
+			url = "/topic/" + URLEncoder.encode(topicName, "UTF-8");
+		} catch(UnsupportedEncodingException e) {
+			url = "/topic/" + topicName;
+		}
+		return redirect(url);
 	}
 
 	// TODO: Protect against cross-site request forgeries
@@ -69,5 +93,4 @@ public class TopicPage extends Controller {
 			return "";
 		return array[0];
 	}
-
 }

@@ -8,14 +8,18 @@ GET     /                           controllers.Application.index()
 # User
 GET     /login                      controllers.Authenticator.login()
 GET     /logout                     controllers.Authenticator.logout()
-POST	/authenticate               controllers.Authenticator.auth()
+POST    /authenticate               controllers.Authenticator.auth()
 GET     /verify                     controllers.Authenticator.verify()
 POST    /confirmUser                controllers.Authenticator.confirmUser()
-GET     /profile                    controllers.SignUp.profile()
+GET     /profile                    controllers.Profile.profile()
+GET     /profile/:userID            controllers.Profile.getUser(userID: Long)
+
 
 # Edit profile
-GET     /editProfile                controllers.EditProfile.blank() 
-POST    /editProfile                controllers.EditProfile.submit()
+GET     /editProfile                controllers.Profile.edit() 
+POST    /editProfile                controllers.Profile.submit()
+POST	/profileImageUpload			controllers.ProfileImage.upload()
+GET		/profileImageSetGravatar	controllers.ProfileImage.setGravatar()
 
 # Language
 GET     /language                   controllers.Language.chooseLanguage()
@@ -23,8 +27,9 @@ GET     /sandbox                    controllers.Markup.sandbox()
 POST    /sandbox                    controllers.Markup.sandbox()
 
 # Topic
-GET     /topic/:topicName           controllers.TopicPage.page(topicName: String)
-POST    /topic/:topicName           controllers.TopicPage.apply(topicName: String)
+GET     /topic/*topicName           controllers.TopicPage.page(topicName: String)
+POST    /topic/*topicName           controllers.TopicPage.apply(topicName: String)
+GET     /topic/                     controllers.TopicPage.getTopic()
 
 # User list
 GET     /users                  controllers.Userlist.list(p:Int ?= 0, s ?= "fullName", o ?= "asc", f ?= "")

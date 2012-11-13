@@ -3,99 +3,117 @@
 @import helper._
 @import helper.twitterBootstrap._
 
-@main("Endre profil") {
-<div class="container">
-	<div class="row">
-		<div class="span6 offset3">
-		<h2>Endre profil</h2>
+@title = {@Language.get("EditProfile")}
+@stringFirst = {@Language.get("FirstName")}
+@stringFError = {@Language.get("FirstNameError")}
+@stringLast = {@Language.get("LastName")}
+@stringLError = {@Language.get("LastNameError")}
+@stringAge = {@Language.get("Age")}
+@stringAgeEr = {@Language.get("AgeError")}
+@stringEmail = {@Language.get("Email")}
+@stringEmailEr = {@Language.get("EmailError")}
+@stringAltEmail = {@Language.get("AlternativeEmail")}
+@stringPhone = {@Language.get("PhoneNumber")}
+@stringAddress = {@Language.get("Address")}
+@stringAddressE = {@Language.get("AddressError")}
+@stringCity = {@Language.get("City")}
+@stringCityE = {@Language.get("CityError")}
+@stringCountry = {@Language.get("Country")}
+
+@main(""+title) {
+		<h2>@Language.get("EditProfile")</h2>
     
-    @helper.form(action = routes.EditProfile.submit) {
-        
+    <form action="/profileImageUpload" enctype="multipart/form-data" method="post">
+    	<fieldset>
+    		<legend>@Language.get("ProfileImage")</legend>
+    		<img src="@{Authenticator.getCurrentUser().imageURL}"><br>
+    		<label>Change profile image</label><br>
+    		<input type="file" name="profileImage"> <input type="submit" value="Upload"><br>
+    		<label>Use your gravatar</label><br>
+    		<a href="/profileImageSetGravatar">Use your gravatar instead! (if you have one)</a>
+    	</fieldset>
+		
+	</form>
+    
+    @helper.form(action = routes.Profile.submit) {
+
         <fieldset>
-            <legend>Persondetaljer</legend>
+            <legend>@Language.get("AboutMe")</legend>
                   
             @inputText(
-            	editForm("firstName"), '_label -> "Fornavn",
+            	editForm("firstName"), '_label -> stringFirst,
+            	'_value -> "Test",
             	'_showConstraints -> false,
-            	'_error -> editForm("firstName").error.map(_.withMessage("Fornavnet mŒ v¾re kortere"))
+            	'_error -> editForm("firstName").error.map(_.withMessage(""+stringFError))
             )
-            
+
             @inputText(
-            	editForm("lastName"), '_label -> "Etternavn",
+            	editForm("lastName"), '_label -> stringLast,
             	'_showConstraints -> false,
-            	'_error -> editForm("lastName").error.map(_.withMessage("Etternavnet mŒ v¾re kortere"))
+            	'_error -> editForm("lastName").error.map(_.withMessage(""+stringLError))
             )
 
 			@inputText(
-                editForm("age"), 
-                '_label -> "Alder", 'class -> "mini",
+                editForm("age"), '_label -> stringAge,
                 '_showConstraints -> false,
-                '_error -> editForm("age").error.map(_.withMessage("Skriv inn rett alder"))
+                '_error -> editForm("age").error.map(_.withMessage(""+stringAgeEr))
             )
 			
         </fieldset>
-        
-	  
-        
+
         <fieldset>
             
-            <legend>Kontaktinformasjon</legend>
+            <legend>@Language.get("ContactInfo")</legend>
             
              @inputText(
-                editForm("email"), '_label -> "Epost",
+                editForm("email"), '_label -> stringEmail,
                 '_showConstraints -> false,
-            	'_error -> editForm("email").error.map(_.withMessage("Skriv inn en gyldig epost adresse"))         
+            	'_error -> editForm("email").error.map(_.withMessage(""+stringEmailEr))         
             )	
             
             @inputText(
-                editForm("alternativeEmail"), '_label -> "Alternativ epost",
+                editForm("alternativeEmail"), '_label -> stringAltEmail,
                 '_showConstraints -> false,
-            	'_error -> editForm("alternativeEmail").error.map(_.withMessage("Skriv inn en gyldig epost adresse"))         
+            	'_error -> editForm("alternativeEmail").error.map(_.withMessage(""+stringEmailEr))         
             )	
             
     		@inputText(
-    			editForm("phone"), 
-    			'_label -> "Telefonnummer", 
-    			'class -> "small",
+    			editForm("phone"), '_label -> stringPhone,
     			'_showConstraints -> false
     		)
     		
     		@textarea(
                 editForm("address"), 
-                '_label -> "Adresse", 'cols -> 50,
+                '_label -> stringAddress, 'cols -> 50,
                 '_showConstraints -> false,
-                '_error -> editForm("address").error.map(_.withMessage("Pr¿v Œ korte ned adressen"))
+                '_error -> editForm("address").error.map(_.withMessage(""+stringAddressE))
             )
             
             @select( 
             	editForm("city"), 
-            	options = options(ByerINorge.list),
-            	'_default -> "--- Velg by ---", 
-            	'_label -> "By",
+            	options = options(ByerINorge.list), 
+            	'_default -> "-----------",
+            	'_label -> stringCity,
             	 '_showConstraints -> false,
-            	'_error -> editForm("city").error.map(_.withMessage("Vennligst velg en by"))
+            	'_error -> editForm("city").error.map(_.withMessage(""+stringCityE))
 
             )
 
             @select(
                 editForm("country"), 
                 options = options(Countries.list),
-                '_default -> "--- Velg land ---",
-                '_label -> "Land"
+                '_default -> "---------------",
+                '_label -> stringCountry
             )
 
         </fieldset>
-		
-        <div class="actions">
-            <input type="submit" class="btn primary" value="Endre">
-            <a href="@routes.Application.index" class="btn">Avbryt</a>
-        </div>
         
-    }
-		
-		</div>
-	</div>
-</div>	
+        <div class="actions"> <br>
+            <input type="submit" class="btn" value=@Language.get("Save")>
+            <a href="@routes.Profile.profile">@Language.get("Cancel")</a>
+        </div>
 
+     	
+    }
 		
 }

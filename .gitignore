@@ -10,3 +10,5 @@ dist
 .project
 .target
 database.db
+conf/database.conf
+public/images/profileImages/*

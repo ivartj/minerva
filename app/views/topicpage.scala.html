@@ -5,6 +5,28 @@
 
 @main(topicName) {
 	<h1>@Language.get("Topic"): @topicName</h1>
+	<ul class="interests">
+	@for(interest <- new Topic(topicName).getInterests()) {
+	@defining(interest.getUser()) { listuser =>
+	<li class="interest">
+		<form class="bar" action="/topic/@topicName" method="post">
+			<a href="/profile/@listuser.id">@listuser.fullName</a>
+			@if(interest.asMentor) {
+				– @Language.get("SeeksStudent")
+			}
+			@if(interest.asStudent) {
+				– @Language.get("SeeksMentor")
+			}
+			@if(user != null && listuser.id == user.id) {
+				– <input type="submit" name="remove" value="@Language.get("RemoveInterest")"></form>
+			}
+		</form>
+		<div class="interestcontent">
+		@Html(Markup.parse(interest.description))
+		</div>
+	</li>
+	}}
+	</ul>
 	@if(user != null) {
 	<form action="/topic/@topicName" method="post">
 
@@ -26,7 +48,6 @@
 		@if(interest != null) {
 
 		<h2>@Language.get("EditInterest")</h2>
-		<input type="submit" name="remove" value="@Language.get("RemoveInterest")"><br>
 		<label>
 			<p>@Language.get("WriteAboutYourInterest")</p>
 			<textarea rows="6" name="description">@interest.description</textarea>
@@ -40,23 +61,7 @@
 
 	</form>
 	}
-	<ul class="interests">
-	@for(interest <- new Topic(topicName).getInterests()) {
-	@defining(interest.getUser()) { user =>
-	<li class="interest">
-		<div class="bar">
-			<a href="/user/@user.id">@user.fullName</a>
-			@if(interest.asMentor) {
-				&#150; @Language.get("SeeksStudent")
-			}
-			@if(interest.asStudent) {
-				&#150; @Language.get("SeeksMentor")
-			}
-		</div>
-		<div class="interestcontent">
-		@Html(Markup.parse(interest.description))
-		</div>
-	</li>
-	}}
-	</ul>
+	@if(user == null) {
+		@Html(Language.get("LogInToApplyToTopicHTML"))
+	}
 }
