@@ -91,8 +91,10 @@ public class Authenticator extends Controller{
 
 	public static Result confirmUser() {
 		Form<User> filledForm = userForm.bindFromRequest();
-		User.create(filledForm.get());
-		remember(filledForm.get());
+		User user = filledForm.get();
+		user.imageURL = ProfileImage.getGravatarURL(user);
+		User.create(user);
+		remember(user);
 		return redirect(routes.Application.index());
 	}
 
@@ -101,9 +103,17 @@ public class Authenticator extends Controller{
 		if (cookie != null && !cookie.value().isEmpty()){
 			int uid = Integer.parseInt(cookie.value().split("[ ]")[0]);
 			String uuid = cookie.value().split("[ ]")[1];
-			if (User.find.where().eq("id", uid).findUnique().cookieIdentifier.equals(uuid)){
-				session("connected", Integer.toString(uid));
-				return redirect(routes.Application.index());
+			if (!User.find.where().eq("id", uid).findList().isEmpty()) {
+				if (User.find.where().eq("id", uid).findList().get(0).cookieIdentifier.equals(uuid)) {
+					session("connected", Integer.toString(uid));
+					return redirect(routes.Application.index());
+				}
+				else {
+					response().discardCookies("rememberMe");
+				}
+			}
+			else {
+				response().discardCookies("rememberMe");
 			}
 		}
 		return chooseProvider();

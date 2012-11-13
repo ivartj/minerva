@@ -18,6 +18,8 @@ GET     /profile/:userID            controllers.Profile.getUser(userID: Long)
 # Edit profile
 GET     /editProfile                controllers.Profile.edit() 
 POST    /editProfile                controllers.Profile.submit()
+POST	/profileImageUpload			controllers.ProfileImage.upload()
+GET		/profileImageSetGravatar	controllers.ProfileImage.setGravatar()
 
 # Language
 GET     /language                   controllers.Language.chooseLanguage()

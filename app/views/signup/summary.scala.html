@@ -8,7 +8,7 @@
     
     <div class="container">
         <div class="row">
-
+			
 	    	<h2>@user.firstName @user.lastName</h2>
             
     		<fieldset>
@@ -16,7 +16,7 @@
                
                 <legend>@Language.get("AboutMe")</legend>
    				<table cellpadding="1">
-			   		<tr> <img src="@routes.Assets.at("images/logo/medium.png")">
+			   		<tr> <img src="@user.imageURL">
                         <td width = "200"> <b> @Language.get("FirstName"):</td>
                         <td> @user.firstName </td>
 			    	</tr>

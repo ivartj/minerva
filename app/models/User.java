@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import org.hibernate.validator.constraints.URL;
+
 import controllers.Authenticator;
 
 import play.data.validation.Constraints.*;
@@ -48,7 +50,9 @@ public class User extends Model {
 
 	@Min(18) @Max(150)
 	public Integer age;
-
+	
+	public String imageURL;
+	
 	public String googleId;
 	
 	public String yahooId;
