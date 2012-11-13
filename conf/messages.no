@@ -45,3 +45,4 @@ SomeOtherTopicQuestion=Et annet emne?
 GetTopic=Skaff emne
 TopicName=Emnenavn
 EmptyTopicName=Tumt emnenavn!
+ProfileImage=Profilbilde
