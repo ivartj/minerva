@@ -77,11 +77,13 @@
                 @for(User <- currentPage.getList) {
                     <tr>
                     
+                   
                      <td>
                             @if(User.fullName == null) {
                                 <em>-</em>
                             } else {
-                                @User.fullName
+                            
+                               <a href="/profile/@User.id">@User.fullName</a>
                             }
                         </td>
                         
