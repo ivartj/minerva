@@ -1,5 +1,8 @@
 JAR files in this directory:
 
+ * imgscalr.jar
+   Library for image scaling. Used to adjust size of uploaded profile pictures.
+
  * mysql.jar
    The MySQL JDBC driver from:
    http://dev.mysql.com/downloads/connector/j/3.1.html
@@ -19,29 +22,6 @@ JAR files in this directory:
 
    If someone is able to include this in the sbt build process,
    then that is a welcome adjustment.
-
- * bcrypt.jar
-   The jBCrypt Java implementation of the BCrypt password hashing algorithm.
-   Website and example can be found at:
-
-   http://www.mindrot.org/projects/jBCrypt/
-
-   import with:
-
-   import org.mindrot.BCrypt;
-
- * sqlite.jar
-   SQLite JDBC driver from:
-
-   https://bitbucket.org/xerial/sqlite-jdbc
-
-   Documentation of the JDBC interface can be found in the official
-   Java documentation and many examples online. Check the
-   http://www.sqlite.org/ website if SQL doesn't work as
-   expected.
-
-   See http://www.playframework.org/documentation/2.0.3/JavaDatabase
-   for how to use JDBC with the Play framework.
 
  * sbt-launch.jar
    The SBT build tool, which the Play Framework is built on.

@@ -6,6 +6,7 @@ This project is based on the Play Framework:
 http://www.playframework.org/
 
 You will need to configure conf/database.conf to connect to a MySQL database.
+Example configuration in conf/database.conf.example
 
 The project is structured according to *Anatomy of a Play 2.0 application*.[1] 
 The ./lib directory includes a README describing the included libraries.

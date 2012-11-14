@@ -1,11 +1,7 @@
+# Update User
+ 
 # --- !Ups
-create table form_token (
-	user integer not null,
-	form varchar(255) not null,
-	token varchar(255) not null,
-	foreign key(user) references user(id),
-	primary key(user, form, token)
-);
-
+alter table user add image_url varchar(255);
+ 
 # --- !Downs
-drop table form_token;
+alter table user drop image_url;
