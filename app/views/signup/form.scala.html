@@ -38,6 +38,8 @@
     
     @helper.form(action = routes.Profile.submit) {
 
+        <input type="hidden" name="formtoken" value="@FormToken.get("editprofile")">
+
         <fieldset>
             <legend>@Language.get("AboutMe")</legend>
                   

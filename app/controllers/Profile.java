@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.Map;
+
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.SqlUpdate;
 
@@ -30,6 +32,9 @@ public class Profile extends Controller {
 	 * Handle the form submission.
 	 */
 	public static Result submit() {
+		if(checkFormToken() == false)
+			return ok(error.render(Language.get("InvalidFormToken")));
+
 		Form<User> filledForm = editForm.bindFromRequest();
 		if(filledForm.hasErrors()) {
 			return badRequest(form.render(filledForm));
@@ -54,6 +59,21 @@ public class Profile extends Controller {
 
 			return ok(summary.render(currentUser));
 		}
+	}
+
+	private static boolean checkFormToken() {
+		Map<String, String[]> formMap;
+		String[] array;
+		String receivedToken;
+
+		formMap = request().body().asFormUrlEncoded();
+		array = formMap.get("formtoken");
+		if(array == null)
+			return false;
+		if(array.length == 0)
+			return false;
+		receivedToken = array[0];
+		return FormToken.check("editprofile", receivedToken);
 	}
 
 	public static Result profile() {
