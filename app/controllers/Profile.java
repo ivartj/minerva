@@ -35,32 +35,21 @@ public class Profile extends Controller {
             return badRequest(form.render(filledForm));
         } else {
         	User currUs = Authenticator.getCurrentUser(); 
-        	User currentUser = filledForm.get(); 
-        	Long id = currUs.id; 
-        	String first_name = currentUser.firstName;
-        	String last_name = currentUser.lastName; 
-        	Integer age = currentUser.age; 
-        	String email = currentUser.email; 
-        	String alternativeEmail = currentUser.alternativeEmail; 
-        	String phone = currentUser.phone; 
-        	String address = currentUser.address; 
-        	String city = currentUser.city;
-        	String country = currentUser.country; 
+        	User currentUser = filledForm.get();  
 
         	String s = "UPDATE user SET first_name = :first_name, last_name = :last_name, age = :age, email = :email, " +
         			"phone = :phone, address = :address, city = :city, country = :country where id = :id";
 			SqlUpdate update = Ebean.createSqlUpdate(s);
-			update.setParameter("id", id);
-			update.setParameter("first_name", first_name);
-			update.setParameter("last_name", last_name);			
-			update.setParameter("age", age);
-			update.setParameter("email", email);
-			update.setParameter("alternativeEmail", alternativeEmail); 
-			update.setParameter("phone", phone); 
-			update.setParameter("address", address); 
-			update.setParameter("city", city); 
-			update.setParameter("country", country); 
-			
+			update.setParameter("id", currUs.id);
+			update.setParameter("first_name", currentUser.firstName);
+			update.setParameter("last_name", currentUser.lastName);			
+			update.setParameter("age", currentUser.age);
+			update.setParameter("email", currentUser.email);
+			update.setParameter("alternativeEmail", currentUser.alternativeEmail); 
+			update.setParameter("phone", currentUser.phone); 
+			update.setParameter("address", currentUser.address); 
+			update.setParameter("city", currentUser.city); 
+			update.setParameter("country", currentUser.country); 
 			Ebean.execute(update);
 			
 			return ok(summary.render(currentUser));
