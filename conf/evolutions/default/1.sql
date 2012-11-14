@@ -8,7 +8,7 @@ create table user (
   first_name				varchar(50),
   last_name					varchar(50),
   age						integer,
-  phone						varchar(8),
+  phone						varchar(12),
   email             		varchar(255),
   alternative_Email			varchar(255),
   address           		varchar(255),
