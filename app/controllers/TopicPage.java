@@ -6,6 +6,7 @@ import views.html.error;
 import play.mvc.*;
 import models.User;
 import models.Topic;
+import models.FormToken;
 import controllers.Language;
 import java.util.Map;
 import java.net.URLEncoder;
@@ -40,7 +41,6 @@ public class TopicPage extends Controller {
 		return redirect(url);
 	}
 
-	// TODO: Protect against cross-site request forgeries
 	public static Result apply(String topicName) {
 		User user = null;
 		Topic topic;
@@ -52,6 +52,9 @@ public class TopicPage extends Controller {
 		topic = new Topic(topicName);
 
 		formData = request().body().asFormUrlEncoded();
+
+		if(FormToken.check("topicpage", getFormString(formData, "form-token")) == false)
+			return ok(error.render(Language.get("InvalidFormToken")));
 
 		remove = getFormString(formData, "remove") != "";
 		description = getFormString(formData, "description");
