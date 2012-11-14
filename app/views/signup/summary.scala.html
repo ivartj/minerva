@@ -1,78 +1,108 @@
 @(user: User)
-    @import helper._
-    @import helper.twitterBootstrap._
-    
-    @title = {@Language.get("Profile")}
-    
-    @main(""+title) {
-    
-   	 <div class="container">
-       <div class="row">
+@import controllers.Language
+@import models.Topic
+@import models.Interest
+@import java.net.URLEncoder 
 
-			<h2>@user.firstName @user.lastName</h2> 
-            
-    		<fieldset>
-               
-                <legend>@Language.get("AboutMe")</legend>
-   				<table>
-			   		<tr> <img src="@routes.Assets.at("images/logo/medium.png")">
-                        <td width = "200"> <b> @Language.get("FirstName"):</td>
-                        <td> @user.firstName </td>
-			    	</tr>
-                    
-			    	<tr>
-                        <td width = "200"> <b>@Language.get("LastName"):</td>
-                        <td> @user.lastName </td>
-			    	</tr>
-                    
-			    	<tr>
-                        <td width = "200"> <b> @Language.get("Age"):</td>
-                        <td> @user.age </td>
-			    	</tr>
-			    </table>
-            </fieldset>
-            <br>
-			<fieldset>
-              <legend>@Language.get("ContactInfo")</legend> 
-                <table cellpadding="1">
-                    <tr>
-				   	 	<td width = "200"> <b> @Language.get("Email"):</td>
-				    	<td> @user.email </td>
-                    </tr>
-				    
-                    <tr>
-				   	 	<td width = "200"> <b> @Language.get("AlternativeEmail")</td>
-				    	<td> @user.alternativeEmail </td>
-                    </tr>
-                    
-                     <tr>
-				   	 	<td width = "200"> <b> @Language.get("Phone"):</td>
-				    	<td> @user.phone </td>
-                    </tr>
-                    
-                    <tr>
-					    <td width = "200"> <b> @Language.get("Address"):</td>
-					    <td> @user.address</td>
-                    </tr>
-                    
-                    <tr>
-					    <td width = "200"> <b> @Language.get("City"):</td>
-					    <td> @user.city</td>
-                    </tr>
-                    
-                    <tr>
-					    <td width = "200"> <b> @Language.get("Country"): </td>
-					    <td> @user.country </td>
-                    </tr>
-                </table>
-         
-			</fieldset>
+@title = {@Language.get("Profile"): @user.firstName}
+
+@main(""+title) {
+
+<div class="center">
+	<h1>@user.firstName @user.lastName</h1>
+	<div class="boxes">
+		<div class="box">
+			<div class="subbox">
+				<h4> @Language.get("AboutMe")</h4>
+				<table>
+				   		<tr>
+	                        <td width = "200"> <b> @Language.get("FirstName"):</td>
+	                        <td> @user.firstName </td>
+				    	</tr>
+	                    
+				    	<tr>
+	                        <td width = "200"> <b>@Language.get("LastName"):</td>
+	                        <td> @user.lastName </td>
+				    	</tr>
+	                    
+				    	<tr>
+	                        <td width = "200"> <b> @Language.get("Age"):</td>
+	                        <td> @user.age </td>
+				    	</tr>
+				    </table>
+				 <table> 
+				
+					<tr>
+					<td width = "200"> <h4> @Language.get("ContactInfo")</h4> </td>
+					</tr>
+		                   <tr>
+						   	 	<td width = "200"> <b> @Language.get("Email"):</td>
+						    	<td>@user.email</td>
+		                    </tr>
+						    
+		                    <tr>
+						   	 	<td width = "200"> <b> @Language.get("AlternativeEmail")</td>
+						    	<td> @user.alternativeEmail </td>
+		                    </tr>
+		                    
+		                     <tr>
+						   	 	<td width = "200"> <b> @Language.get("PhoneNumber"):</td>
+						    	<td> @user.phone </td>
+		                    </tr>
+		                    
+		                    <tr>
+							    <td width = "200"> <b> @Language.get("Address"):</td>
+							    <td> @user.address</td>
+		                    </tr>
+		                    
+		                    <tr>
+							    <td width = "200"> <b> @Language.get("City"):</td>
+							    <td> @user.city</td>
+		                    </tr>
+		                    
+		                    <tr>
+							    <td width = "200"> <b> @Language.get("Country"): </td>
+							    <td> @user.country </td>
+		                    </tr>
+		                </table>
+		                     
+		        <div class="actions"> <br>
+            		<input type="button" value="@Language.get("EditProfile")" onClick="location.href='@routes.Profile.edit()'">
+		        </div>
+			</div>
+			</div><div class="box">
+				<div class="subbox">
+					<img src="@routes.Assets.at("images/logo/medium.png")">
+				</div>
+			</div><div class="box">
+			<div class="subbox">
+			<table>
+				<tr>
+					<td width = "200" > <h4>@Language.get("SeeksStudent")</h4> </td> <td><h4>@Language.get("SeeksMentor")</h4></td>
+				</tr>
 			
-			<div class="actions"> <br>
-			<a href="@routes.Profile.edit()">@Language.get("EditProfile")</a>
-        	</div>
-        	
-        </div>
-	</div> 
-}
+				<tr>
+					<td width = "200">
+						@for(topic <- Topic.getAllForUserMentor()) {
+							<a href="/topic/@URLEncoder.encode(topic.name, "UTF-8")">@topic.name</a>
+						}
+					</td>
+					
+					<td>
+						@for(topic <- Topic.getAllForUserStudent()) {
+								<a href="/topic/@URLEncoder.encode(topic.name, "UTF-8")">@topic.name</a>
+						}
+					</td>
+				</tr>
+			</table>
+			</div>
+		</div><div class="box">
+			<div class="subbox center">
+			
+				
+			</div>
+		</div>
+	</div>
+</div>
 
+}
