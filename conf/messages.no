@@ -48,3 +48,6 @@ TopicName=Emnenavn
 EmptyTopicName=Tumt emnenavn!
 ProfileImage=Profilbilde
 LogInToApplyToTopicHTML=<p><a href="/login">Logg inn</a> for å melde deg på emnet.</p>
+Filter=Filtrer
+FilterByName=Filtrer etter navn
+Name=Navn

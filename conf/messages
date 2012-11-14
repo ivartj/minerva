@@ -48,3 +48,6 @@ GetTopic=Get topic
 EmptyTopicName=Empty topic name!
 ProfileImage=Profile image
 LogInToApplyToTopicHTML=<p><a href="/login">Log in</a> to apply to topic.</p>
+Filter=Filter
+FilterByName=Filter by name
+Name=Name
