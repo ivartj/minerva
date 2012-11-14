@@ -14,6 +14,7 @@
 @stringEmailEr = {@Language.get("EmailError")}
 @stringAltEmail = {@Language.get("AlternativeEmail")}
 @stringPhone = {@Language.get("PhoneNumber")}
+@stringPhoneE = {@Language.get("PhoneNumberError")}
 @stringAddress = {@Language.get("Address")}
 @stringAddressE = {@Language.get("AddressError")}
 @stringCity = {@Language.get("City")}
@@ -67,7 +68,8 @@
             
     		@inputText(
     			editForm("phone"), '_label -> stringPhone,
-    			'_showConstraints -> false
+    			'_showConstraints -> false, 
+    			'_error -> editForm("phone").error.map(_.withMessage(""+stringPhoneE))
     		)
     		
     		@textarea(
@@ -98,7 +100,7 @@
         
         <div class="actions"> <br>
             <input type="submit" class="btn" value=@Language.get("Save")>
-            <a href="@routes.Profile.profile">@Language.get("Cancel")</a>
+            <input type="button" value="@Language.get("Cancel")" onClick="location.href='@routes.Profile.profile'">
         </div>
 
      	
