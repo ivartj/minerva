@@ -30,15 +30,15 @@ public class Profile extends Controller {
 	 * Handle the form submission.
 	 */
 	public static Result submit() {
-        Form<User> filledForm = editForm.bindFromRequest();
-        if(filledForm.hasErrors()) {
-            return badRequest(form.render(filledForm));
-        } else {
-        	User currUs = Authenticator.getCurrentUser(); 
-        	User currentUser = filledForm.get();  
+		Form<User> filledForm = editForm.bindFromRequest();
+		if(filledForm.hasErrors()) {
+			return badRequest(form.render(filledForm));
+		} else {
+			User currUs = Authenticator.getCurrentUser(); 
+			User currentUser = filledForm.get();  
 
-        	String s = "UPDATE user SET first_name = :first_name, last_name = :last_name, age = :age, email = :email, " +
-        			"phone = :phone, address = :address, city = :city, country = :country where id = :id";
+			String s = "UPDATE user SET first_name = :first_name, last_name = :last_name, age = :age, email = :email, " +
+				"phone = :phone, address = :address, city = :city, country = :country where id = :id";
 			SqlUpdate update = Ebean.createSqlUpdate(s);
 			update.setParameter("id", currUs.id);
 			update.setParameter("first_name", currentUser.firstName);
@@ -51,22 +51,22 @@ public class Profile extends Controller {
 			update.setParameter("city", currentUser.city); 
 			update.setParameter("country", currentUser.country); 
 			Ebean.execute(update);
-			
+
 			return ok(summary.render(currentUser));
-        }
-    }
-	 
-	public static Result profile(){
-        User user = Authenticator.getCurrentUser();
-        return ok(summary.render(user));      
-    }
-    
-    public static Result getUser(Long userID){
-        User user = User.getByUserId(userID);
-        if(user == null){
-            return ok(noUser.render(userID));
-        }else{
-            return ok(profile.render(user));
-        }
-    }
+		}
+	}
+
+	public static Result profile() {
+		User user = Authenticator.getCurrentUser();
+		return ok(summary.render(user));      
+	}
+
+	public static Result getUser(Long userID) {
+		User user = User.getByUserId(userID);
+		if(user == null) {
+			return ok(noUser.render(userID));
+		} else {
+			return ok(profile.render(user));
+		}
+	}
 }
