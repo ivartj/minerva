@@ -22,7 +22,7 @@
     }
     
     // Generate the link
-    routes.Userlist.list(newPage, sortBy, order, currentFilter)
+    routes.UserList.list(newPage, sortBy, order, currentFilter)
     
 }
 
@@ -37,7 +37,7 @@
 
 @main("") {
     
-    <h1 id="homeTitle">@Messages("users.list.title", currentPage.getTotalRowCount)</h1>
+    <h1 id="homeTitle">@Language.get("UsersListTitle", new Integer(currentPage.getTotalRowCount))</h1>
 
     @if(flash.containsKey("success")) {
         <div class="alert-message warning">
