@@ -1,0 +1,39 @@
+@(emails: Emails)
+
+@import controllers.Language
+    
+@title = {@Language.get("Message")}
+    
+   @main(""+title) {
+   
+   <div class="container">
+       <div class="row">
+
+    	<h2>@Language.get("MessageSent")</h2> 
+           
+   		<fieldset>
+              
+               <legend>@Language.get("MessageDetails")</legend>
+  				<table>
+		    	<tr>
+                       <td width = "200"> <b> @Language.get("Subject"):</td>
+                       <td> @emails.subject </td>
+		    	</tr>   	
+		    	<tr>
+                       <td width = "200"> <b> @Language.get("Message"):</td>
+                       <td> @emails.text </td>
+		    	</tr>
+		    </table>
+           </fieldset>
+           <br>
+		
+		<div class="actions"> <br>
+			<input type="button" value="@Language.get("Home")" onClick="location.href='@routes.Application.index()'">
+       	</div>
+       </div>
+	</div>
+  
+}
+
+
+
