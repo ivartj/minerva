@@ -63,3 +63,4 @@ Name=Name
 RegisterMessage=If this wasn't what you expected to see you're probably already registered with a different OpenID provider
 ToFrontPage=Go to frontpage
 PersonalInformationMessage=Please review your personal information
+NoUserMessage=This user doesn't exist
