@@ -12,13 +12,13 @@
 		<form class="bar" action="/topic/@topicName" method="post">
 			<a href="/profile/@listuser.id">@listuser.fullName</a>
 			@if(interest.asMentor) {
-				– @Language.get("SeeksStudent")
+				- @Language.get("SeeksStudent")
 			}
 			@if(interest.asStudent) {
-				– @Language.get("SeeksMentor")
+				- @Language.get("SeeksMentor")
 			}
 			@if(user != null && listuser.id == user.id) {
-				– <input type="submit" name="remove" value="@Language.get("RemoveInterest")"></form>
+				- <input type="submit" name="remove" value="@Language.get("RemoveInterest")"></form>
 			}
 		</form>
 		<div class="interestcontent">
