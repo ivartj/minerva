@@ -7,13 +7,19 @@
 @title = {@Language.get("Profile"): @user.firstName}
 
 @main(""+title) {
-
 <div class="center">
 	<h1>@user.firstName @user.lastName</h1>
 	<div class="boxes">
 		<div class="box">
 			<div class="subbox">
-				<h4> @Language.get("AboutMe")</h4>
+			
+			<form class="bar">
+						<a href="@routes.Profile.myTopics()">Mine emner</a>
+						<a href="@routes.Profile.edit()">Endre profil</a>
+					</form>
+					<br>
+			
+				<h3> @Language.get("AboutMe")</h3>
 				<table>
 				   		<tr>
 	                        <td width = "200"> <b> @Language.get("FirstName"):</td>
@@ -33,7 +39,7 @@
 				 <table> 
 				
 					<tr>
-					<td width = "200"> <h4> @Language.get("ContactInfo")</h4> </td>
+					<td width = "200"> <h3> @Language.get("ContactInfo")</h3> </td>
 					</tr>
 		                   <tr>
 						   	 	<td width = "200"> <b> @Language.get("Email"):</td>
@@ -65,43 +71,14 @@
 							    <td> @user.country </td>
 		                    </tr>
 		                </table>
-		                     
-		        <div class="actions"> <br>
-            		<input type="button" value="@Language.get("EditProfile")" onClick="location.href='@routes.Profile.edit()'">
-		        </div>
 			</div>
 			</div><div class="box">
 				<div class="subbox">
-					<img src="@routes.Assets.at("images/logo/medium.png")">
-				</div>
-			</div><div class="box">
-			<div class="subbox">
-			<table>
-				<tr>
-					<td width = "200" > <h4>@Language.get("SeeksStudent")</h4> </td> <td><h4>@Language.get("SeeksMentor")</h4></td>
-				</tr>
-			
-				<tr>
-					<td width = "200">
-						@for(topic <- Topic.getAllForUserMentor()) {
-							<a href="/topic/@URLEncoder.encode(topic.name, "UTF-8")">@topic.name</a>
-						}
-					</td>
 					
-					<td>
-						@for(topic <- Topic.getAllForUserStudent()) {
-								<a href="/topic/@URLEncoder.encode(topic.name, "UTF-8")">@topic.name</a>
-						}
-					</td>
-				</tr>
-			</table>
+					<img src="@routes.Assets.at("images/logo/medium.png")">
+					
+				</div>
 			</div>
-		</div><div class="box">
-			<div class="subbox center">
-			
-				
-			</div>
-		</div>
 	</div>
 </div>
 
