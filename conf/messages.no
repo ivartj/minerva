@@ -66,3 +66,4 @@ ToFrontPage=Til forsiden
 PersonalInformationMessage=Vennligst bekreft din personlig informasjon
 NoUserMessage=Denne brukeren eksisterer ikke
 Create=Opprett bruker
+SearchUsers=Søk brukere
