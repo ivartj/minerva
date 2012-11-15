@@ -24,7 +24,7 @@ public class TopicList extends Controller{
 	 public static Result list(int page, String sortBy, String order, String filter) {
 	        return ok(
 	            topiclist.render(
-	                Topic.page(page, 10, sortBy, order, filter),
+	                Topic.page(page, 25, sortBy, order, filter),
 	                sortBy, order, filter
 	            )
 	        );
