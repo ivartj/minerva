@@ -50,8 +50,13 @@ LogInToApplyToTopicHTML=<p><a href="/login">Log in</a> to apply to topic.</p>
 MessageSent=Message sent!
 MessageDetails=Message details
 Subject=Subject
+SubjectError=Please enter a shorter subject. 
 SendMail=Send e-mail
 Write=Write
+WriteError=Please enter a shorter message.
 Message=Message
 Home=First Page
 Wrote=wrote
+Reply=Reply to
+ReceivedMessage=You have received a message from a user on Minerva.
+NameAndEmail=Your name and email-address is visible to the recipient
