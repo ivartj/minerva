@@ -64,11 +64,10 @@
         
     } else {
         
-        <table class="userlist">
+        <table class="bordered-table">
             <thead>
                 <tr>
-                    @header("topic", "Emne navn")
-                    @header("description", "Beskrivelse")
+                    @header("topic", "Emne")
                 </tr>
             </thead>
             <tbody>
@@ -86,13 +85,6 @@
                             }
                         </td>
                         
-                        <td>
-                            @if(Topic.description == null) {
-                                <em>-</em>
-                            } else {
-                                @Topic.description
-                            }
-                        </td>
                         
                         
                       

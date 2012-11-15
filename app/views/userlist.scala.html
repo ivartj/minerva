@@ -64,11 +64,10 @@
         
     } else {
         
-        <table class="userlist">
+        <table class="bordered-table">
             <thead>
                 <tr>
                     @header("full_Name", "Bruker Navn")
-                    @header("Email", "Email")
                     @header("City", "By")
                 </tr>
             </thead>
@@ -87,13 +86,7 @@
                             }
                         </td>
                         
-                        <td>
-                            @if(User.email == null) {
-                                <em>-</em>
-                            } else {
-                                @User.email
-                            }
-                        </td>
+                        
                         
                         
                         <td>
