@@ -16,7 +16,7 @@
 			@if(user != null && listuser.id == user.id) {
 				href="/profile"
 			}
-			@if(user != null && listuser.id != user.id){
+			@if(user == null || listuser.id != user.id){
 				href="/profile/@listuser.id"
 			}
 			>@listuser.fullName</a>
