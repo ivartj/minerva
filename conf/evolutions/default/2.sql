@@ -22,6 +22,7 @@ create view topic as select i.topic as name, t.description from interest_topic_d
 
 # --- !Downs
 
+
 drop table interest;
 drop table topic_description;
 drop view interest_topic_distinct;
