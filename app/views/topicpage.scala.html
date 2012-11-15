@@ -10,7 +10,14 @@
 	@defining(interest.getUser()) { listuser =>
 	<li class="interest">
 		<form class="bar" action="/topic/@topicName" method="post">
-			<a href="/profile/@listuser.id">@listuser.fullName</a>
+			<a
+                @if(user != null && listuser.id == user.id) {
+                    href="/profile"}
+                @if(user != null && listuser.id != user.id){
+                href="/profile/@listuser.id"
+                }
+                >@listuser.fullName</a>
+            
 			@if(interest.asMentor) {
 				– @Language.get("SeeksStudent")
 			}
