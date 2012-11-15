@@ -171,7 +171,7 @@ li.interest {
 
 /* User list */
 
-td {
+.userlist td {
 	border: 1px solid #da5;
 	padding: 0.1em 2em;
 }

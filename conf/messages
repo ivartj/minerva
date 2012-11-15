@@ -43,6 +43,7 @@ RemoveInterest=Remove
 WriteAboutYourInterest=Write a little about your interest in this topic:
 
 users.list.title={0,choice,0#Ingen brukere|1#En bruker|1<{0,number,integer} brukere} funnet
+topics.list.title={0,choice,0#Ingen emner|1#Et emne|1<{0,number,integer} emner} funnet
 
 SomeOtherTopicQuestion=Some other topic?
 TopicName=Topic name

@@ -18,12 +18,13 @@ create table topic_description (
 );
 
 create view interest_topic_distinct as select distinct topic from interest;
-create view topic as select i.topic as name, t.description from interest_topic_distinct i left outer join topic_description t using(topic);
+create view topicx as select i.topic as name, t.description from interest_topic_distinct i left outer join topic_description t using(topic);
+
 
 # --- !Downs
 
 
 drop table interest;
-drop table topic_description;
+drop table topicx;
 drop view interest_topic_distinct;
-drop view topic;
+drop view topicx;

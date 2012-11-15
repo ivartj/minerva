@@ -32,7 +32,10 @@ POST    /topic/*topicName           controllers.TopicPage.apply(topicName: Strin
 GET     /topic/                     controllers.TopicPage.getTopic()
 
 # User list
-GET     /users                  controllers.Userlist.list(p:Int ?= 0, s ?= "fullName", o ?= "asc", f ?= "")
+GET     /users                      controllers.UserList.list(p:Int ?= 0, s ?= "fullName", o ?= "asc", f ?= "")
+
+# Topic list
+GET     /topics                     controllers.TopicList.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
 
 
 # Map static resources from the /public folder to the /assets URL path
