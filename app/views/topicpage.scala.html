@@ -2,6 +2,7 @@
 @import controllers.Language
 @import controllers.Markup
 @import models.Topic
+@import models.FormToken
 
 @main(topicName) {
 	<h1>@Language.get("Topic"): @topicName</h1>
@@ -10,13 +11,15 @@
 	@defining(interest.getUser()) { listuser =>
 	<li class="interest">
 		<form class="bar" action="/topic/@topicName" method="post">
+			<input type="hidden" name="form-token" value="@FormToken.get("topicpage")">
 			<a
-                @if(user != null && listuser.id == user.id) {
-                    href="/profile"}
-                @if(user != null && listuser.id != user.id){
-                href="/profile/@listuser.id"
-                }
-                >@listuser.fullName</a>
+			@if(user != null && listuser.id == user.id) {
+				href="/profile"
+			}
+			@if(user != null && listuser.id != user.id){
+				href="/profile/@listuser.id"
+			}
+			>@listuser.fullName</a>
             
 			@if(interest.asMentor) {
 				– @Language.get("SeeksStudent")
@@ -36,6 +39,7 @@
 	</ul>
 	@if(user != null) {
 	<form action="/topic/@topicName" method="post">
+		<input type="hidden" name="form-token" value="@FormToken.get("topicpage")">
 
 	@defining(new Topic(topicName).getInterestOf(user)) { interest =>
 

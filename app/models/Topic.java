@@ -7,6 +7,8 @@ import models.User;
 import java.util.List;
 import java.util.ArrayList;
 
+import controllers.Authenticator;
+
 public class Topic {
 
 	
@@ -33,6 +35,52 @@ public class Topic {
 
 		conn = DB.getConnection();
 		stmt = conn.prepareStatement("select name, description from topic");
+		result = stmt.executeQuery();
+		list = new ArrayList<Topic>();
+		while(result.next()) {
+			name = result.getString(1);
+			description = result.getString(2);
+			list.add(new Topic(name, description));
+		}
+		conn.close();
+		return list;
+	}
+	
+	public static List<Topic> getAllForUserMentor() throws SQLException {
+		ResultSet result;
+		Connection conn;
+		PreparedStatement stmt;
+
+		User currentUser = Authenticator.getCurrentUser();
+		String name, description;
+		List<Topic> list;
+
+		conn = DB.getConnection();
+		stmt = conn.prepareStatement("select topic, description from interest where user = ? and as_mentor = 1");
+		stmt.setLong(1, currentUser.id); 
+		result = stmt.executeQuery();
+		list = new ArrayList<Topic>();
+		while(result.next()) {
+			name = result.getString(1);
+			description = result.getString(2);
+			list.add(new Topic(name, description));
+		}
+		conn.close();
+		return list;
+	}
+	
+	public static List<Topic> getAllForUserStudent() throws SQLException {
+		ResultSet result;
+		Connection conn;
+		PreparedStatement stmt;
+
+		User currentUser = Authenticator.getCurrentUser();
+		String name, description;
+		List<Topic> list;
+
+		conn = DB.getConnection();
+		stmt = conn.prepareStatement("select topic, description from interest where user = ? and as_student = 1");
+		stmt.setLong(1, currentUser.id); 
 		result = stmt.executeQuery();
 		list = new ArrayList<Topic>();
 		while(result.next()) {

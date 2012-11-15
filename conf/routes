@@ -26,6 +26,10 @@ GET	/language			controllers.Language.chooseLanguage()
 GET	/sandbox			controllers.Markup.sandbox()
 POST	/sandbox			controllers.Markup.sandbox()
 
+# Email
+GET     /profile/:userID/email      controllers.Email.create(userID: Long)
+POST	/profile/:userID/email      controllers.Email.send(userID: Long)
+
 # Topic
 GET	/topic/*topicName		controllers.TopicPage.page(topicName: String)
 POST	/topic/*topicName		controllers.TopicPage.apply(topicName: String)

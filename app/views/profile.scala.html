@@ -1,20 +1,17 @@
 @(user: User)
-@import helper._        
-@import helper.twitterBootstrap._
+@import controllers.Language
+@import models.Topic
+@import models.Interest
+@import java.net.URLEncoder 
 
-@title = {@Language.get("Profile")}
+@title = {@Language.get("Profile"): @user.firstName}
 
 @main(""+title) {
 
 <div class="container">
     <div class="row">
- 
- 
         <h2>@user.firstName @user.lastName</h2>
- 
         <fieldset>
- 
- 
             <legend>@Language.get("AboutMe")</legend>
             <table cellpadding="1"> 
                 <tr> <img src="@routes.Assets.at("images/logo/medium.png")">
@@ -28,13 +25,8 @@
                 </tr>
     
                 <tr>
-                    <td width = "200"> <b> @Language.get("Age"):</td>
-                    <td> @if(user.age == 0) {
-                        <em>Ikke spesifisert</em>
-                        } else {
-                        @user.age
-                        }
-                   </td>
+                	<td width = "200"> <b> @if(user.age !=0 && user.age != null) {@Language.get("Age"):} </b></td>
+                	<td> @if(user.age != 0 || user.age != null) {@user.age}</td>
               </tr>
            </table>
        </fieldset>
@@ -44,40 +36,24 @@
            <table cellpadding="1">
                 <tr>        
                    <td width = "200"> <b> @Language.get("Email"):</td>
-                   <td> @user.email </td>
+                  
+                   <td><input type="button" value="@Language.get("SendMail")" onClick="location.href='@routes.Email.create(user.id)'"></td>
                 </tr>
-
+               
                 <tr>
-                    <td width = "200"> <b>@Language.get("AlternativeEmail"):</td>
-                    <td> @user.alternativeEmail </td>
-                </tr>
-        
-                <tr>
-                    <td width = "200"> <b> @Language.get("Phone"):</td>
-                    <td> @user.phone </td>
-                </tr>
                 
-                <tr>
-                    <td width = "200"> <b> @Language.get("Address"):</td>
-                    <td> @if(user.address == null || user.address == "") {
-                        <em>Ikke spesifisert</em>
-                       } else {
-                     @user.address
-                        } </td>
-                </tr>
-                
-                <tr>
-                  <td width = "200"> <b> @Language.get("City"):</td>
-                  <td> @user.city</td>
+                	<td width = "200"> <b> @if(user.city != null) {@Language.get("City"):} </b></td>
+                	<td> @if(user.city != null) {@user.city}</td>
                 </tr>   
                
                <tr>
-                  <td width = "200"> <b> @Language.get("Country"): </td>
-                  <td> @user.country </td>
+                  <td width = "200"> <b> @if(user.country != null) {@Language.get("Country"):} </b></td>
+                	<td> @if(user.country != null) {@user.country}</td>
                 </tr>
         
             </table>
         </fieldset> 
+        
     </div>  
 </div>
 }

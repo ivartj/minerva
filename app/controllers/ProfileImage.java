@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.UUID;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 
@@ -19,6 +20,7 @@ import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
 
 import models.*;
+import models.FormToken;
 
 import views.html.*;
 
@@ -41,15 +43,28 @@ public class ProfileImage extends Controller {
 	}
 	
 	public static Result setGravatar() {
+		String givenToken;
+
+		givenToken = getMapString(request().queryString(), "formtoken");
+		if(FormToken.check("profileimage", givenToken) == false)
+			return ok(error.render(Language.get("InvalidFormToken")));
+
 		updateProfileImageURL(getGravatarURL(Authenticator.getCurrentUser()));
 		return redirect(routes.Profile.edit());
 	}
 	
 	public static Result upload() {
 
+		String givenToken;
+
 		MultipartFormData body = request().body().asMultipartFormData();
 		FilePart imageFilePart = body.getFile("profileImage");
 		String extension = imageFilePart.getContentType().substring(6);
+
+		givenToken = getMapString(body.asFormUrlEncoded(), "formtoken");
+		if(FormToken.check("profileimage", givenToken) == false)
+			return ok(error.render(Language.get("InvalidFormToken")));
+
 		
 		if (imageFilePart.getFile().exists()) {
 			
@@ -129,5 +144,15 @@ public class ProfileImage extends Controller {
 		}		
 		return file;	
 	}
-	
+
+	private static String getMapString(Map<String,String[]> map, String key) {
+		String array[];
+
+		array = map.get(key);
+		if(array == null)
+			return "";
+		if(array.length == 0)
+			return "";
+		return array[0];
+	}
 }

@@ -1,8 +1,6 @@
 package controllers;
 
-import java.sql.SQLException;
-
-
+import java.util.Map;
 
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.SqlUpdate;
@@ -10,8 +8,8 @@ import com.avaje.ebean.SqlUpdate;
 import play.mvc.*;
 import play.data.*;
 
-import views.html.signup.*;
 import views.html.*;
+import views.html.signup.*;
 
 import models.*;
 
@@ -24,75 +22,71 @@ public class Profile extends Controller {
 
 	/**
 	 * Display a blank form.
-	 * @throws SQLException 
 	 */ 
 	public static Result edit() {
-		User currentUser = Authenticator.getCurrentUser();  
-		currentUser.getInfo();
+		User currentUser = Authenticator.getCurrentUser();
 		return ok(form.render(editForm.fill(currentUser)));
-		
-//		User currentUser = Authenticator.getCurrentUser();  
-//		currentUser.getInfo();
-//		
-//		User created = new User(currentUser.fullName, currentUser.cookieIdentifier, currentUser.firstName, currentUser.lastName, currentUser.age, 
-//    			currentUser.email, currentUser.alternativeEmail, currentUser.phone, currentUser.address, currentUser.city, currentUser.country);  
-//		
-//		return ok(form.render(editForm.fill(created)));
 	}
 
 	/**
 	 * Handle the form submission.
 	 */
 	public static Result submit() {
-        Form<User> filledForm = editForm.bindFromRequest();
-        if(filledForm.hasErrors()) {
-            return badRequest(form.render(filledForm));
-        } else {
-        	User currUs = Authenticator.getCurrentUser(); 
-        	User currentUser = filledForm.get(); 
-        	Long id = currUs.id; 
-        	String first_name = currentUser.firstName;
-        	String last_name = currentUser.lastName; 
-        	Integer age = currentUser.age; 
-        	String email = currentUser.email; 
-        	String alternativeEmail = currentUser.alternativeEmail; 
-        	String phone = currentUser.phone; 
-        	String address = currentUser.address; 
-        	String city = currentUser.city;
-        	String country = currentUser.country; 
-        	
-        	String s = "UPDATE user SET first_name = :first_name, last_name = :last_name, age = :age, email = :email, alternative_Email = :alternativeEmail, " +
-        			"phone = :phone, address = :address, city = :city, country = :country where id = :id";
+		if(checkFormToken() == false)
+			return ok(error.render(Language.get("InvalidFormToken")));
+
+		Form<User> filledForm = editForm.bindFromRequest();
+		if(filledForm.hasErrors()) {
+			return badRequest(form.render(filledForm));
+		} else {
+			User currUs = Authenticator.getCurrentUser(); 
+			User currentUser = filledForm.get();  
+
+			String s = "UPDATE user SET first_name = :first_name, last_name = :last_name, age = :age, email = :email, " +
+				"phone = :phone, address = :address, city = :city, country = :country where id = :id";
 			SqlUpdate update = Ebean.createSqlUpdate(s);
-			update.setParameter("id", id);
-			update.setParameter("first_name", first_name);
-			update.setParameter("last_name", last_name);			
-			update.setParameter("age", age);
-			update.setParameter("email", email);
-			update.setParameter("alternativeEmail", alternativeEmail); 
-			update.setParameter("phone", phone); 
-			update.setParameter("address", address); 
-			update.setParameter("city", city); 
-			update.setParameter("country", country); 
-			
+			update.setParameter("id", currUs.id);
+			update.setParameter("first_name", currentUser.firstName);
+			update.setParameter("last_name", currentUser.lastName);			
+			update.setParameter("age", currentUser.age);
+			update.setParameter("email", currentUser.email);
+			update.setParameter("alternativeEmail", currentUser.alternativeEmail); 
+			update.setParameter("phone", currentUser.phone); 
+			update.setParameter("address", currentUser.address); 
+			update.setParameter("city", currentUser.city); 
+			update.setParameter("country", currentUser.country); 
 			Ebean.execute(update);
-			
+
 			return ok(summary.render(currentUser));
-        	
-        }
-    }
-	
-	public static Result profile(){
-        User user = Authenticator.getCurrentUser();
-        return ok(summary.render(user));      
-    }
-    
-    public static Result getUser(Long userID){
-        User user = User.getByUserId(userID);
-        if(user == null){
-            return ok(noUser.render(userID));
-        }else{
-            return ok(profile.render(user));
-        }
-    }
+		}
+	}
+
+	private static boolean checkFormToken() {
+		Map<String, String[]> formMap;
+		String[] array;
+		String receivedToken;
+
+		formMap = request().body().asFormUrlEncoded();
+		array = formMap.get("formtoken");
+		if(array == null)
+			return false;
+		if(array.length == 0)
+			return false;
+		receivedToken = array[0];
+		return FormToken.check("editprofile", receivedToken);
+	}
+
+	public static Result profile() {
+		User user = Authenticator.getCurrentUser();
+		return ok(summary.render(user));      
+	}
+
+	public static Result getUser(Long userID) {
+		User user = User.getByUserId(userID);
+		if(user == null) {
+			return ok(noUser.render(userID));
+		} else {
+			return ok(profile.render(user));
+		}
+	}
 }

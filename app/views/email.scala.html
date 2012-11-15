@@ -1,0 +1,36 @@
+@(editForm: Form[Emails], user: User)
+
+@import helper._	
+@import helper.twitterBootstrap._
+
+@stringSub = {@Language.get("Subject")}
+@stringWrite = {@Language.get("Write")}
+
+@title = {@Language.get("SendMail")}
+
+@main(""+title) {
+		<h2>@Language.get("SendMail")</h2>
+    
+  <form action="/profile/@user.id/email" method="post"> 
+
+        <fieldset>
+            <legend>@Language.get("Message")</legend>
+		
+			@inputText(
+                editForm("subject"), 'size -> 40, 
+                '_label -> stringSub
+            )
+            <br>
+            @textarea(
+                editForm("text"), 
+                '_label -> stringWrite, 'cols -> 200, 'rows -> 10
+            )
+			
+		<div class="actions"> <br>
+			<input type="submit" class="btn primary" value=@Language.get("Send")>
+            <input type="button" value="@Language.get("Cancel")" onClick="location.href='@routes.Profile.profile'">
+        </div>
+        </fieldset>
+    </form>
+		
+}
