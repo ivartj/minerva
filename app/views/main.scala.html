@@ -26,9 +26,13 @@
               				} else {
               					<a href="/profile">@{Authenticator.getCurrentUser().firstName + " " + Authenticator.getCurrentUser().lastName}</a>
 						<a href="/logout?formtoken=@FormToken.get("logout")">@Language.get("LogOut")</a>
-              				} 		
+              				}
 
+                        <a href="/aboutUs">@Language.get("AboutUs")</a>
 					</div>
+     
+
+            
 					<div class="clearboth"></div>
 				</div>
 			</div>

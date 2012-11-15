@@ -14,4 +14,7 @@ public class Application extends Controller {
         return ok(index.render());
     }
   
+    public static Result aboutUs() {
+        return ok(aboutUs.render());
+    }
 }

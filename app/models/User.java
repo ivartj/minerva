@@ -1,6 +1,8 @@
 package models;
 
 import java.util.List;
+import java.util.ArrayList;
+import java.sql.*;
 
 import javax.persistence.*;
 
@@ -10,6 +12,7 @@ import controllers.Authenticator;
 
 import play.data.validation.Constraints.*;
 import play.db.ebean.*;
+import play.db.DB;
 
 import com.avaje.ebean.*;
 
@@ -80,14 +83,52 @@ public class User extends Model {
 		return find.where().eq("googleId", id).findList().size() == 1 || find.where().eq("yahooId", id).findList().size() == 1;	
 	}
 	
-	 public static Page<User> page(int page, int pageSize, String sortBy, String order, String filter) {
-	        return 
-	            find.where()
-	                .ilike("fullName", "%" + filter + "%")
-	                .orderBy(sortBy + " " + order)
-	                .findPagingList(pageSize)
-	                .getPage(page);
+	/* Last minute ugly */
+	 public static List<UserTableInfo> page(int page, int pageSize, String sortBy, String order, String filter) {
+		 Connection conn;
+		 PreparedStatement stmt;
+		 String stmtStr;
+		 ResultSet res;
+		 List<UserTableInfo> list;
+
+		 list = new ArrayList<UserTableInfo>();
+
+		 stmtStr = "select id, first_name, last_name, city from user where concat(first_name, ' ', last_name) like concat('%', ?, '%') limit ? offset ?";
+		 if(sortBy.equals("first_name") || sortBy.equals("last_name") || sortBy.equals("city")) {
+			 stmtStr += "order by " + sortBy;
+			 if(order.equals("asc") || order.equals("desc"))
+				 stmtStr += " " + order;
+		 }
+
+		 try {
+			 conn = DB.getConnection();
+			 System.out.println(stmtStr);
+			 stmt = conn.prepareStatement(stmtStr);
+			 stmt.setString(1, filter);
+			 stmt.setInt(2, pageSize);
+			 stmt.setInt(3, pageSize * page);
+			 res = stmt.executeQuery();
+			 while(res.next()) {
+				 UserTableInfo info = new UserTableInfo();;
+				 info.id = res.getLong(1);
+				 info.firstName = res.getString(2);
+				 info.lastName = res.getString(3);
+				 info.city = res.getString(4);
+				 list.add(info);
+			 }
+		 } catch (SQLException e) {
+			 e.printStackTrace();
+		 }
+
+		 return list;
 	    }
+
+	public static class UserTableInfo {
+		public Long id;
+		public String firstName;
+		public String lastName;
+		public String city;
+	}
 
 	public User() {}
 
