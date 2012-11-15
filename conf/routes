@@ -13,6 +13,7 @@ GET     /verify                     controllers.Authenticator.verify()
 POST    /confirmUser                controllers.Authenticator.confirmUser()
 GET     /profile                    controllers.Profile.profile()
 GET     /profile/:userID            controllers.Profile.getUser(userID: Long)
+GET     /myTopics                   controllers.Profile.myTopics()
 
 
 # Edit profile
