@@ -15,14 +15,14 @@
                   
                     <td>@Language.get("FirstName"):</td>
                     <td>
-                        <input type="text" name="firstName" value="@user.firstName"><br>
+                        <input type="text" name="firstName" value="@user.firstName" size="35"><br>
                             </td>
                 </tr>
                 
                 <tr>
                     <td>@Language.get("LastName"):</td>
                     <td>
-                        <input type="text" name="lastName" value="@user.lastName">
+                        <input type="text" name="lastName" value="@user.lastName" size="35">
                             <br>
                             </td>
                 </tr>
@@ -30,20 +30,21 @@
                 <tr>
                     <td>@Language.get("Email"):</td>
                     <td>
-                        <input type="text" name="email" value="@user.email"><br>
+                        <input type="text" name="email" value="@user.email" size="35"><br>
                             </td>
                     <td>
-                        <input type="hidden" name="googleId" value="@user.googleId"><br>
+                        <input type="hidden" name="googleId" value="@user.googleId"
+                            size="35"><br>
                             </td>
                     <td>
-                        <input type="hidden" name="yahooId" value="@user.yahooId">
+                        <input type="hidden" name="yahooId" value="@user.yahooId" size="35">
                             <br>
                             </td>
                 </tr>
                 <tr>
                     <td> <br> </td>
                     <td>
-                        <input type="submit" class="btn" value="Create">
+                        <input type="submit" class="btn" value="@Language.get("Create")" >
                             </td>
     
                     </table>

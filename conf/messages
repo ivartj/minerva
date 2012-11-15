@@ -55,3 +55,4 @@ RegisterMessage=If this wasn't what you expected to see you're probably already 
 ToFrontPage=Go to frontpage
 PersonalInformationMessage=Please review your personal information
 NoUserMessage=This user doesn't exist
+Create=Create user

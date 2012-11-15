@@ -55,3 +55,4 @@ RegisterMessage=Hvis dette ikke var det du hadde forventet, så er du sannsynlig
 ToFrontPage=Til forsiden
 PersonalInformationMessage=Vennligst bekreft din personlig informasjon
 NoUserMessage=Denne brukeren eksisterer ikke
+Create=Opprett bruker
