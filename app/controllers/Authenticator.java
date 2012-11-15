@@ -70,18 +70,18 @@ public class Authenticator extends Controller{
 			if (userInfo.id.startsWith(identifiers.get("google"))){
 				
 				user.googleId = userInfo.id;
-				user.fullName = userInfo.attributes.get("oiFirstName") + " " + userInfo.attributes.get("oiLastName");
 				user.firstName = userInfo.attributes.get("oiFirstName");
 				user.lastName = userInfo.attributes.get("oiLastName");
 				user.email = userInfo.attributes.get("oiEmail");
 			}
 			else if (userInfo.id.startsWith(identifiers.get("yahoo"))){
-
+				
+				String fullName = userInfo.attributes.get("fullname");
+				
 				user.yahooId = userInfo.id;
-				user.fullName = userInfo.attributes.get("fullname");
 				user.email = userInfo.attributes.get("email");
-				user.firstName = user.fullName.split("[ ]")[0].trim();
-				user.lastName = user.fullName.substring(user.fullName.split("[ ]")[0].trim().length()).trim();
+				user.firstName = fullName.split("[ ]")[0].trim();
+				user.lastName = fullName.substring(fullName.split("[ ]")[0].trim().length()).trim();
 			}
 			else
 				return unauthorized("Hmm");
@@ -99,6 +99,7 @@ public class Authenticator extends Controller{
 	public static Result confirmUser() {
 		Form<User> filledForm = userForm.bindFromRequest();
 		User user = filledForm.get();
+		user.fullName = user.firstName + " " + user.lastName;
 		user.imageURL = ProfileImage.getGravatarURL(user);
 		User.create(user);
 		remember(user);
