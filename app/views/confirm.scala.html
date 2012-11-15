@@ -1,23 +1,61 @@
+
+
 @(user: User, userForm: Form[User])
 @import helper._
 @main("Register") {
 <div class="container">
 	<div class="row">
 		<div class="span6 offset3">
-		
+            
 			@form(routes.Authenticator.confirmUser()) {
-				<legend>Please review your personal information</legend>
-				<input type="text" name="fullName" value="@user.fullName"><br>
-				<input type="text" name="firstName" value="@user.firstName"><br>
-				<input type="text" name="lastName" value="@user.lastName"><br>
-				<input type="text" name="email" value="@user.email"><br>
-				<input type="hidden" name="googleId" value="@user.googleId"><br>
-				<input type="hidden" name="yahooId" value="@user.yahooId"><br>
-				<input type="submit" class="btn" value="Create">
-			}
+            <legend>Please review your personal information</legend>
+            
+            <table>
+                               
+                <tr>
+                    <td>Fornavn:</td>
+                    <td>
+                        <input type="text" name="firstName" value="@user.firstName"><br>
+                            </td>
+                </tr>
+                
+                <tr>
+                    <td>Etternavn:</td>
+                    <td>
+                        <input type="text" name="lastName" value="@user.lastName">
+                            <br>
+                            </td>
+                </tr>
+                
+                <tr>
+                    <td>Email:</td>
+                    <td>
+                        <input type="text" name="email" value="@user.email"><br>
+                            </td>
+                    <td>
+                        <input type="hidden" name="googleId" value="@user.googleId"><br>
+                            </td>
+                    <td>
+                        <input type="hidden" name="yahooId" value="@user.yahooId">
+                            <br>
+                            </td>
+                </tr>
+                <tr>
+                    <td> <br> </td>
+                    <td>
+                        <input type="submit" class="btn" value="Create">
+                            </td>
+                    
+                    
+                    
+                    </table>
+            
+            
+            }
 			<br>
+            
 			<div class="alert-info">
-			<p>If this wasn't what you expected to see you're probably already registered with a different OpenID provider.</p>
+                <p>If this wasn't what you expected to see you're probably already registered with a different OpenID provider.</p>
 			</div>
 			<br>
 			<a href="@{routes.Application.index()}">Go to frontpage</a>

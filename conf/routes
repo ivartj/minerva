@@ -3,33 +3,33 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index()
+GET	/				controllers.Application.index()
 
 # User
-GET     /login                      controllers.Authenticator.login()
-GET     /logout                     controllers.Authenticator.logout()
-POST    /authenticate               controllers.Authenticator.auth()
-GET     /verify                     controllers.Authenticator.verify()
-POST    /confirmUser                controllers.Authenticator.confirmUser()
-GET     /profile                    controllers.Profile.profile()
-GET     /profile/:userID            controllers.Profile.getUser(userID: Long)
+GET	/login				controllers.Authenticator.login()
+GET	/logout				controllers.Authenticator.logout()
+POST	/authenticate			controllers.Authenticator.auth()
+GET	/verify				controllers.Authenticator.verify()
+POST	/confirmUser			controllers.Authenticator.confirmUser()
+GET	/profile			controllers.Profile.profile()
+GET	/profile/:userID		controllers.Profile.getUser(userID: Long)
 
 
 # Edit profile
-GET     /editProfile                controllers.Profile.edit() 
-POST    /editProfile                controllers.Profile.submit()
-POST	/profileImageUpload			controllers.ProfileImage.upload()
-GET		/profileImageSetGravatar	controllers.ProfileImage.setGravatar()
+GET	/editProfile			controllers.Profile.edit() 
+POST	/editProfile			controllers.Profile.submit()
+POST	/profileImageUpload		controllers.ProfileImage.upload()
+GET	/profileImageSetGravatar	controllers.ProfileImage.setGravatar()
 
 # Language
-GET     /language                   controllers.Language.chooseLanguage()
-GET     /sandbox                    controllers.Markup.sandbox()
-POST    /sandbox                    controllers.Markup.sandbox()
+GET	/language			controllers.Language.chooseLanguage()
+GET	/sandbox			controllers.Markup.sandbox()
+POST	/sandbox			controllers.Markup.sandbox()
 
 # Topic
-GET     /topic/*topicName           controllers.TopicPage.page(topicName: String)
-POST    /topic/*topicName           controllers.TopicPage.apply(topicName: String)
-GET     /topic/                     controllers.TopicPage.getTopic()
+GET	/topic/*topicName		controllers.TopicPage.page(topicName: String)
+POST	/topic/*topicName		controllers.TopicPage.apply(topicName: String)
+GET	/topic/				controllers.TopicPage.getTopic()
 
 # User list
 GET     /users                      controllers.UserList.list(p:Int ?= 0, s ?= "fullName", o ?= "asc", f ?= "")
@@ -38,6 +38,7 @@ GET     /users                      controllers.UserList.list(p:Int ?= 0, s ?= "
 GET     /topics                     controllers.TopicList.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
 
 
+
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public", file)
+GET	/assets/*file			controllers.Assets.at(path="/public", file)
 
