@@ -1,0 +1,46 @@
+@(user: User)
+@import controllers.Language
+@import models.Topic
+@import models.Interest
+@import java.net.URLEncoder 
+
+@title = {@Language.get("MyTopics")}
+
+@main(""+title) {
+<ul class="interests">
+	<li class="interest">
+		<form class="bar">
+			@Language.get("SeeksStudent") @Language.get("In"):
+		</form>
+		<div class="interestcontent">
+		<br>
+			@for(topic <- Topic.getAllForUserMentor()) {
+						<a href="/topic/@URLEncoder.encode(topic.name, "UTF-8")">@topic.name</a>
+			}
+		
+		</div>
+		<br>
+	</li>
+	</ul>
+	
+<ul class="interests">
+	<li class="interest">
+		<form class="bar">
+			@Language.get("SeeksMentor") @Language.get("In"):
+		</form>
+		<div class="interestcontent">
+		<br>
+			@for(topic <- Topic.getAllForUserStudent()) {
+						<a href="/topic/@URLEncoder.encode(topic.name, "UTF-8")">@topic.name</a>
+			}
+		
+		</div>
+		<br>
+	</li>
+</ul>
+
+<div class="actions"> <br>
+	<input type="button" value="@Language.get("Profile")" onClick="location.href='@routes.Profile.profile()'">
+</div>
+
+}
