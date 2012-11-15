@@ -70,4 +70,9 @@ public class Profile extends Controller {
             return ok(profile.render(user));
         }
     }
+    
+    public static Result myTopics() {
+    	User user = Authenticator.getCurrentUser(); 
+    	return ok(myTopics.render(user));
+    }
 }
