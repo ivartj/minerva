@@ -107,7 +107,7 @@
 
         <div id="pagination" class="pagination">
             <ul>
-                @if(page != 1) {
+                @if(page != 0) {
                     <li class="prev">
                         <a href="@link(page - 1, null)">&larr; Previous</a>
                     </li>
@@ -117,9 +117,9 @@
                     </li>
                 }
                 <li class="current">
-		    @(page + 1) / @currentPage.size()
+		    @(page + 1) / @(currentPage.size() / pageSize + 1)
                 </li>
-                @if(page != currentPage.size()) {
+                @if(page != currentPage.size() / pageSize) {
                     <li class="next">
                         <a href="@link(page + 1, null)">Next &rarr;</a>
                     </li>
