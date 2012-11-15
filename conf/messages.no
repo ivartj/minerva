@@ -51,3 +51,6 @@ LogInToApplyToTopicHTML=<p><a href="/login">Logg inn</a> for å melde deg på em
 Filter=Filtrer
 FilterByName=Filtrer etter navn
 Name=Navn
+RegisterMessage=Hvis dette ikke var det du hadde forventet, så er du sannsynligvis allerede registrert med en annen OpenID-leverandør
+ToFrontPage=Til forsiden
+PersonalInformationMessage=Vennligst bekreft din personlig informasjon

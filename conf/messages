@@ -51,3 +51,6 @@ LogInToApplyToTopicHTML=<p><a href="/login">Log in</a> to apply to topic.</p>
 Filter=Filter
 FilterByName=Filter by name
 Name=Name
+RegisterMessage=If this wasn't what you expected to see you're probably already registered with a different OpenID provider
+ToFrontPage=Go to frontpage
+PersonalInformationMessage=Please review your personal information
