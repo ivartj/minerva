@@ -11,7 +11,7 @@
 @main(""+title) {
 		<h2>@Language.get("SendMail")</h2>
     
-  <form action="/profile/@user.id/email" method="post"> 
+  <form action="/sendEmail/@user.id/" method="post"> 
 
         <fieldset>
             <legend>@Language.get("Message")</legend>
@@ -25,7 +25,8 @@
                 editForm("text"), 
                 '_label -> stringWrite, 'cols -> 200, 'rows -> 10
             )
-			
+            
+        <p><em>@Language.get("NameAndEmail")</em></p>	
 		<div class="actions"> <br>
 			<input type="submit" class="btn primary" value=@Language.get("Send")>
             <input type="button" value="@Language.get("Cancel")" onClick="location.href='@routes.Profile.profile'">
