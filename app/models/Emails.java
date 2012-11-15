@@ -11,7 +11,7 @@ import play.db.ebean.Model;
 public class Emails extends Model{
 
 	public String from;
-	public String recipient; 
+	public String recipient;
 	public String subject; 
 	public String text; 
 	
