@@ -26,13 +26,19 @@
     
     <form action="/profileImageUpload" enctype="multipart/form-data" method="post">
         <input type="hidden" name="formtoken" value="@FormToken.get("profileimage")">
-    	<fieldset>
+    	<fieldset class="ep-container">
     		<legend>@Language.get("ProfileImage")</legend>
-    		<img src="@{Authenticator.getCurrentUser().imageURL}"><br>
+    		
+    		<div class="ep-image">
+    			<img src="@{Authenticator.getCurrentUser().imageURL}"><br>
+    		</div>
+    		
     		<label>Change profile image</label><br>
-    		<input type="file" name="profileImage"> <input type="submit" value="Upload"><br>
+    		<input type="file" name="profileImage" class="ep-item"> <input type="submit" value="Upload" class="ep-item"><br>
+    		
     		<label>Use your gravatar</label><br>
-    		<a href="/profileImageSetGravatar?formtoken=@FormToken.get("profileimage")">Use your gravatar instead! (if you have one)</a>
+    		<a href="/profileImageSetGravatar?formtoken=@FormToken.get("profileimage")">Get Gravatar!</a>
+    		<p class="ep-error">@flash.get("error")</p>
     	</fieldset>
 		
 	</form>
@@ -40,12 +46,12 @@
     @helper.form(action = routes.Profile.submit) {
 
         <input type="hidden" name="formtoken" value="@FormToken.get("editprofile")">
-
-        <fieldset>
+        <fieldset class="ep-container">
             <legend>@Language.get("AboutMe")</legend>
                   
             @inputText(
             	editForm("firstName"), '_label -> stringFirst,
+            	'_class -> "ep-item",
             	'_value -> "Test",
             	'_showConstraints -> false,
             	'_error -> editForm("firstName").error.map(_.withMessage(""+stringFError))
@@ -53,30 +59,34 @@
 
             @inputText(
             	editForm("lastName"), '_label -> stringLast,
+            	'_class -> "ep-item",
             	'_showConstraints -> false,
             	'_error -> editForm("lastName").error.map(_.withMessage(""+stringLError))
             )
 
 			@inputText(
                 editForm("age"), '_label -> stringAge,
+                '_class -> "ep-item",
                 '_showConstraints -> false,
                 '_error -> editForm("age").error.map(_.withMessage(""+stringAgeEr))
             )
 			
         </fieldset>
 
-        <fieldset>
+        <fieldset class="ep-container">
             
             <legend>@Language.get("ContactInfo")</legend>
             
              @inputText(
                 editForm("email"), '_label -> stringEmail,
+                '_class -> "ep-item",
                 '_showConstraints -> false,
             	'_error -> editForm("email").error.map(_.withMessage(""+stringEmailEr))         
             )	
             
             @inputText(
                 editForm("alternativeEmail"), '_label -> stringAltEmail,
+                '_class -> "ep-item",
                 '_showConstraints -> false,
             	'_error -> editForm("alternativeEmail").error.map(_.withMessage(""+stringEmailEr))         
             )	
@@ -90,6 +100,7 @@
     		@textarea(
                 editForm("address"), 
                 '_label -> stringAddress, 'cols -> 50,
+                '_class -> "ep-item",
                 '_showConstraints -> false,
                 '_error -> editForm("address").error.map(_.withMessage(""+stringAddressE))
             )
@@ -99,6 +110,7 @@
             	options = options(ByerINorge.list), 
             	'_default -> "-----------",
             	'_label -> stringCity,
+            	'_class -> "ep-item",
             	 '_showConstraints -> false,
             	'_error -> editForm("city").error.map(_.withMessage(""+stringCityE))
 
@@ -108,7 +120,8 @@
                 editForm("country"), 
                 options = options(Countries.list),
                 '_default -> "---------------",
-                '_label -> stringCountry
+                '_label -> stringCountry,
+                '_class -> "ep-item"
             )
 
         </fieldset>

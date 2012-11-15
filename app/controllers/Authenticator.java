@@ -124,8 +124,8 @@ public class Authenticator extends Controller{
 	public static Result logout() {
 		if(FormToken.check("logout", getMapString(request().queryString(), "formtoken")) == false)
 			return ok(error.render(Language.get("InvalidFormToken")));
-		User user = User.find.where().eq("id", Integer.parseInt(session("connected"))).findUnique();
-		user.cookieIdentifier = "";
+
+		getCurrentUser().cookieIdentifier = "";
 		session().remove("connected");
 		response().discardCookies("rememberMe");
 		return redirect(routes.Application.index());

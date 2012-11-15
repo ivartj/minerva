@@ -26,9 +26,8 @@ import views.html.*;
 
 public class ProfileImage extends Controller {
 
-	final static int IMAGE_SIZE = 200;
-	static User currentUser = Authenticator.getCurrentUser();
-	static ArrayList<String> allowedFormats = createAllowedFormatsList();	
+	private final static int IMAGE_SIZE = 200;
+	private static ArrayList<String> allowedFormats = createAllowedFormatsList();	
 	
 	private static ArrayList<String> createAllowedFormatsList() {
 		ArrayList<String> out = new ArrayList<String>();
@@ -50,7 +49,7 @@ public class ProfileImage extends Controller {
 		if(FormToken.check("profileimage", givenToken) == false)
 			return ok(error.render(Language.get("InvalidFormToken")));
 
-		updateProfileImageURL(getGravatarURL(currentUser));
+		updateProfileImageURL(getGravatarURL(Authenticator.getCurrentUser()));
 		return redirect(routes.Profile.edit());
 	}
 	
@@ -73,22 +72,17 @@ public class ProfileImage extends Controller {
 				flash("error", "File format not allowed");
 			}
 			else {
-				
 				File resizedImage = resizeImage(imageFilePart.getFile(), extension);
-				
-				if(writeImageFile(resizedImage, extension)){ 
-				}
-				else 
-					flash("error", "File upload failed");	
+				writeImageFile(resizedImage, extension);
 			}				
 		}
 		else {
-			flash("error", "Missing file");
+			flash("error", "File missing");
 		}
 		return redirect(routes.Profile.edit());
 	}
 
-	private static boolean writeImageFile(File file, String extension){
+	private static void writeImageFile(File file, String extension){
 		
 		String publicPath = Play.application().path() + "/public/";
 		String randomString = UUID.randomUUID().toString();
@@ -99,10 +93,9 @@ public class ProfileImage extends Controller {
 		int bytesRead;
 		
 		try {
-			
-			FileInputStream is = new FileInputStream(file);
-			
+			FileInputStream is = new FileInputStream(file);			
 			FileOutputStream os = new FileOutputStream(publicPath + fileName);
+			
 			while ((bytesRead = is.read(buffer)) != -1) {
 				os.write(buffer, 0, bytesRead);
 			}
@@ -110,20 +103,18 @@ public class ProfileImage extends Controller {
 			is.close();
 			os.close();
 			updateProfileImageURL("/assets/" + fileName);
-			return true;
 			
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			flash("error", "File missing");
 		} catch (IOException e) {
-			e.printStackTrace();
+			flash("error", "File upload failed");
 		}
-		System.out.println("end of writefImageFile");
-		return false;
 	}
 	
 	private static void updateProfileImageURL(String url) {
-		currentUser.imageURL = url;
-		currentUser.save();
+		User user = Authenticator.getCurrentUser();
+		user.imageURL = url;
+		user.save();
 	}
 	
 	public static String MD5(String md5) {
@@ -149,8 +140,7 @@ public class ProfileImage extends Controller {
 			out = Scalr.resize(in, IMAGE_SIZE);
 			ImageIO.write(out, extension, file);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			flash("error", "Something went wrong when resizing the profile image.");
 		}		
 		return file;	
 	}
