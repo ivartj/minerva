@@ -1,4 +1,4 @@
-@(currentPage: Page[User], currentSortBy: String, currentOrder: String, currentFilter: String)
+@(currentPage: List[User.UserTableInfo], page: Integer, pageSize: Integer, currentSortBy: String, currentOrder: String, currentFilter: String)
 
 @****************************************
 * Helper generating navigation links    *
@@ -35,9 +35,9 @@
     </th>
 }
 
-@main("") {
+@main(Language.get("Search users")) {
     
-    <h1 id="homeTitle">@Language.get("UsersListTitle", new Integer(currentPage.getTotalRowCount))</h1>
+    <h1 id="homeTitle">@Language.get("UsersListTitle", new Integer(currentPage.size()))</h1>
 
     @if(flash.containsKey("success")) {
         <div class="alert-message warning">
@@ -56,7 +56,7 @@
         
     </div>
     
-    @if(currentPage.getTotalRowCount == 0) {
+    @if(currentPage.size() == 0) {
         
         <div class="well">
             <em>Nothing to display</em>
@@ -73,18 +73,23 @@
             </thead>
             <tbody>
 
-                @for(User <- currentPage.getList) {
+                @for(User <- currentPage) {
                     <tr>
                     
-                   
-                     <td>
-                            @if(User.fullName == null) {
-                                <em>-</em>
-                            } else {
-                            
-                               <a href="/profile/@User.id">@User.fullName</a>
-                            }
-                        </td>
+			<td>
+				<a href="/profile/@User.id">
+					@if(User.firstName == null) {
+					<em>-</em>
+					} else {
+					@User.firstName
+					}
+					@if(User.lastName == null) {
+					<em>-</em>
+					} else {
+					@User.lastName
+					}
+				</a>
+			</td>
                         
                         <td>
                             @if(User.city == null) {
@@ -102,9 +107,9 @@
 
         <div id="pagination" class="pagination">
             <ul>
-                @if(currentPage.hasPrev) {
+                @if(page != 1) {
                     <li class="prev">
-                        <a href="@link(currentPage.getPageIndex - 1, null)">&larr; Previous</a>
+                        <a href="@link(page - 1, null)">&larr; Previous</a>
                     </li>
                 } else {
                     <li class="prev disabled">
@@ -112,11 +117,11 @@
                     </li>
                 }
                 <li class="current">
-                    <a>Displaying @currentPage.getDisplayXtoYofZ(" to "," of ")</a>
+		    @(page + 1) / @currentPage.size()
                 </li>
-                @if(currentPage.hasNext) {
+                @if(page != currentPage.size()) {
                     <li class="next">
-                        <a href="@link(currentPage.getPageIndex + 1, null)">Next &rarr;</a>
+                        <a href="@link(page + 1, null)">Next &rarr;</a>
                     </li>
                 } else {
                     <li class="next disabled">

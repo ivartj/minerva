@@ -67,6 +67,7 @@ ToFrontPage=Go to frontpage
 PersonalInformationMessage=Please review your personal information
 NoUserMessage=This user doesn't exist
 Create=Create user
+SearchUsers=Search Users
 Reply=Reply to
 ReceivedMessage=You have received a message from a user on Minerva.
 NameAndEmail=Your name and email-address is visible to the recipient
@@ -79,3 +80,4 @@ Other=Other
 Year=year
 Group=Group
 About=About
+

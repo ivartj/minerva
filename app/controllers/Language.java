@@ -29,8 +29,9 @@ public class Language extends Controller {
 		Map<String, String[]> queryMap;
 
 		queryMap = request().queryString();
-		if(FormToken.check("language", getMapString(queryMap, "formtoken")))
-			response().setCookie("lang", lang.code());
+		if(FormToken.check("language", getMapString(queryMap, "formtoken")) == false && Authenticator.getCurrentUser() != null)
+			return;
+		response().setCookie("lang", lang.code());
 	}
 
 	public static Lang getLang() {
