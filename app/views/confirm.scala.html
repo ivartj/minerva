@@ -7,50 +7,26 @@
             
             <br>
 			@form(routes.Authenticator.confirmUser()) {
+                              
+            <fieldset class="ep-container">
             <legend>@Language.get("PersonalInformationMessage")</legend>
             
-            <table>
-                               
-                <tr>
-                  
-                    <td>@Language.get("FirstName"):</td>
-                    <td>
-                        <input type="text" name="firstName" value="@user.firstName" size="35"><br>
-                            </td>
-                </tr>
+				<label>@Language.get("FirstName"):</label>
+				<input type="text" class="ep-item" name="firstName" value="@user.firstName" size="35"><br>
+
+				<label>@Language.get("LastName"):</label>
+				<input type="text" class="ep-item" name="lastName" value="@user.lastName" size="35"><br>
                 
-                <tr>
-                    <td>@Language.get("LastName"):</td>
-                    <td>
-                        <input type="text" name="lastName" value="@user.lastName" size="35">
-                            <br>
-                            </td>
-                </tr>
-                
-                <tr>
-                    <td>@Language.get("Email"):</td>
-                    <td>
-                        <input type="text" name="email" value="@user.email" size="35"><br>
-                            </td>
-                    <td>
-                        <input type="hidden" name="googleId" value="@user.googleId"
-                            size="35"><br>
-                            </td>
-                    <td>
-                        <input type="hidden" name="yahooId" value="@user.yahooId" size="35">
-                            <br>
-                            </td>
-                </tr>
-                <tr>
-                    <td> <br> </td>
-                    <td>
-                        <input type="submit" class="btn" value="@Language.get("Create")" >
-                            </td>
-    
-                    </table>
-            
-            
+                <label>@Language.get("Email"):</label>
+				<input type="text" class="ep-item" name="email" value="@user.email" size="35"><br>
+
+				<input type="hidden" name="googleId" value="@user.googleId" size="35"><br>
+
+				<input type="hidden" name="yahooId" value="@user.yahooId" size="35"><br>
+
+				<input type="submit" class="ep-item" value="@Language.get("Create")" >
             }
+
 			<br>
 			<div class="alert-info">
                 <p>@Language.get("RegisterMessage").</p>

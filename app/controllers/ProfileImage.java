@@ -20,7 +20,6 @@ import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
 
 import models.*;
-import models.FormToken;
 
 import views.html.*;
 
@@ -59,21 +58,25 @@ public class ProfileImage extends Controller {
 
 		MultipartFormData body = request().body().asMultipartFormData();
 		FilePart imageFilePart = body.getFile("profileImage");
-		String extension = imageFilePart.getContentType().substring(6);
-
+		
 		givenToken = getMapString(body.asFormUrlEncoded(), "formtoken");
 		if(FormToken.check("profileimage", givenToken) == false)
 			return ok(error.render(Language.get("InvalidFormToken")));
-
-		
-		if (imageFilePart.getFile().exists()) {
+	
+		if (imageFilePart != null && imageFilePart.getFile().exists()) {
+			
+			String extension = imageFilePart.getContentType().substring(6);
 			
 			if (!allowedFormats.contains(imageFilePart.getContentType())){
 				flash("error", "File format not allowed");
 			}
 			else {
-				File resizedImage = resizeImage(imageFilePart.getFile(), extension);
-				writeImageFile(resizedImage, extension);
+				try {
+					File resizedImage = resizeImage(imageFilePart.getFile(), extension);
+					writeImageFile(resizedImage, extension);
+				} catch (Exception e) {
+					flash("error", "Something went wrong when resizing the profile image.\nAre you sure it's an image file?");
+				}
 			}				
 		}
 		else {
@@ -132,16 +135,12 @@ public class ProfileImage extends Controller {
 		return null;
 	}
 
-	private static File resizeImage(File file, String extension){
+	private static File resizeImage(File file, String extension) throws Exception{
 		BufferedImage in = null;
 		BufferedImage out = null;
-		try {
-			in = ImageIO.read(file);
-			out = Scalr.resize(in, IMAGE_SIZE);
-			ImageIO.write(out, extension, file);
-		} catch (IOException e) {
-			flash("error", "Something went wrong when resizing the profile image.");
-		}		
+		in = ImageIO.read(file);
+		out = Scalr.resize(in, IMAGE_SIZE);
+		ImageIO.write(out, extension, file);
 		return file;	
 	}
 

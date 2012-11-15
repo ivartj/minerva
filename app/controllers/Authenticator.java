@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.regex.*;
 
@@ -49,8 +50,8 @@ public class Authenticator extends Controller{
 		attributes.put("oiFirstName", "http://schema.openid.net/namePerson/first");
 		attributes.put("oiLastName", "http://schema.openid.net/namePerson/last");
 		attributes.put("oiCity", "http://openid.net/schema/contact/city/home");
-		attributes.put("axEmail", "http://axschema.org/contact/email");
-		attributes.put("axFullName", "http://axschema.org/namePerson");
+		attributes.put("email", "http://axschema.org/contact/email");
+		attributes.put("fullname", "http://axschema.org/namePerson");
 
 		Promise<String> redirectUrl = null;
 		redirectUrl = OpenID.redirectURL(providerUrl, returnToUrl, attributes);
@@ -63,10 +64,11 @@ public class Authenticator extends Controller{
 		UserInfo userInfo = userInfoPromise.get();
 
 		if (!User.isUser(userInfo.id)){
-
+			
+			
 			User user = new User();
 			if (userInfo.id.startsWith(identifiers.get("google"))){
-
+				
 				user.googleId = userInfo.id;
 				user.fullName = userInfo.attributes.get("oiFirstName") + " " + userInfo.attributes.get("oiLastName");
 				user.firstName = userInfo.attributes.get("oiFirstName");
@@ -75,18 +77,21 @@ public class Authenticator extends Controller{
 			}
 			else if (userInfo.id.startsWith(identifiers.get("yahoo"))){
 
-				user.fullName = userInfo.attributes.get("fullname");
-				user.firstName = userInfo.attributes.get("firstName"); 
-				user.lastName = userInfo.attributes.get("lastName");
-				user.email = userInfo.attributes.get("email");
 				user.yahooId = userInfo.id;
+				user.fullName = userInfo.attributes.get("fullname");
+				user.email = userInfo.attributes.get("email");
+				user.firstName = user.fullName.split("[ ]")[0].trim();
+				user.lastName = user.fullName.substring(user.fullName.split("[ ]")[0].trim().length()).trim();
 			}
 			else
 				return unauthorized("Hmm");
 			return ok(confirm.render(user, userForm));	    
 		}
 		else{
-			remember(User.find.where().eq("googleId", userInfo.id).findList().get(0));
+			if (User.find.where().eq("googleId", userInfo.id).findList().size() == 1)
+				remember(User.find.where().eq("googleId", userInfo.id).findList().get(0));
+			else if (User.find.where().eq("yahooId", userInfo.id).findList().size() == 1)
+				remember(User.find.where().eq("yahooId", userInfo.id).findList().get(0));
 			return redirect(routes.Application.index());
 		}
 	}
@@ -134,6 +139,7 @@ public class Authenticator extends Controller{
 	private static void remember(User user) {
 		String uuid = UUID.randomUUID().toString();
 		user.cookieIdentifier = uuid;
+		user.save();
 		response().setCookie("rememberMe", user.id + " " + uuid);
 		session("connected", Long.toString(user.id));
 	}
