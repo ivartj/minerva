@@ -80,9 +80,11 @@ public class Topic {
 		result = stmt.executeQuery();
 		list = new ArrayList<Topic>();
 		while(result.next()) {
-			name = result.getString(1);
-			description = result.getString(2);
-			list.add(new Topic(name, description));
+			if (list.size() < 10) {
+				name = result.getString(1);
+				description = result.getString(2);
+				list.add(new Topic(name, description));
+			}
 		}
 		conn.close();
 		return list;
@@ -125,9 +127,11 @@ public class Topic {
 		result = stmt.executeQuery();
 		list = new ArrayList<Topic>();
 		while(result.next()) {
-			name = result.getString(1);
-			description = result.getString(2);
-			list.add(new Topic(name, description));
+			if (list.size() < 10) {
+				name = result.getString(1);
+				description = result.getString(2);
+				list.add(new Topic(name, description));
+			}
 		}
 		conn.close();
 		return list;
