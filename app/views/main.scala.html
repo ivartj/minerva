@@ -1,6 +1,7 @@
 @(title: String)(content: Html)
 
 @import controllers.Language
+@import models.FormToken
 
 <!doctype html>
 <html lang="@Language.getLang().code()">
@@ -20,15 +21,12 @@
 						<a href="/">Minerva</a>
 					</div>
 					<div class="right">
-						@{
-              				if (Authenticator.getCurrentUser() == null){
-              					<a href="/login">{Language.get("LogIn")}</a>
-              				}
-              				else {
-              					<a href="/profile">{Authenticator.getCurrentUser().firstName + " " + Authenticator.getCurrentUser().lastName}</a>
-              					<a href="/logout">{Language.get("LogOut")}</a>
+              				@if(Authenticator.getCurrentUser() == null) {
+              					<a href="/login">@Language.get("LogIn")</a>
+              				} else {
+              					<a href="/profile">@{Authenticator.getCurrentUser().firstName + " " + Authenticator.getCurrentUser().lastName}</a>
+						<a href="/logout?formtoken=@FormToken.get("logout")">@Language.get("LogOut")</a>
               				} 		
-	              		} 
 
 					</div>
 					<div class="clearboth"></div>

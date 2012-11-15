@@ -8,6 +8,7 @@ import java.util.UUID;
 import java.util.regex.*;
 
 import models.User;
+import models.FormToken;
 
 import play.data.Form;
 import play.libs.F.Promise;
@@ -18,6 +19,7 @@ import play.mvc.Http.Cookie;
 import play.mvc.Result;
 import views.html.login;
 import views.html.confirm;
+import views.html.error;
 
 public class Authenticator extends Controller{
 
@@ -120,6 +122,8 @@ public class Authenticator extends Controller{
 	}
 
 	public static Result logout() {
+		if(FormToken.check("logout", getMapString(request().queryString(), "formtoken")) == false)
+			return ok(error.render(Language.get("InvalidFormToken")));
 		User user = User.find.where().eq("id", Integer.parseInt(session("connected"))).findUnique();
 		user.cookieIdentifier = "";
 		session().remove("connected");
@@ -139,5 +143,16 @@ public class Authenticator extends Controller{
 			return null;
 		User user = User.find.where().eq("id", Integer.parseInt(session("connected"))).findUnique();
 		return user;
+	}
+
+	private static String getMapString(Map<String, String[]> map, String key) {
+		String array[];
+
+		array = map.get(key);
+		if(array == null)
+			return "";
+		if(array.length == 0)
+			return "";
+		return array[0];
 	}
 }

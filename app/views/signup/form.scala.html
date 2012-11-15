@@ -25,13 +25,14 @@
 		<h2>@Language.get("EditProfile")</h2>
     
     <form action="/profileImageUpload" enctype="multipart/form-data" method="post">
+        <input type="hidden" name="formtoken" value="@FormToken.get("profileimage")">
     	<fieldset>
     		<legend>@Language.get("ProfileImage")</legend>
     		<img src="@{Authenticator.getCurrentUser().imageURL}"><br>
     		<label>Change profile image</label><br>
     		<input type="file" name="profileImage"> <input type="submit" value="Upload"><br>
     		<label>Use your gravatar</label><br>
-    		<a href="/profileImageSetGravatar">Use your gravatar instead! (if you have one)</a>
+    		<a href="/profileImageSetGravatar?formtoken=@FormToken.get("profileimage")">Use your gravatar instead! (if you have one)</a>
     	</fieldset>
 		
 	</form>
