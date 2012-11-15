@@ -14,5 +14,3 @@ db.default.user="root"
 # Password should be commented if there are no passwords.
 
 # db.default.password=""
-
-
