@@ -1,13 +1,14 @@
 package models;
 
+
+import play.db.*;
+import java.sql.*;
+
+
 import java.util.List;
-
 import javax.persistence.*;
-
 import org.hibernate.validator.constraints.URL;
-
 import controllers.Authenticator;
-
 import play.data.validation.Constraints.*;
 import play.db.ebean.*;
 

@@ -42,7 +42,7 @@ LogOut=Log out
 RemoveInterest=Remove
 WriteAboutYourInterest=Write a little about your interest in this topic:
 
-topics.list.title={0,choice,0#Ingen emner|1#Et emne|1<{0,number,integer} emner} funnet
+topics.list.title={0,choice,0#No topics|1#One topic|1<{0,number,integer} topics} found
 
 
 UsersListTitle={0,choice,0#No users|1#One user|1<{0,number,integer} users} found
