@@ -35,6 +35,7 @@ public class User extends Model {
 	@Email
 	public String alternativeEmail; 
 
+	@MaxLength(12)
 	@Pattern(value = "[0-9.+]+", message = "Skriv et gyldig telefonnummer")
 	public String phone;
 
