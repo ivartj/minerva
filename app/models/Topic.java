@@ -6,13 +6,24 @@ import models.Interest;
 import models.User;
 import java.util.List;
 import java.util.ArrayList;
+import javax.persistence.*;
+import org.hibernate.validator.constraints.URL;
+import controllers.Authenticator;
+import play.data.validation.Constraints.*;
+import play.db.ebean.*;
 
-public class Topic {
+import com.avaje.ebean.*;
 
-	
+@Entity
+public class Topic extends Model {
+
+	@Id
 	public String name;
 	
+	@Required
 	public String description;
+	
+	public static Finder<Long,Topic> find = new Finder<Long,Topic>(Long.class, Topic.class);
 	
 	public Topic(String name) {
 		this.name = name;
@@ -23,6 +34,18 @@ public class Topic {
 		this.description = description;
 	}
 
+	
+	
+	public static Page<Topic> page(int page, int pageSize, String sortBy, String order, String filter) {
+        return 
+            find.where()
+                .ilike("name", "%" + filter + "%")
+                .orderBy(sortBy + " " + order)
+                .findPagingList(pageSize)
+                .getPage(page);
+	}
+	
+	
 	public static List<Topic> getAll() throws SQLException {
 		ResultSet result;
 		Connection conn;

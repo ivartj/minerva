@@ -1,11 +1,9 @@
 package controllers;
 
 import java.util.*;
-
 import play.mvc.*;
 import play.data.*;
 import play.*;
-
 import views.html.*;
 
 import models.*;
@@ -13,13 +11,13 @@ import models.*;
 /**
  * Manage a database of computers
  */
-public class Userlist extends Controller {
+public class UserList extends Controller {
     
     /**
      * This result directly redirect to application home.
      */
     public static Result GO_HOME = redirect(
-        routes.Userlist.list(0, "fullName", "asc", "")
+        routes.UserList.list(0, "fullName", "asc", "")
     );
     
     /**
@@ -39,7 +37,7 @@ public class Userlist extends Controller {
      */
     public static Result list(int page, String sortBy, String order, String filter) {
         return ok(
-            list.render(
+            userlist.render(
                 User.page(page, 10, sortBy, order, filter),
                 sortBy, order, filter
             )
