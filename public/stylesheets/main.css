@@ -164,4 +164,26 @@ li.interest {
 
 .interestcontent {
 	padding: 0 0.5em;
+}	
+
+/* Edit Profile page */
+
+.ep-image {
+	padding: 0px 20px 0px 0px; 
+	float: left;
 }
+
+.ep-container {
+	padding: 10px;
+	margin: 0 0 10px 0;
+}
+
+.ep-item {
+	margin: 0 0 10px 0;	
+}
+
+.ep-error {
+	font-size: 10px;
+	color: red;	
+}
+

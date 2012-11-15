@@ -120,8 +120,7 @@ public class Authenticator extends Controller{
 	}
 
 	public static Result logout() {
-		User user = User.find.where().eq("id", Integer.parseInt(session("connected"))).findUnique();
-		user.cookieIdentifier = "";
+		getCurrentUser().cookieIdentifier = "";
 		session().remove("connected");
 		response().discardCookies("rememberMe");
 		return redirect(routes.Application.index());
