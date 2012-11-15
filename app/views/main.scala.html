@@ -25,11 +25,10 @@
               					<a href="/login">{Language.get("LogIn")}</a>
               				}
               				else {
-              					<a href="/profile">{Authenticator.getCurrentUser().firstName + " " + Authenticator.getCurrentUser().lastName}</a>
+              				 	<a href="/profile">{Authenticator.getCurrentUser().firstName + " " + Authenticator.getCurrentUser().lastName}</a>
               					<a href="/logout">{Language.get("LogOut")}</a>
               				} 		
 	              		}
-	              		
 					</div>
 					<div class="clearboth"></div>
 				</div>

@@ -67,6 +67,28 @@ public class Topic {
 		return list;
 	}
 	
+	public static List<Topic> getAllForMentor() throws SQLException {
+		ResultSet result;
+		Connection conn;
+		PreparedStatement stmt;
+		
+		String name, description;
+		List<Topic> list;
+
+		conn = DB.getConnection();
+		stmt = conn.prepareStatement("select topic, description from interest where as_mentor = 1");
+		result = stmt.executeQuery();
+		list = new ArrayList<Topic>();
+		while(result.next()) {
+			name = result.getString(1);
+			description = result.getString(2);
+			list.add(new Topic(name, description));
+		}
+		conn.close();
+		return list;
+	}
+	
+	
 	public static List<Topic> getAllForUserStudent() throws SQLException {
 		ResultSet result;
 		Connection conn;
@@ -79,6 +101,27 @@ public class Topic {
 		conn = DB.getConnection();
 		stmt = conn.prepareStatement("select topic, description from interest where user = ? and as_student = 1");
 		stmt.setLong(1, currentUser.id); 
+		result = stmt.executeQuery();
+		list = new ArrayList<Topic>();
+		while(result.next()) {
+			name = result.getString(1);
+			description = result.getString(2);
+			list.add(new Topic(name, description));
+		}
+		conn.close();
+		return list;
+	}
+	
+	public static List<Topic> getAllForStudent() throws SQLException {
+		ResultSet result;
+		Connection conn;
+		PreparedStatement stmt;
+		
+		String name, description;
+		List<Topic> list;
+
+		conn = DB.getConnection();
+		stmt = conn.prepareStatement("select topic, description from interest where as_student = 1"); 
 		result = stmt.executeQuery();
 		list = new ArrayList<Topic>();
 		while(result.next()) {

@@ -16,10 +16,25 @@
 			</div>
 			</div><div class="box">
 			<div class="subbox">
-				<h2>@Language.get("IndexTopicsTitle")</h2>
-				@for(topic <- Topic.getAll()) {
-					<a href="/topic/@URLEncoder.encode(topic.name, "UTF-8")">@topic.name</a>
-				}
+				<table>
+				<tr>
+					<td width = "200" > <h4>@Language.get("SeeksStudent")</h4> </td> <td><h4>@Language.get("SeeksMentor")</h4></td>
+				</tr>
+			
+				<tr>
+					<td width = "200">
+						@for(topic <- Topic.getAllForMentor()) {
+							<a href="/topic/@URLEncoder.encode(topic.name, "UTF-8")">@topic.name</a>
+						}
+					</td>
+					
+					<td>
+						@for(topic <- Topic.getAllForStudent()) {
+								<a href="/topic/@URLEncoder.encode(topic.name, "UTF-8")">@topic.name</a>
+						}
+					</td>
+				</tr>
+			</table>
 				<form action="/topic/" method="get">
 					<p>@Language.get("SomeOtherTopicQuestion")</p>
 					<input type="hidden" name="submit" value="true">
