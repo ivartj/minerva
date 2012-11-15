@@ -37,7 +37,7 @@
 
 @main("") {
     
-    <h1 id="homeTitle">@Messages("topics.list.title", currentPage.getTotalRowCount)</h1>
+    <h1 id="homeTitle">@Language.get("TopicListTitle", new Integer(currentPage.getTotalRowCount))</h1>
 
     @if(flash.containsKey("success")) {
         <div class="alert-message warning">
@@ -48,8 +48,8 @@
     <div id="actions">
         
         <form action="@link(0, "name")" method="GET">
-            <input type="search" id="searchbox" name="f" value="@currentFilter" placeholder="Filter by topic name...">
-            <input type="submit" id="searchsubmit" value="Filter by name" class="btn primary">
+            <input type="search" id="searchbox" name="f" value="@currentFilter" placeholder="@Language.get("FilterByTopicName")">
+            <input type="submit" id="searchsubmit" value="@Language.get("Filter")" by name" class="btn primary">
         </form>
         
      
@@ -67,7 +67,7 @@
         <table class="bordered-table">
             <thead>
                 <tr>
-                    @header("topic", "Emne")
+                    @header("topic", Language.get("TopicName"))
                 </tr>
             </thead>
             <tbody>
