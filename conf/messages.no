@@ -71,3 +71,4 @@ Create=Opprett bruker
 Reply=Svar
 ReceivedMessage=Du har mottatt en mail fra en bruker på Minerva. 
 NameAndEmail=Ditt navn og e-postadresse er synlig for mottaker.
+AboutUs=Om oss

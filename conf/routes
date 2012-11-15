@@ -4,7 +4,7 @@
 
 # Home page
 GET	/				controllers.Application.index()
-GET    /aboutUs                       controllers.Application.aboutUs()
+GET     /aboutUs                        controllers.Application.aboutUs()
 
 # User
 GET	/login				controllers.Authenticator.login()
