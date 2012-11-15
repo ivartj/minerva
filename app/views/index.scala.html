@@ -16,38 +16,58 @@
 			</div>
 			</div><div class="box">
 			<div class="subbox">
-				<table>
-				<tr>
-					<td width = "200" > <h4>@Language.get("SeeksStudent")</h4> </td> <td><h4>@Language.get("SeeksMentor")</h4></td>
-				</tr>
-			
-				<tr>
-					<td width = "200">
-						@for(topic <- Topic.getAllForMentor()) {
-							<a href="/topic/@URLEncoder.encode(topic.name, "UTF-8")">@topic.name</a>
-						}
-					</td>
-					
-					<td>
-						@for(topic <- Topic.getAllForStudent()) {
-								<a href="/topic/@URLEncoder.encode(topic.name, "UTF-8")">@topic.name</a>
-						}
-					</td>
-				</tr>
-			</table>
-				<form action="/topic/" method="get">
-					<p>@Language.get("SomeOtherTopicQuestion")</p>
-					<input type="hidden" name="submit" value="true">
-					<input type="text" name="topic" placeholder="@Language.get("TopicName")">
-					<input type="submit" value="@Language.get("GetTopic")">
-				</form>
-			</div>
-		</div><div class="box">
-			<div class="subbox center">
-				<p><img alt="logo" src="@routes.Assets.at("images/logo/medium.png")"></p>
+				<p><img alt="logo" src="@routes.Assets.at("images/logo/medium.png")" width="130" heigth="140"></p>
 			</div>
 		</div>
 	</div>
 </div>
-
+<br>
+<div>
+<h2>@Language.get("Last10"):</h2>
+	
+	<ul class="interests">
+	<li class="interest">
+	<form class="bar">
+		<table>
+			<tr>
+				<td width = "500">@Language.get("SeeksStudent")</td>
+				<td width="500"> @Language.get("SeeksMentor")</td>
+			</tr>
+		</table>
+	</form>
+	<div class="interestcontent">
+	<table>
+		<tr>
+			<td width = "500">
+				@for(topic <- Topic.getAllForMentor()) {
+					<a href="/topic/@URLEncoder.encode(topic.name, "UTF-8")">@topic.name</a>
+				}
+			</td>
+					
+			<td>
+				@for(topic <- Topic.getAllForStudent()) {
+						<a href="/topic/@URLEncoder.encode(topic.name, "UTF-8")">@topic.name</a>
+				}
+			</td>
+		</tr>
+	</table>
+	</div>
+	</li>
+	</ul>
+	<table>
+	<tr>
+	<td>
+	</td>
+	</tr>
+	</table>
+	<div align="right">
+		<a href="/myTopics">@Language.get("SeeAllTopics")</a>
+	</div>	
+<form action="/topic/" method="get">
+		<p>@Language.get("SomeOtherTopicQuestion")</p>
+		<input type="hidden" name="submit" value="true">
+		<input type="text" name="topic" placeholder="@Language.get("TopicName")">
+		<input type="submit" value="@Language.get("GetTopic")">
+	</form>
+</div>
 }
