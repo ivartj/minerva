@@ -37,12 +37,13 @@ public class Profile extends Controller {
         	User currUs = Authenticator.getCurrentUser(); 
         	User currentUser = filledForm.get();  
 
-        	String s = "UPDATE user SET first_name = :first_name, last_name = :last_name, age = :age, email = :email, " +
+        	String s = "UPDATE user SET full_name = :full_name, first_name = :first_name, last_name = :last_name, age = :age, email = :email, " +
         			"phone = :phone, address = :address, city = :city, country = :country where id = :id";
 			SqlUpdate update = Ebean.createSqlUpdate(s);
 			update.setParameter("id", currUs.id);
 			update.setParameter("first_name", currentUser.firstName);
-			update.setParameter("last_name", currentUser.lastName);			
+			update.setParameter("last_name", currentUser.lastName);	
+			update.setParameter("full_name", currentUser.firstName +" "+currentUser.lastName);
 			update.setParameter("age", currentUser.age);
 			update.setParameter("email", currentUser.email);
 			update.setParameter("alternativeEmail", currentUser.alternativeEmail); 
