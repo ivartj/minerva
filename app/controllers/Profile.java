@@ -73,6 +73,12 @@ public class Profile extends Controller {
     
     public static Result myTopics() {
     	User user = Authenticator.getCurrentUser(); 
-    	return ok(myTopics.render(user));
+		if (user == null) {
+			return redirect("/");
+		}
+		else { 
+			return ok(myTopics.render(user));
+		}
+    	
     }
 }
