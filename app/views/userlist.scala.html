@@ -1,0 +1,135 @@
+@(currentPage: List[User.UserTableInfo], page: Integer, pageSize: Integer, currentSortBy: String, currentOrder: String, currentFilter: String)
+
+@****************************************
+* Helper generating navigation links    *
+****************************************@
+@link(newPage:Int, newSortBy:String) = @{
+    
+    var sortBy = currentSortBy
+    var order = currentOrder
+    
+    if(newSortBy != null) {
+        sortBy = newSortBy
+        if(currentSortBy == newSortBy) {
+            if(currentOrder == "asc") {
+                order = "desc"
+            } else {
+                order = "asc"
+            }
+        } else {
+            order = "asc"
+        }
+    }
+    
+    // Generate the link
+    routes.UserList.list(newPage, sortBy, order, currentFilter)
+    
+}
+
+@**********************************
+* Helper generating table headers *
+***********************************@
+@header(key:String, title:String) = {
+    <th class="@key.replace(".","_") header @if(currentSortBy == key) @{if(currentOrder == "asc") "headerSortDown" else "headerSortUp"}">
+        <a href="@link(0, key)">@title</a>
+    </th>
+}
+
+@main(Language.get("Search users")) {
+    
+    <h1 id="homeTitle">@Language.get("UsersListTitle", new Integer(currentPage.size()))</h1>
+
+    @if(flash.containsKey("success")) {
+        <div class="alert-message warning">
+            <strong>Done!</strong> @flash.get("success")
+        </div>
+    } 
+
+    <div id="actions">
+        
+        <form action="@link(0, "name")" method="GET">
+            <input type="search" id="searchbox" name="f" value="@currentFilter" placeholder="@Language.get("FilterByName")">
+            <input type="submit" id="searchsubmit" value="@Language.get("Filter")" class="btn primary">
+        </form>
+        
+     
+        
+    </div>
+    
+    @if(currentPage.size() == 0) {
+        
+        <div class="well">
+            <em>Nothing to display</em>
+        </div>
+        
+    } else {
+        
+        <table class="bordered-table">
+            <thead>
+                <tr>
+                    @header("full_name", Language.get("Name"))
+                    @header("city", Language.get("City"))
+                </tr>
+            </thead>
+            <tbody>
+
+                @for(User <- currentPage) {
+                    <tr>
+                    
+			<td>
+				<a href="/profile/@User.id">
+					@if(User.firstName == null) {
+					<em>-</em>
+					} else {
+					@User.firstName
+					}
+					@if(User.lastName == null) {
+					<em>-</em>
+					} else {
+					@User.lastName
+					}
+				</a>
+			</td>
+                        
+                        <td>
+                            @if(User.city == null) {
+                                <em>-</em>
+                            } else {
+                                @User.city
+                            }
+                        </td>
+                        
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+        <div id="pagination" class="pagination">
+            <ul>
+                @if(page != 0) {
+                    <li class="prev">
+                        <a href="@link(page - 1, null)">&larr; Previous</a>
+                    </li>
+                } else {
+                    <li class="prev disabled">
+                        <a>&larr; Previous</a>
+                    </li>
+                }
+                @if(currentPage.size() == pageSize) {
+                    <li class="next">
+                        <a href="@link(page + 1, null)">Next &rarr;</a>
+                    </li>
+                } else {
+                    <li class="next disabled">
+                        <a>Next &rarr;</a>
+                    </li>
+                }
+            </ul>
+        </div>
+        
+    }
+        
+}
+
+            

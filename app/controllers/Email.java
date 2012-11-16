@@ -5,7 +5,6 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.*;
-import play.Play;
 
 import com.typesafe.plugin.*;
 

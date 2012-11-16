@@ -1,6 +1,7 @@
 @(title: String)(content: Html)
 
 @import controllers.Language
+@import models.FormToken
 
 <!doctype html>
 <html lang="@Language.getLang().code()">
@@ -20,16 +21,18 @@
 						<a href="/">Minerva</a>
 					</div>
 					<div class="right">
-						@{
-              				if (Authenticator.getCurrentUser() == null){
-              					<a href="/login">{Language.get("LogIn")}</a>
+              				@if(Authenticator.getCurrentUser() == null) {
+              					<a href="/login">@Language.get("LogIn")</a>
+              				} else {
+              					<a href="/profile">@{Authenticator.getCurrentUser().firstName + " " + Authenticator.getCurrentUser().lastName}</a>
+						<a href="/logout?formtoken=@FormToken.get("logout")">@Language.get("LogOut")</a>
               				}
-              				else {
-              				 	<a href="/profile">{Authenticator.getCurrentUser().firstName + " " + Authenticator.getCurrentUser().lastName}</a>
-              					<a href="/logout">{Language.get("LogOut")}</a>
-              				} 		
-	              		}
+
+                        <a href="/aboutUs">@Language.get("AboutUs")</a>
 					</div>
+     
+
+            
 					<div class="clearboth"></div>
 				</div>
 			</div>
@@ -40,8 +43,8 @@
 			</div>
 			<div class="footer">
 			<div class="language">
-				<a href="/language?lang=en&amp;redirect_back=true">English</a> -
-				<a href="/language?lang=no&amp;redirect_back=true">Norsk</a>
+				<a href="/language?lang=en&amp;formtoken=@FormToken.get("language")">English</a> -
+				<a href="/language?lang=no&amp;formtoken=@FormToken.get("language")">Norsk</a>
 			</div>
 			</div>
 		</div>

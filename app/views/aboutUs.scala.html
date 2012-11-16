@@ -1,0 +1,59 @@
+@()
+@import controllers.Language
+@import models.Topic
+@import models.Interest
+@import java.net.URLEncoder
+
+
+@main("Om oss") {
+
+
+        <fieldset>
+            <legend> @Language.get("About") </legend>
+            @Language.get("AboutMessage")
+           
+            
+            </table>
+        </fieldset>
+        <br>
+        <fieldset>
+            <legend> @Language.get("GroupMembers") - @Language.get("Group") A </legend>
+                <table cellpadding="6">
+                    <tr>
+                        <td>@Language.get("TeamLeader"): </td>
+                        <td>Ole-Johan Jackobsen</td>
+                        <td>n @Language.get("Year")</td>
+                    </tr>
+                    <tr>
+                        <td>@Language.get("ItLeader"): </td>
+                        <td>Ivar Trygve Jarlsby</td>
+                         <td>n @Language.get("Year")</td>
+                    </tr>
+                            
+                    <tr>
+                         <td>@Language.get("Other"): </td>
+                         <td>Christian Toftegaard </td>
+                         <td>n @Language.get("Year")</td>
+                       
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td>Fredrik Wæhre Severinsen </td>
+                        <td>n @Language.get("Year")</td>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td>Stine Jonassen Føyen </td>
+                        <td>22 @Language.get("Year")</td>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td>Roya Albraji</td>
+                        <td>21 @Language.get("Year") </td>
+                    <tr>
+                </table>
+        </fieldset>
+<p align="right">Copyright &#169; 2012</p>
+
+
+}

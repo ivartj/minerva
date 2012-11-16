@@ -11,7 +11,9 @@ import controllers.Authenticator;
 
 public class Topic {
 
+	
 	public String name;
+	
 	public String description;
 	
 	public Topic(String name) {

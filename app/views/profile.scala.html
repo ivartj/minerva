@@ -14,7 +14,7 @@
         <fieldset>
             <legend>@Language.get("AboutMe")</legend>
             <table cellpadding="1"> 
-                <tr> <img src="@routes.Assets.at("images/logo/medium.png")">
+                <tr> <img src="@{Authenticator.getCurrentUser().imageURL}">
                     <td width = "200"> <b> @Language.get("FirstName"):</td>    
                     <td> @user.firstName </td>
                 </tr>

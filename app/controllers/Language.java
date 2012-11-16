@@ -4,6 +4,8 @@ import views.html.language;
 import play.mvc.*;
 import play.i18n.Lang;
 import play.i18n.Messages;
+import java.util.Map;
+import models.FormToken;
 
 public class Language extends Controller {
 
@@ -12,8 +14,6 @@ public class Language extends Controller {
 		return Messages.get(getLang(), key, args);
 	}
 
-	// TODO: Add protection from Cross-Site Request Forgeries
-	// TODO: Perhaps set language in user profile if logged in
 	public static Result chooseLanguage() {
 		Lang lang = getLangFromQueryString();
 		if(lang != null) {
@@ -25,7 +25,12 @@ public class Language extends Controller {
 		return ok(language.render());
 	}
 
-	public static void changeLang(Lang lang) {
+	private static void changeLang(Lang lang) {
+		Map<String, String[]> queryMap;
+
+		queryMap = request().queryString();
+		if(FormToken.check("language", getMapString(queryMap, "formtoken")) == false && Authenticator.getCurrentUser() != null)
+			return;
 		response().setCookie("lang", lang.code());
 	}
 
@@ -68,6 +73,17 @@ public class Language extends Controller {
 			lang = null;
 		}
 		return lang;
+	}
+
+	private static String getMapString(Map<String, String[]> map, String key) {
+		String array[];
+
+		array = map.get(key);
+		if(array == null)
+			return "";
+		if(array.length == 0)
+			return "";
+		return array[0];
 	}
 
 }

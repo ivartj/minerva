@@ -4,7 +4,7 @@
 	<h1>@Language.get("AskToChooseYourLanguage")</h1>
 	<p>@Language.get("TellYourCurrentLanguage")</p>
 	<ul>
-		<li><a href="/language?lang=en">English</a></li>
-		<li><a href="/language?lang=no">Norsk</a></li>
+		<li><a href="/language?lang=en&amp;formtoken=@FormToken.get("language")">English</a></li>
+		<li><a href="/language?lang=no&amp;formtoken=@FormToken.get("language")">Norsk</a></li>
 	</ul>
 }

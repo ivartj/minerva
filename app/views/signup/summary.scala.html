@@ -16,7 +16,7 @@
 			<form class="bar">
 						<a href="@routes.Profile.myTopics()">Mine emner</a>
 						<a href="@routes.Profile.edit()">Endre profil</a>
-					</form>
+			</form>
 					<br>
 			
 				<h3> @Language.get("AboutMe")</h3>
@@ -74,8 +74,8 @@
 			</div>
 			</div><div class="box">
 				<div class="subbox">
+					<img src="@{Authenticator.getCurrentUser().imageURL}">
 					
-					<img src="@routes.Assets.at("images/logo/medium.png")">
 					
 				</div>
 			</div>

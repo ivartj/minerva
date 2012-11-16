@@ -1,0 +1,16 @@
+db.default.driver=com.mysql.jdbc.Driver
+
+# The URL of your database
+# If using the MySQL database provided by UiS' Unix laboratory,
+# the address should be something like:
+# db.default.url="jdbc:mysql://mysql.ux.uis.no/db_ivartj"
+# 
+db.default.url="jdbc:mysql://127.0.0.1/minerva"
+
+
+
+db.default.user="root"
+
+# Password should be commented if there are no passwords.
+
+# db.default.password=""
