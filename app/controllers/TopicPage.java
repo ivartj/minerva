@@ -1,8 +1,10 @@
 package controllers;
 
+import views.html.myTopics;
 import views.html.topicpage;
 import views.html.gettopic;
 import views.html.error;
+import views.html.topics; 
 import play.mvc.*;
 import models.User;
 import models.Topic;
@@ -14,7 +16,16 @@ import java.io.UnsupportedEncodingException;
 
 public class TopicPage extends Controller {
 
-
+	public static Result getTopics() {
+    	User user = Authenticator.getCurrentUser(); 
+		if (user == null) {
+			return redirect("/");
+		}
+		else { 
+			return ok(topics.render());
+		}
+    	
+    }
 	public static Result page(String topicName) {
 		User user = Authenticator.getCurrentUser();
 		return ok(topicpage.render(topicName, user));
