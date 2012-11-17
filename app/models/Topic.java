@@ -1,9 +1,14 @@
 package models;
 
 import play.db.*;
+import sun.misc.Sort;
+
 import java.sql.*;
 import models.Interest;
 import models.User;
+
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -78,7 +83,29 @@ public class Topic {
 		List<Topic> list;
 
 		conn = DB.getConnection();
-		stmt = conn.prepareStatement("select topic, description from interest where as_mentor = 1");
+		stmt = conn.prepareStatement("select topic, description from interest where as_mentor = 1"); 
+		result = stmt.executeQuery();
+		list = new ArrayList<Topic>();
+		while(result.next()) {
+			name = result.getString(1);
+			description = result.getString(2);
+			list.add(new Topic(name, description));
+		}
+		conn.close();
+		return list;
+	}
+	
+	
+	public static List<Topic> getAllForMentor10() throws SQLException {
+		ResultSet result;
+		Connection conn;
+		PreparedStatement stmt;
+		
+		String name, description;
+		List<Topic> list;
+
+		conn = DB.getConnection();
+		stmt = conn.prepareStatement("select topic, description from interest where as_mentor = 1"); 
 		result = stmt.executeQuery();
 		list = new ArrayList<Topic>();
 		while(result.next()) {
@@ -91,7 +118,6 @@ public class Topic {
 		conn.close();
 		return list;
 	}
-	
 	
 	public static List<Topic> getAllForUserStudent() throws SQLException {
 		ResultSet result;
@@ -116,7 +142,7 @@ public class Topic {
 		return list;
 	}
 	
-	public static List<Topic> getAllForStudent() throws SQLException {
+	public static List<Topic> getAllForStudent10() throws SQLException {
 		ResultSet result;
 		Connection conn;
 		PreparedStatement stmt;
@@ -138,7 +164,28 @@ public class Topic {
 		conn.close();
 		return list;
 	}
+	
+	public static List<Topic> getAllForStudent() throws SQLException {
+		ResultSet result;
+		Connection conn;
+		PreparedStatement stmt;
+		
+		String name, description;
+		List<Topic> list;
 
+		conn = DB.getConnection();
+		stmt = conn.prepareStatement("select topic, description from interest where as_student = 1"); 
+		result = stmt.executeQuery();
+		list = new ArrayList<Topic>();
+		while(result.next()) {
+			name = result.getString(1);
+			description = result.getString(2);
+			list.add(new Topic(name, description));
+		}
+		conn.close();
+		return list;
+	}
+	
 	public void addUser(User user, String description, boolean asMentor, boolean asStudent) throws SQLException {
 		
 		Connection conn = DB.getConnection();
