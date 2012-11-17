@@ -1,0 +1,54 @@
+@()
+@import controllers.Language
+@import models.Topic
+@import models.Interest
+@import java.net.URLEncoder 
+
+@title = {@Language.get("Topics")}
+
+@main(""+title) {
+
+<h2>@Language.get("AllTopics")</h2>
+
+<form action="/topic/" method="get">
+	<p>@Language.get("SomeOtherTopicQuestion")</p>
+	<input type="hidden" name="submit" value="true">
+	<input type="text" name="topic" placeholder="@Language.get("TopicName")">
+	<input type="submit" value="@Language.get("GetTopic")">
+	<a href="/topics">@Language.get("SeeAllTopics")</a>
+</form>
+
+<ul class="interests">
+	<li class="interest">
+		<form class="bar">
+			@Language.get("SeeksStudent"):
+		</form>
+		<div class="interestcontent">
+		<br>	
+		<ul>
+			@for(topic <- Topic.getAllForMentor()) {
+						<li><a href="/topic/@URLEncoder.encode(topic.name, "UTF-8")">@topic.name</a></li>
+			}
+		</ul>
+		</div>
+		<br>
+	</li>
+	</ul>
+	
+<ul class="interests">
+	<li class="interest">
+		<form class="bar">
+			@Language.get("SeeksMentor"):
+		</form>
+		<div class="interestcontent">
+		<br>
+		<ul>
+			@for(topic <- Topic.getAllForStudent()) {
+				<li><a href="/topic/@URLEncoder.encode(topic.name, "UTF-8")">@topic.name</a></li>
+			}
+		</ul>
+		</div>
+		<br>
+	</li>
+</ul>
+}
