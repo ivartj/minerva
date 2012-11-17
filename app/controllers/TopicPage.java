@@ -1,6 +1,5 @@
 package controllers;
 
-import views.html.myTopics;
 import views.html.topicpage;
 import views.html.gettopic;
 import views.html.error;

@@ -59,7 +59,7 @@
     @if(currentPage.size() == 0) {
         
         <div class="well">
-            <em>Nothing to display</em>
+            <em>@Language.get("NothingToDisplay")</em>
         </div>
         
     } else {
@@ -109,20 +109,20 @@
             <ul>
                 @if(page != 0) {
                     <li class="prev">
-                        <a href="@link(page - 1, null)">&larr; Previous</a>
+                        <a href="@link(page - 1, null)">&larr; @Language.get("Previous")</a>
                     </li>
                 } else {
                     <li class="prev disabled">
-                        <a>&larr; Previous</a>
+                        <a>&larr; @Language.get("Previous")</a>
                     </li>
                 }
                 @if(currentPage.size() == pageSize) {
                     <li class="next">
-                        <a href="@link(page + 1, null)">Next &rarr;</a>
+                        <a href="@link(page + 1, null)">@Language.get("Next") &rarr;</a>
                     </li>
                 } else {
                     <li class="next disabled">
-                        <a>Next &rarr;</a>
+                        <a>@Language.get("Next") &rarr;</a>
                     </li>
                 }
             </ul>
