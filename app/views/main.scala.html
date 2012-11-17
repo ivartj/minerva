@@ -25,16 +25,17 @@
               					<a href="/login">@Language.get("LogIn")</a>
               				} else {
               					<a href="/profile">@{Authenticator.getCurrentUser().firstName + " " + Authenticator.getCurrentUser().lastName}</a>
-						<a href="/logout?formtoken=@FormToken.get("logout")">@Language.get("LogOut")</a>
+								<a href="/logout?formtoken=@FormToken.get("logout")">@Language.get("LogOut")</a>
+								<div class = "bar">
+									<a href="/myTopics">@Language.get("MyTopics")</a>
+									<a href="/topics">@Language.get("SearchTopics")</a>
+									<a href="/users">@Language.get("SearchUsers")</a>
+								</div>
               				}
-
-                        <a href="/aboutUs">@Language.get("AboutUs")</a>
 					</div>
-     
-
-            
 					<div class="clearboth"></div>
 				</div>
+				
 			</div>
 		</div>
 		<div class="wrap">
@@ -44,7 +45,8 @@
 			<div class="footer">
 			<div class="language">
 				<a href="/language?lang=en&amp;formtoken=@FormToken.get("language")">English</a> -
-				<a href="/language?lang=no&amp;formtoken=@FormToken.get("language")">Norsk</a>
+				<a href="/language?lang=no&amp;formtoken=@FormToken.get("language")">Norsk</a> - 
+				<a href="/aboutUs">@Language.get("AboutUs")</a>
 			</div>
 			</div>
 		</div>
