@@ -49,11 +49,13 @@
 				@content
 			</div>
 			<div class="footer">
-			<div class="language">
-				<a href="/language?lang=en&amp;formtoken=@FormToken.get("language")">English</a> -
-				<a href="/language?lang=no&amp;formtoken=@FormToken.get("language")">Norsk</a> - 
-				<a href="/aboutUs">@Language.get("AboutUs")</a>
-			</div>
+				<div class="right">
+					<a href="/language?lang=en&amp;formtoken=@FormToken.get("language")">English</a> -
+					<a href="/language?lang=no&amp;formtoken=@FormToken.get("language")">Norsk</a>
+				</div>
+				<div class="left">
+					<a href="/aboutUs">@Language.get("AboutUs")</a>
+				</div>
 			</div>
 		</div>
 	</body>
