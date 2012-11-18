@@ -33,11 +33,11 @@
     			<img src="@{Authenticator.getCurrentUser().imageURL}"><br>
     		</div>
     		
-    		<label>Change profile image</label><br>
-    		<input type="file" name="profileImage" class="ep-item"> <input type="submit" value="Upload" class="ep-item"><br>
+    		<label>@Language.get("ChangeProfileImage")</label><br>
+    		<input type="file" name="profileImage" class="ep-item"> <input type="submit" value="@Language.get("Upload")" class="ep-item"><br>
     		
-    		<label>Use your gravatar</label><br>
-    		<a href="/profileImageSetGravatar?formtoken=@FormToken.get("profileimage")">Get Gravatar!</a>
+    		<label>@Language.get("UseYourGravatar")</label><br>
+    		<a href="/profileImageSetGravatar?formtoken=@FormToken.get("profileimage")">@Language.get("GetGravatar")</a>
     		<p class="ep-error">@flash.get("error")</p>
     	</fieldset>
 		
@@ -94,6 +94,7 @@
     		@inputText(
     			editForm("phone"), '_label -> stringPhone,
     			'_showConstraints -> false, 
+    			'_class -> "ep-item",
     			'_error -> editForm("phone").error.map(_.withMessage(""+stringPhoneE))
     		)
     		

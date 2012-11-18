@@ -18,7 +18,9 @@ public class Profile extends Controller {
 
 	public static Result edit() {
 		User currentUser = Authenticator.getCurrentUser();
-		return ok(editProfile.render(editForm.fill(currentUser)));
+		if (currentUser == null) {
+			return redirect("/");
+		} else return ok(editProfile.render(editForm.fill(currentUser)));
 	}
 
 	public static Result submit() {
@@ -78,12 +80,21 @@ public class Profile extends Controller {
 
 	public static Result getUser(Long userID) {
 		User user = User.getByUserId(userID);
+		User currentUser = Authenticator.getCurrentUser(); 
 		if(user == null) {
 			return ok(noUser.render(userID));
-		} else {
+		}
+		if (currentUser == null) {
+			return redirect("/");
+		}
+		else if (user.id == currentUser.id){
+			return redirect("/profile"); 
+		}
+		else {
 			return ok(profile.render(user));
 		}
 	}
+
 	public static Result myTopics() {
     	User user = Authenticator.getCurrentUser(); 
 		if (user == null) {
