@@ -59,7 +59,7 @@ public class Topic {
 		List<Topic> list;
 
 		conn = DB.getConnection();
-		stmt = conn.prepareStatement("select topic, description from interest where user = ? and as_mentor = 1");
+		stmt = conn.prepareStatement("select topic, description from interest where user = ? and as_mentor = 1 group by topic");
 		stmt.setLong(1, currentUser.id); 
 		result = stmt.executeQuery();
 		list = new ArrayList<Topic>();
@@ -81,7 +81,7 @@ public class Topic {
 		List<Topic> list;
 
 		conn = DB.getConnection();
-		stmt = conn.prepareStatement("select topic, description from interest where as_mentor = 1"); 
+		stmt = conn.prepareStatement("select topic, description from interest where as_mentor = 1 group by topic"); 
 		result = stmt.executeQuery();
 		list = new ArrayList<Topic>();
 		while(result.next()) {
@@ -103,7 +103,7 @@ public class Topic {
 		List<Topic> list;
 
 		conn = DB.getConnection();
-		stmt = conn.prepareStatement("select topic, description from interest where as_mentor = 1"); 
+		stmt = conn.prepareStatement("select topic, description from interest where as_mentor = 1 group by topic"); 
 		result = stmt.executeQuery();
 		list = new ArrayList<Topic>();
 		while(result.next()) {
@@ -127,7 +127,7 @@ public class Topic {
 		List<Topic> list;
 
 		conn = DB.getConnection();
-		stmt = conn.prepareStatement("select topic, description from interest where user = ? and as_student = 1");
+		stmt = conn.prepareStatement("select topic, description from interest where user = ? and as_student = 1 group by topic");
 		stmt.setLong(1, currentUser.id); 
 		result = stmt.executeQuery();
 		list = new ArrayList<Topic>();
@@ -149,7 +149,7 @@ public class Topic {
 		List<Topic> list;
 
 		conn = DB.getConnection();
-		stmt = conn.prepareStatement("select topic, description from interest where as_student = 1"); 
+		stmt = conn.prepareStatement("select topic, description from interest where as_student = 1 group by topic"); 
 		result = stmt.executeQuery();
 		list = new ArrayList<Topic>();
 		while(result.next()) {
@@ -172,7 +172,7 @@ public class Topic {
 		List<Topic> list;
 
 		conn = DB.getConnection();
-		stmt = conn.prepareStatement("select topic, description from interest where as_student = 1"); 
+		stmt = conn.prepareStatement("select topic, description from interest where as_student = 1 group by topic"); 
 		result = stmt.executeQuery();
 		list = new ArrayList<Topic>();
 		while(result.next()) {
