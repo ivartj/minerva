@@ -5,11 +5,9 @@
 	<div class="span6 offset3 bg-dark-gradient">
 		<form action="/authenticate" method="post">
 			<legend>Choose your login provider:</legend>
+            <br><br>
 			<img src="@routes.Assets.at("images/google_32.png")">
 			<input type="submit" class="btn" name="provider" value="google">
-			<br><br>
-			<img src="@routes.Assets.at("images/facebook_32.png")">
-			<input type="submit" disabled="disabled" class="btn" name="provider" value="facebook">
 			<br><br>
 			<img src="@routes.Assets.at("images/yahoo_32.png")">
 			<input type="submit" class="btn" name="provider" value="yahoo">
