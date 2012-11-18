@@ -1,21 +1,13 @@
 @() 
 @main("Authenticate") {
-<div class="container">	
-	<div class="row">
-	<div class="span6 offset3 bg-dark-gradient">
-		<form action="/authenticate" method="post">
+	<form action="/authenticate" method="post">
+		<fieldset class="l-container">
 			<legend>Choose your login provider:</legend>
-			<img src="@routes.Assets.at("images/google_32.png")">
-			<input type="submit" class="btn" name="provider" value="google">
+			<img class="l-item" src="@routes.Assets.at("images/google_32.png")">
+			<input type="submit" class="l-item" name="provider" value="google">
 			<br><br>
-			<img src="@routes.Assets.at("images/facebook_32.png")">
-			<input type="submit" disabled="disabled" class="btn" name="provider" value="facebook">
-			<br><br>
-			<img src="@routes.Assets.at("images/yahoo_32.png")">
-			<input type="submit" class="btn" name="provider" value="yahoo">
-		</form>
-	</div>
-	</div>
-</div>
-
+			<img class="l-item" src="@routes.Assets.at("images/yahoo_32.png")">
+			<input type="submit" class="l-item" name="provider" value="yahoo">
+		</fieldset>
+	</form>
 }

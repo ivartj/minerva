@@ -2,11 +2,8 @@ package controllers;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.UUID;
-import java.util.regex.*;
 
 import models.User;
 import models.FormToken;
@@ -88,10 +85,12 @@ public class Authenticator extends Controller{
 			return ok(confirm.render(user, userForm));	    
 		}
 		else{
+			
 			if (User.find.where().eq("googleId", userInfo.id).findList().size() == 1)
 				remember(User.find.where().eq("googleId", userInfo.id).findList().get(0));
 			else if (User.find.where().eq("yahooId", userInfo.id).findList().size() == 1)
 				remember(User.find.where().eq("yahooId", userInfo.id).findList().get(0));
+			
 			return redirect(routes.Application.index());
 		}
 	}
@@ -106,49 +105,28 @@ public class Authenticator extends Controller{
 		return redirect(routes.Application.index());
 	}
 
-	public static Result login() {		
-		Cookie cookie = request().cookies().get("rememberMe");
-		if (cookie != null && !cookie.value().isEmpty()){
-			int uid = Integer.parseInt(cookie.value().split("[ ]")[0]);
-			String uuid = cookie.value().split("[ ]")[1];
-			if (!User.find.where().eq("id", uid).findList().isEmpty()) {
-				if (User.find.where().eq("id", uid).findList().get(0).cookieIdentifier.equals(uuid)) {
-					session("connected", Integer.toString(uid));
-					return redirect(routes.Application.index());
-				}
-				else {
-					response().discardCookies("rememberMe");
-				}
-			}
-			else {
-				response().discardCookies("rememberMe");
-			}
-		}
-		return chooseProvider();
-	}
-
 	public static Result logout() {
 		if(FormToken.check("logout", getMapString(request().queryString(), "formtoken")) == false)
 			return ok(error.render(Language.get("InvalidFormToken")));
-
-		getCurrentUser().cookieIdentifier = "";
-		session().remove("connected");
+		User user = getCurrentUser();
+		user.cookieIdentifier = "";
+		user.save();
 		response().discardCookies("rememberMe");
 		return redirect(routes.Application.index());
 	}
 
 	private static void remember(User user) {
-		String uuid = UUID.randomUUID().toString();
+		String uuid = user.id + UUID.randomUUID().toString();
 		user.cookieIdentifier = uuid;
 		user.save();
-		response().setCookie("rememberMe", user.id + " " + uuid);
-		session("connected", Long.toString(user.id));
+		response().setCookie("rememberMe", uuid, 10800);
 	}
 
 	public static User getCurrentUser(){
-		if (session("connected") == null)
+		Cookie cookie = request().cookies().get("rememberMe");
+		if (cookie == null)
 			return null;
-		User user = User.find.where().eq("id", Integer.parseInt(session("connected"))).findUnique();
+		User user = User.find.where().eq("cookieIdentifier", cookie.value()).findUnique();
 		return user;
 	}
 

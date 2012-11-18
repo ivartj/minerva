@@ -80,8 +80,13 @@ public class Profile extends Controller {
 	}
 
 	public static Result profile() {
-		User user = Authenticator.getCurrentUser();
-		return ok(summary.render(user));      
+    	User user = Authenticator.getCurrentUser(); 
+		if (user == null) {
+			return redirect("/");
+		}
+		else { 
+			return ok(summary.render(user));
+		}
 	}
 
 	public static Result getUser(Long userID) {
