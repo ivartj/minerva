@@ -9,35 +9,25 @@ import play.mvc.*;
 import play.data.*;
 
 import views.html.*;
-import views.html.signup.*;
 
 import models.*;
 
 public class Profile extends Controller {
 
-	/**
-	 * Defines a form wrapping the User class.
-	 */ 
 	final static Form<User> editForm = form(User.class);
 
-	/**
-	 * Display a blank form.
-	 */ 
 	public static Result edit() {
 		User currentUser = Authenticator.getCurrentUser();
-		return ok(form.render(editForm.fill(currentUser)));
+		return ok(editProfile.render(editForm.fill(currentUser)));
 	}
 
-	/**
-	 * Handle the form submission.
-	 */
 	public static Result submit() {
 		if(checkFormToken() == false)
 			return ok(error.render(Language.get("InvalidFormToken")));
 
 		Form<User> filledForm = editForm.bindFromRequest();
 		if(filledForm.hasErrors()) {
-			return badRequest(form.render(filledForm));
+			return badRequest(editProfile.render(filledForm));
 		} else {
 			User currUs = Authenticator.getCurrentUser(); 
 			User currentUser = filledForm.get();  
@@ -58,11 +48,9 @@ public class Profile extends Controller {
 			update.setParameter("country", currentUser.country); 
 			Ebean.execute(update);
 
-			return ok(summary.render(currentUser));
+			return ok(userProfile.render(currentUser));
         }
     }
-	 
-
 
 	private static boolean checkFormToken() {
 		Map<String, String[]> formMap;
@@ -85,7 +73,7 @@ public class Profile extends Controller {
 			return redirect("/");
 		}
 		else { 
-			return ok(summary.render(user));
+			return ok(userProfile.render(user));
 		}
 	}
 
