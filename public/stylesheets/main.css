@@ -78,20 +78,30 @@ fieldset {
 	background-color: #da5;
 }
 
-.bar, .bordered-table th {
+.second-dark {
+	background-color: #fb0;
+}
+
+.bar, .bordered-table th, .second-bar {
 	background-color: #bb4422;
 	padding: 0.3em 0 0.2em 0;
 	color: white;
 }
 
+.second-bar {
+	background-color: #f70 ! important;
+}
+
 .bar a:focus, .bar a:focus, .bar a:focus, .bar a:hover,
-.bordered-table th a:focus, .bordered-table th a:focus, .bordered-table th a:focus, .bordered-table th a:hover {
+.bordered-table th a:focus, .bordered-table th a:focus, .bordered-table th a:focus, .bordered-table th a:hover,
+.second-bar a:focus, .second-bar a:focus, .second-bar a:focus, .second-bar a:hover {
 	background-color: white;
 	color: #bb4422 ! important;
 	outline: none;
 }
 
 .bar a:link, .bar a:visited, .bar span,
+.second-bar a:link, .second-bar a:visited, .second-bar span,
 .bordered-table th a:link, .bordered-table th a:visited, .bordered-table th span
 {
 	text-decoration: none;
@@ -110,12 +120,6 @@ fieldset {
 	padding: 0;
 	margin: 0;
 }
-
-/*
-.pagination .disabled {
-	display: none;
-}
-*/
 
 .content {
 	 padding: 0.5em;

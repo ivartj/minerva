@@ -26,16 +26,22 @@
               				} else {
               					<a href="/profile">@{Authenticator.getCurrentUser().firstName + " " + Authenticator.getCurrentUser().lastName}</a>
 								<a href="/logout?formtoken=@FormToken.get("logout")">@Language.get("LogOut")</a>
-								<div class = "bar">
-									<a href="/myTopics">@Language.get("MyTopics")</a>
-									<a href="/topics">@Language.get("AllTopics")</a>
-									<a href="/users">@Language.get("SearchUsers")</a>
-								</div>
               				}
 					</div>
 					<div class="clearboth"></div>
 				</div>
 				
+			</div>
+		</div>
+		<div class="second-dark">
+			<div class="wrap">
+			@if(Authenticator.getCurrentUser() != null) {
+				<div class="second-bar">
+					<a href="/myTopics">@Language.get("MyTopics")</a>
+					<a href="/topics">@Language.get("AllTopics")</a>
+					<a href="/users">@Language.get("SearchUsers")</a>
+				</div>
+			}
 			</div>
 		</div>
 		<div class="wrap">
