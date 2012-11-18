@@ -18,7 +18,9 @@ public class Profile extends Controller {
 
 	public static Result edit() {
 		User currentUser = Authenticator.getCurrentUser();
-		return ok(editProfile.render(editForm.fill(currentUser)));
+		if (currentUser == null) {
+			return redirect("/");
+		} else return ok(editProfile.render(editForm.fill(currentUser)));
 	}
 
 	public static Result submit() {
