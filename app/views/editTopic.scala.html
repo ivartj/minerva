@@ -1,0 +1,37 @@
+@(topicName: java.lang.String, user: models.User)
+@import controllers.Language
+@import controllers.Markup
+@import models.Topic
+@import models.FormToken
+
+@main(topicName) {
+<h1>@Language.get("Topic"): @topicName</h1>
+    <ul class="interests">
+
+        @if(user == null){
+        <a href="/topic/@topicName">Tilbake</a>
+        }else{
+        
+        @defining(new Topic(topicName).getInterestOf(user)) { interest =>
+        <div>
+            @if(interest != null) {
+            
+            <form action="/topic/@topicName" method="post">
+                <input type="hidden" name="form-token" value="@FormToken.get("topicpage")">
+            
+            <h2>@Language.get("EditInterest")</h2>
+            <label>
+                <p>@Language.get("WriteAboutYourInterest")</p>
+                <textarea rows="6" name="description">@interest.description</textarea>
+            </label>
+            <p><label><input type="checkbox" name="as_mentor" @if(interest.asMentor) { checked }> @Language.get("AsMentorQuestion")</label></p>
+            <p><label><input type="checkbox" name="as_student" @if(interest.asStudent) { checked }> @Language.get("AsStudentQuestion")</label></p>
+            <input type="submit" value="@Language.get("Submit")">
+                
+                
+                } }
+        </form>
+                }
+        </div>
+</ul>
+}

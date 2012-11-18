@@ -8,14 +8,14 @@ GET     /aboutUs                        controllers.Application.aboutUs()
 
 # User
 
-GET	/login				controllers.Authenticator.chooseProvider()
-GET	/logout				controllers.Authenticator.logout()
-POST	/authenticate			controllers.Authenticator.auth()
-GET	/verify				controllers.Authenticator.verify()
-POST	/confirmUser			controllers.Authenticator.confirmUser()
-GET	/profile			controllers.Profile.profile()
-GET	/profile/:userID		controllers.Profile.getUser(userID: Long)
-GET /myTopics               controllers.Profile.myTopics()
+GET    /login                         controllers.Authenticator.chooseProvider()
+GET    /logout                        controllers.Authenticator.logout()
+POST   /authenticate                  controllers.Authenticator.auth()
+GET    /verify                        controllers.Authenticator.verify()
+POST   /confirmUser                   controllers.Authenticator.confirmUser()
+GET    /profile			        controllers.Profile.profile()
+GET    /profile/:userID               controllers.Profile.getUser(userID: Long)
+GET    /myTopics                      controllers.Profile.myTopics()
 
 
 # Edit profile
@@ -34,10 +34,11 @@ GET     /sendEmail/:userID            controllers.Email.create(userID: Long)
 POST    /sendEmail/:userID/           controllers.Email.send(userID: Long)
 
 # Topic
-GET    /topic/*topicName		controllers.TopicPage.page(topicName: String)
-POST   /topic/*topicName		controllers.TopicPage.apply(topicName: String)
-GET    /topic/				controllers.TopicPage.getTopic()	
+GET    /topic/*topicName              controllers.TopicPage.page(topicName: String)
+POST   /topic/*topicName              controllers.TopicPage.apply(topicName: String)
+GET    /topic/                        controllers.TopicPage.getTopic()	
 GET    /topics                        controllers.TopicPage.getTopics()
+GET    /editTopic/*topicName          controllers.TopicPage.editTopic(topicName: String)
 
 # User list
 GET	/users				controllers.UserList.list(p:Int ?= 0, s ?= "fullName", o ?= "asc", f ?= "")

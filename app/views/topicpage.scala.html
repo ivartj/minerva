@@ -19,7 +19,7 @@
 			@if(user == null || listuser.id != user.id){
 				href="/profile/@listuser.id"
 			}
-			>@listuser.fullName</a>
+			>@listuser.firstName @listuser.lastName</a>
             
 			@if(interest.asMentor) {
 				- @Language.get("SeeksStudent")
@@ -28,7 +28,9 @@
 				- @Language.get("SeeksMentor")
 			}
 			@if(user != null && listuser.id == user.id) {
-				- <input type="submit" name="remove" value="@Language.get("RemoveInterest")"></form>
+				- <input type="submit" name="remove" value="@Language.get("RemoveInterest")">
+                  <input type="submit" name="change"
+                    value="@Language.get("Edit")" href="@routes.TopicPage.editTopic(topicName)"></form>
 			}
 		</form>
 		<div class="interestcontent">
@@ -56,19 +58,7 @@
 
 		}
 
-		@if(interest != null) {
-
-		<h2>@Language.get("EditInterest")</h2>
-		<label>
-			<p>@Language.get("WriteAboutYourInterest")</p>
-			<textarea rows="6" name="description">@interest.description</textarea>
-		</label>
-		<p><label><input type="checkbox" name="as_mentor" @if(interest.asMentor) { checked }> @Language.get("AsMentorQuestion")</label></p>
-		<p><label><input type="checkbox" name="as_student" @if(interest.asStudent) { checked }> @Language.get("AsStudentQuestion")</label></p>
-		<input type="submit" value="@Language.get("Submit")">
-		<a href="/topics">@Language.get("AllTopics")</a>
-
-		}
+	<br></br>
 	}
 
 	</form>

@@ -96,3 +96,4 @@ Next=Neste
 Previous=Forrige
 NothingToDisplay=Ingen brukere å vise
 AddTopic=Nytt emne
+Edit=Endre
