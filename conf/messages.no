@@ -49,6 +49,10 @@ GetTopic=Skaff emne
 TopicName=Emnenavn
 EmptyTopicName=Tumt emnenavn!
 ProfileImage=Profilbilde
+ChangeProfileImage=Endre profilbilde
+UseYourGravatar=Bruk ditt Gravatar
+GetGravatar=Hent Gravatar!
+Upload=Last opp
 LogInToApplyToTopicHTML=<p><a href="/login">Logg inn</a> for å melde deg på emnet.</p>
 MessageSent=Melding sendt!
 MessageDetails=Meldingsdetaljer
