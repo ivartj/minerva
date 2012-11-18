@@ -130,15 +130,6 @@ fieldset {
 	border-top: 1px solid #fc9;
 }
 
-.language {
-	float: right;
-	border-top: 1px solid #bb4422;
-	border-radius: 0.4em;
-	background-color: #eee;
-	padding: 0.3em 0.5em 0.2em 0.5em;
-}
-
-
 /* Front page */
 
 .box {
