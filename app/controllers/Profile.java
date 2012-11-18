@@ -81,8 +81,11 @@ public class Profile extends Controller {
 		User currentUser = Authenticator.getCurrentUser(); 
 		if(user == null) {
 			return ok(noUser.render(userID));
-		} 
-		if (user.id == currentUser.id){
+		}
+		if (currentUser == null) {
+			return redirect("/");
+		}
+		else if (user.id == currentUser.id){
 			return redirect("/profile"); 
 		}
 		else {
