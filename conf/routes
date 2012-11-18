@@ -30,14 +30,14 @@ GET	/sandbox			controllers.Markup.sandbox()
 POST	/sandbox			controllers.Markup.sandbox()
 
 # Email
-GET     /sendEmail/:userID          controllers.Email.create(userID: Long)
-POST	/sendEmail/:userID/         controllers.Email.send(userID: Long)
+GET     /sendEmail/:userID            controllers.Email.create(userID: Long)
+POST    /sendEmail/:userID/           controllers.Email.send(userID: Long)
 
 # Topic
-GET	/topic/*topicName		controllers.TopicPage.page(topicName: String)
-POST	/topic/*topicName		controllers.TopicPage.apply(topicName: String)
-GET	        /topic/				controllers.TopicPage.getTopic()	
-GET         /topics             controllers.TopicPage.getTopics()
+GET    /topic/*topicName		controllers.TopicPage.page(topicName: String)
+POST   /topic/*topicName		controllers.TopicPage.apply(topicName: String)
+GET    /topic/				controllers.TopicPage.getTopic()	
+GET    /topics                        controllers.TopicPage.getTopics()
 
 # User list
 GET	/users				controllers.UserList.list(p:Int ?= 0, s ?= "fullName", o ?= "asc", f ?= "")
