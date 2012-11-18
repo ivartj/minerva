@@ -95,3 +95,4 @@ MyContacts=Mine kontakter
 Next=Neste
 Previous=Forrige
 NothingToDisplay=Ingen brukere å vise
+AddTopic=Nytt emne
