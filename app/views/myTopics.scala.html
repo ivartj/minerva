@@ -11,9 +11,9 @@
 <h2>@Language.get("MyTopics")</h2>
 <ul class="interests">
 	<li class="interest">
-		<form class="bar">
-			@Language.get("SeeksStudent") @Language.get("In"):
-		</form>
+		<div class="bar">
+			<span>@Language.get("SeeksStudent") @Language.get("In")</span>
+		</div>
 		<div class="interestcontent">
 		<br>
 			@for(topic <- Topic.getAllForUserMentor()) {
@@ -27,9 +27,9 @@
 	
 <ul class="interests">
 	<li class="interest">
-		<form class="bar">
-			@Language.get("SeeksMentor") @Language.get("In"):
-		</form>
+		<div class="bar">
+			<span>@Language.get("SeeksMentor") @Language.get("In")</span>
+		</div>
 		<div class="interestcontent">
 		<br>
 			@for(topic <- Topic.getAllForUserStudent()) {
