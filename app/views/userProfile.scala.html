@@ -12,11 +12,6 @@
 	<div class="boxes">
 		<div class="box">
 			<div class="subbox">
-			
-			<form class="bar">
-						<a href="@routes.Profile.myTopics()">Mine emner</a>
-						<a href="@routes.Profile.edit()">Endre profil</a>
-			</form>
 					<br>
 			
 				<h3> @Language.get("AboutMe")</h3>
@@ -70,14 +65,17 @@
 							    <td width = "200"> <b> @Language.get("Country"): </td>
 							    <td> @user.country </td>
 		                    </tr>
+		                    
+		                    
 		                </table>
+		        <div class="actions"> <br>
+					<input type="button" value="@Language.get("EditProfile")" onClick="location.href='@routes.Profile.edit()'">
+   				</div>	
 			</div>
 			</div><div class="box">
 				<div class="subbox">
 					<img src="@{Authenticator.getCurrentUser().imageURL}">
-					
-					
-				</div>
+				</div>	                    
 			</div>
 	</div>
 </div>

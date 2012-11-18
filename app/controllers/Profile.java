@@ -47,8 +47,7 @@ public class Profile extends Controller {
 			update.setParameter("city", currentUser.city); 
 			update.setParameter("country", currentUser.country); 
 			Ebean.execute(update);
-
-			return ok(userProfile.render(currentUser));
+			return redirect("/profile"); 
         }
     }
 
